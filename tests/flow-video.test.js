@@ -279,6 +279,31 @@ test('a clip from a start frame only: no end frame, so a very different place do
   assert.ok(vids[1].first_frame && vids[1].last_frame, 'clip 2: both frames');
 });
 
+test('frames: new places: a new place is drawn from its own words, not copied from the frame before', () => {
+  const { parseFlowStory, followsOn } = require('../lib/story');
+  const text = 'title: Tree Walk\nframes: new places\nvoices: none\nmusic: none\nframe 1: a cave\nframe 2: the World Tree\nframe 3: Same place, at sunset.\nframe 4: a market\nclip 1: from frame 1\nGo.\n';
+  const st = parseFlowStory(text);
+  assert.deepStrictEqual(st.errors, []);
+  assert.deepStrictEqual(st.frames.map(f => followsOn(st.meta, f.text)), [false, false, true, false]);
+  // Ren & Yuki's stories don't change: every frame follows on
+  assert.ok(followsOn(parseFlowStory(fs.readFileSync(STORY, 'utf8')).meta, 'Ren points up.'));
+  assert.match(parseFlowStory('title: x\nframes: sometimes\nframe 1: a\n').errors.join(), /new places/);
+  const story = path.join(tmp, 'tree-walk.txt');
+  fs.writeFileSync(story, text);
+  bank(1, 100); bank(2, 0);
+  let before = calls(1).length;
+  assert.strictEqual(run('make', story, '--account', '1').code, 0);
+  const imgs = calls(1).slice(before);
+  assert.deepStrictEqual(imgs.map(c => !!c.reference_images), [false, false, true, false]);
+  assert.doesNotMatch(imgs[1].prompt, /previous image/); assert.match(imgs[2].prompt, /same scene a moment later/);
+  // several frames again at once
+  before = calls(1).length;
+  const r = run('make', story, '--account', '1', '--redo', 'frames', '2,4');
+  assert.strictEqual(r.code, 0, r.out);
+  assert.deepStrictEqual(calls(1).slice(before).filter(c => c.type === 'image').map(c => c.prompt.match(/(cave|World Tree|sunset|market)/)[1]), ['World Tree', 'market']);
+  assert.match(run('make', story, '--redo', 'frame', 'x').out, /--redo frame 6,7,9-12/);
+});
+
 test("Flow's own sound as the film's music: a quiet one is brought up to a proper level", () => {
   const { loudness } = require('../lib/join');
   const story = path.join(tmp, 'quiet.txt');
@@ -329,7 +354,7 @@ test('manga: the story file, the pages\' layout, and their checks', () => {
 
 test('manga: panels made in Flow (free) or taken from the video\'s frames, then the pages and the PDF', () => {
   const book = path.join(tmp, 'book.txt');
-  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: A tall tree.\nTitle: "The Fox Book"\n\npage 2:\npanel 4: frame 3\nCaption (right): "The end."\n');
+  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: Same place, Ren climbs a tall tree.\nTitle: "The Fox Book"\n\npage 2:\npanel 4: frame 3\nCaption (right): "The end."\n');
   const c = run('check', book);
   assert.strictEqual(c.code, 0, c.out);
   assert.match(c.out, /made +panel 1: frame 1 of story\.txt/);
@@ -342,8 +367,13 @@ test('manga: panels made in Flow (free) or taken from the video\'s frames, then 
   assert.strictEqual(r.code, 0, r.out);
   const made = calls(1).slice(before);
   assert.deepStrictEqual(made.map(x => x.type), ['image', 'image'], 'only the two new panels are made; the frames are reused');
-  assert.match(made[0].prompt, /Ren in a garden\. One manga panel picture[^]*no speech bubbles[^]*next panel of the same comic/);
-  assert.ok(made[0].reference_images.some(x => /frame-01/.test(x)) && made[0].reference_images.includes('asset:Ren'));
+  // a new place: only the character as a reference, not the panel before (Flow would copy it in)
+  assert.match(made[0].prompt, /Ren in a garden\. One manga panel picture[^]*no speech bubbles/);
+  assert.deepStrictEqual(made[0].reference_images, ['asset:Ren']);
+  assert.doesNotMatch(made[0].prompt, /reference picture/);
+  // "Same place": the panel before is the reference
+  assert.match(made[1].prompt, /same scene a moment later/);
+  assert.ok(made[1].reference_images[0].includes('panel-02'));
   assert.strictEqual(made[0].download_quality, 'upscaled');
   assert.strictEqual(made[1].aspect_ratio, '9:16', 'half the page wide, half the page tall: a tall panel');
   assert.strictEqual(bank(1), 7, 'no credits spent');

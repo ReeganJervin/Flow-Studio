@@ -9,7 +9,7 @@
 //   flow-video check <story>                read the story, list what will be made (spends nothing)
 //   flow-video make <story>                 frames first (free); run again for the clips and the finished film
 //   flow-video make <story> --all           frames, clips and the film in one go
-//   flow-video make <story> --redo frame 3  make frame 3 again (also: --redo clip 2, --redo film)
+//   flow-video make <story> --redo frame 3  make frame 3 again (several: --redo frame 6,7,9-12; also --redo clip 2, --redo film)
 //   flow-video make <story> --account 2     use account 2 only (default: whichever has the most credits)
 //
 // A manga story (with "page 1:" and "panel 1:" lines) makes manga pages instead: the panels in Flow (free pictures),
@@ -19,7 +19,7 @@
 // panels/panel-01.png..., pages/page-01.png..., <project>.pdf).
 // Already-made frames and clips are kept, so a run that stops (no credits left, Chrome closed) carries on where it was.
 const fs = require('fs'), path = require('path'), os = require('os');
-const { parseFlowStory, framePrompt, clipPrompt, castOf } = require('./lib/story');
+const { parseFlowStory, framePrompt, clipPrompt, castOf, followsOn } = require('./lib/story');
 const { joinClips, probe } = require('./lib/join');
 const { bubbleTimes, burnBubbles } = require('./lib/bubbles');
 const { makeVoices } = require('./lib/voices');
@@ -89,11 +89,13 @@ function readStory(file) {
 const progress = label => msg => say(`    ${label}: ${msg}`);
 
 // ---------- making ----------
-// frames one at a time, so each can use the frame before it as a reference and keep the look the same
+// frames one at a time, so each can use the frame before it as a reference and keep the look the same (only when it
+// is the same scene a moment later: with "frames: new places", a new place is drawn from its own words only, or the
+// frame before is copied into it)
 async function makeFrames(story, a, m, todo) {
   say(`\nFrames (free): ${todo.map(f => f.n).join(', ')} on ${a.name}`);
   for (const f of todo) {
-    const prev = story.frames[story.frames.indexOf(f) - 1], prevFile = prev && m.frames[prev.n];
+    const prev = followsOn(story.meta, f.text) ? story.frames[story.frames.indexOf(f) - 1] : null, prevFile = prev && m.frames[prev.n];
     // references: the frame before (same look), the story's style pictures, the characters in this frame (3 at most)
     const refs = [...(have(prevFile) ? [frameFor(m, prev.n, a)] : []), ...story.stylePictures, ...castOf(story.meta, f.text).map(c => `asset:${c}`)].slice(0, 3);
     const scene = { type: 'image', prompt: framePrompt(story.meta, f) + (have(prevFile) ? ' Match the previous image exactly for the characters, colours, light and drawing style; this is the same scene a moment later.' : ''),
@@ -180,10 +182,12 @@ async function make(file, opts) {
   const story = readStory(file);
   const m = made(story);
   if (opts.redo) {
-    const [kind, n] = opts.redo;
-    if (kind === 'frame') { delete m.frames[n]; delete m.inFlow[n]; } else if (kind === 'clip') delete m.clips[n];
-    // a new frame changes the clips that start or end on it
-    if (kind === 'frame') story.clips.filter(c => c.from === +n || c.to === +n).forEach(c => { if (m.clips[c.n]) { delete m.clips[c.n]; say(`(clip ${c.n} uses frame ${n}, so it will be made again too)`); } });
+    const [kind, ns] = opts.redo;
+    for (const n of ns) {
+      if (kind === 'frame') { delete m.frames[n]; delete m.inFlow[n]; } else if (kind === 'clip') delete m.clips[n];
+      // a new frame changes the clips that start or end on it
+      if (kind === 'frame') story.clips.filter(c => c.from === n || c.to === n).forEach(c => { if (m.clips[c.n]) { delete m.clips[c.n]; say(`(clip ${c.n} uses frame ${n}, so it will be made again too)`); } });
+    }
     delete m.film;
     saveMade(story, m);
   }
@@ -238,12 +242,15 @@ async function makeManga(file, opts) {
   const book = readManga(file), m = made(book);
   m.panels = m.panels || {};
   if (opts.redo) {
-    const [kind, n] = opts.redo;
+    const [kind, ns] = opts.redo;
     if (kind === 'panel') {
-      const p = book.panels.find(x => x.n === +n);
-      if (!p) stop(`There is no panel ${n}.`);
-      if (p.frame !== null) stop(`Panel ${n} is frame ${p.frame} of ${path.basename(book.linked.file)}: redo that frame there (make ${path.basename(book.linked.file)} --redo frame ${p.frame}).`);
-      delete m.panels[n]; delete m.inFlow[`panel-${n}`]; saveMade(book, m);
+      for (const n of ns) {
+        const p = book.panels.find(x => x.n === n);
+        if (!p) stop(`There is no panel ${n}.`);
+        if (p.frame !== null) stop(`Panel ${n} is frame ${p.frame} of ${path.basename(book.linked.file)}: redo that frame there (make ${path.basename(book.linked.file)} --redo frame ${p.frame}).`);
+        delete m.panels[n]; delete m.inFlow[`panel-${n}`];
+      }
+      saveMade(book, m);
     } else if (kind !== 'pages') stop('In a manga story: --redo panel 3, or --redo pages.');
   }
   const px = pagePixels(book.meta);
@@ -263,11 +270,12 @@ async function makeManga(file, opts) {
     book.pages.forEach(pg => layoutPage(pg, px, book.meta.slant).forEach((q, k) => { shapes[pg.panels[k].n] = panelAspect(q); }));
     for (const p of todo) {
       // references: the panel before (the same drawing style), the style pictures, the characters in this panel (3 at most)
-      const prev = book.panels[book.panels.indexOf(p) - 1], prevFile = prev && panelFile(book, m, prev);
+      // (only a panel that starts with "Same place" uses the panel before: a reference picture is copied into a new place)
+      const prev = /^\s*same (place|scene)\b/i.test(p.text) ? book.panels[book.panels.indexOf(p) - 1] : null, prevFile = prev && panelFile(book, m, prev);
       const prevRef = !have(prevFile) ? [] : prev.frame !== null ? [frameFor(book.linked.m, prev.frame, a)] : [m.inFlow[`panel-${prev.n}`] && m.inFlow[`panel-${prev.n}`].account === a.n ? `asset:${m.inFlow[`panel-${prev.n}`].title}` : path.resolve(prevFile)];
       const refs = [...prevRef, ...book.stylePictures, ...castOf(book.meta, p.text).map(c => `asset:${c}`)].slice(0, 3);
       const prompt = framePrompt(book.meta, p) + ' One manga panel picture, drawn to fill the whole frame: no text, no captions, no speech bubbles, no panel borders.'
-        + (prevRef.length ? ' Keep the same drawing style, colours and characters as the reference picture; this is the next panel of the same comic (it may show another place).' : '');
+        + (prevRef.length ? ' Match the reference picture exactly for the place, characters, colours and drawing style; this is the same scene a moment later.' : '');
       const scene = { type: 'image', prompt, aspect_ratio: shapes[p.n], max_credits: 0, ...(refs.length ? { reference_images: refs } : {}), ...(book.meta.frameModel ? { model: book.meta.frameModel } : {}), download_quality: book.meta.quality };
       let r;
       try { r = await a.generate(scene, path.join(outDir(book), 'panels', `panel-${num(p.n)}`), progress(`panel ${p.n}`), `${book.meta.project}-panel-${num(p.n)}`); }
@@ -373,7 +381,7 @@ async function login(n) {
 // ---------- command line ----------
 async function main(argv) {
   const [cmd, ...rest] = argv, opt = k => { const i = rest.indexOf(`--${k}`); return i >= 0 ? rest[i + 1] : null; };
-  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && !(rest[i - 2] === '--redo' && /^\d+$/.test(x)));
+  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && !(rest[i - 2] === '--redo' && /^[\d,\s-]+$/.test(x)));
   if (cmd === 'login') return login(rest[0]);
   if (cmd === 'credits') return credits();
   if (cmd === 'check') return check(file);
@@ -381,8 +389,12 @@ async function main(argv) {
     let redo = null;
     const ri = rest.indexOf('--redo');
     if (ri >= 0) {
-      redo = [String(rest[ri + 1] || '').toLowerCase(), rest[ri + 2]];
-      if (!/^(frame|clip|film|panel|pages)$/.test(redo[0]) || (!/^(film|pages)$/.test(redo[0]) && !/^\d+$/.test(redo[1] || ''))) stop('Use --redo frame 3, --redo clip 2, or --redo film (manga: --redo panel 3, or --redo pages).');
+      // one number, or several: 6,7,9-12
+      let kind = String(rest[ri + 1] || '').toLowerCase(); const list = String(rest[ri + 2] || '');
+      if (/^(frames|clips|panels)$/.test(kind)) kind = kind.slice(0, -1);
+      const ns = /^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(list) ? list.split(',').flatMap(r => { const [a, b = a] = r.split('-').map(Number); return Array.from({ length: Math.max(0, b - a + 1) }, (_, i) => a + i); }) : null;
+      if (!/^(frame|clip|film|panel|pages)$/.test(kind) || (!/^(film|pages)$/.test(kind) && !(ns && ns.length))) stop('Use --redo frame 3 (or several: --redo frame 6,7,9-12), --redo clip 2, or --redo film (manga: --redo panel 3, or --redo pages).');
+      redo = [kind, ns || []];
     }
     if (file && fs.existsSync(file) && isManga(fs.readFileSync(file, 'utf8'))) return makeManga(file, { account: opt('account'), redo });
     if (redo && /^(panel|pages)$/.test(redo[0])) stop(`--redo ${redo[0]} is for manga stories.`);

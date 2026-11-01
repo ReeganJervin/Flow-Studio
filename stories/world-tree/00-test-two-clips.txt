@@ -26,7 +26,11 @@ bubbles: on
 # style pictures: refs/page-1.png, refs/page-7.png
 
 style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss and ancient trees, soft volumetric sunlight, clear blue sky with big white clouds, drifting mist, glowing blue flowers and tiny light motes, warm golden lanterns, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
-place: The world of the World Tree: an ancient forest beyond the lands known to ordinary travelers, waterfalls, hidden caves, a world of floating islands among the clouds, and towns of wooden houses built on the giant branches.
+# (each frame is a new place: it is drawn from its own words only, not from the frame before, which Flow
+#  copied into the next frames. A frame that starts with "Same place" still follows on from the one before.)
+frames: new places
+# (no "World Tree" here: these words go into every frame, and Flow then drew the World Tree into all of them)
+place: An ancient fantasy world far beyond the lands known to ordinary travelers.
 
 frame 1: The Lower World forest below the giant branches of the World Tree: a sunlit clearing with a clear stream over mossy stones, a spotted deer stag drinking, a fawn beside it, rabbits in the grass, small blue birds on a branch, a wild boar rooting among the ferns, glowing blue flowers, waterfalls and wooden bridges far above in the branches. Wide shot.
 frame 2: The same forest, a little further along the stream: three winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) hunters with bows and quivers moving quietly along a mossy forest path between the giant trees, a young hunter with a green cloak in front crouching to look at animal tracks. Wide shot.

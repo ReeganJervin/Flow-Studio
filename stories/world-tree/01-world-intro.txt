@@ -33,7 +33,11 @@ bubbles: on
 # (style and place go into EVERY frame and clip: only the drawing style and the look of this world here; the sky,
 #  the lanterns, the light of day or sunset are written in each frame, so the cave or the sunset don't get a blue sky)
 style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss, clear turquoise water, pink and blue wildflowers, glowing blue flowers and tiny light motes, soft volumetric light, drifting mist, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
-place: The world of the World Tree, an ancient fantasy world far beyond the lands known to ordinary travelers.
+# (each frame is a new place: it is drawn from its own words only, not from the frame before, which Flow
+#  copied into the next frames. A frame that starts with "Same place" still follows on from the one before.)
+frames: new places
+# (no "World Tree" here: these words go into every frame, and Flow then drew the World Tree into all of them)
+place: An ancient fantasy world far beyond the lands known to ordinary travelers.
 
 # ---------- frames (free stills): each clip goes from one frame to the next ----------
 # page 1: the ancient forest
@@ -51,7 +55,7 @@ frame 6: The heart of the floating world: the colossal World Tree, its trunk as 
 frame 7: The Lower World forest below the giant branches: a sunlit clearing with a clear stream over mossy stones, a spotted deer stag drinking, a fawn beside it, rabbits in the grass, small blue birds on a branch, a wild boar rooting among the ferns, glowing blue flowers, waterfalls and wooden bridges far above. Bright daylight. Wide shot.
 frame 8: Deeper in the misty forest: a majestic magical stag with softly glowing blue markings and antlers standing among the dark trees, glowing blue light motes around it; and on a mossy path nearby, three winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) hunters with bows and quivers moving quietly, a young hunter with a green cloak in front. Wide shot.
 # page 7: the paths become home, the market
-frame 9: The winged-elf hunters walking along a forest path beneath the ancient trees, and ahead of them, through the trees, the first wooden houses on the giant branches with lanterns, flower boxes and waterfalls. Wide shot.
+frame 9: Three winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) hunters with bows and quivers, a young hunter with a green cloak in front, walking along a forest path beneath the ancient trees, and ahead of them, through the trees, the first wooden houses on the giant branches with lanterns, flower boxes and waterfalls. Wide shot.
 frame 10: A lively market in a Lower World town on the giant branches: fruit and flower stalls with colourful awnings, hanging lanterns and herbs, winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) shopping with baskets, a mother and a little child choosing flowers, wooden bridges and waterfalls behind. Warm light. Wide shot.
 # page 8: branch to branch, the World Tree at sunset
 frame 11: Wooden bridges and walkways connecting the giant branches from tree to tree, cozy houses with glowing windows, winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) crossing the bridges, waterfalls pouring between the branches into the clouds below. Golden-hour light. Wide shot.

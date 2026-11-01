@@ -44,7 +44,7 @@ flow-video.bat make stories\my-story.txt
 - **`credits`**: the plan and the credits left on both accounts.
 - **`check`**: reads the story and lists every frame and clip. It spends nothing.
 - **`make`**, the first time: makes **only the frames**, which are free. Look at them in `output\<project>\frames\`.
-  - To redo a frame you don't like: `make ... --redo frame 3`. The clips that start or end on that frame are redone too.
+  - To redo a frame you don't like: `make ... --redo frame 3`. Several at once: `--redo frame 6,7,9-12`. The clips that start or end on that frame are redone too.
 - **`make`**, again: makes the **clips**, which cost credits, and then **joins them** into `output\<project>\film.mp4`.
 - **`make ... --all`**: frames, clips and film in one go.
 
@@ -95,6 +95,7 @@ Yuki (soft, curious): "Ren... did you hear that?"
 | `clip N: frame A to frame B` | A video starting on frame A and ending on frame B. The lines below it say what happens and who says what |
 | `clip N: from frame A` | A video that starts on frame A, with no end frame: the camera travels on by itself. Use it when the next place looks very different (into a cave, into a town): with an end frame, Flow melts one picture into the other, so the new place seems to "fade in". The next clip then starts on its own frame |
 | `Narrator: "..."` | The storyteller: never shown or acted by Flow, read by Kitsu Studio's narrator voice, and shown in a **storybook caption box** (parchment, top left; `(right)` for top right) instead of a speech bubble. With `music: none` and `flow sound: on`, Google Flow's music and sounds play under the narrator: brought up to a good level (Flow's own sound is often very quiet), and dipping a little while the narrator speaks |
+| `frames:` | `follow on` (the default): each frame is the same scene a moment later than the one before, which is given to Flow as a reference (Ren & Yuki's Shorts). `new places`: each frame is a new place, drawn from its own words only, as Flow copies a reference picture into the new frame; a frame that starts with "Same place" still follows on (the World Tree) |
 | `style pictures:` | Up to 2 of your own pictures (paths next to the story file), used as references for every frame so Flow draws in the same style |
 | `clip 1:` (no frames) | The clip is made from the Flow characters named in it, with **their own looks and the voices you gave them in Flow**, and no frames. Flow can't use frames and characters in the same clip, so this trades the frames' exact picture for the characters' voices. Use it with `voices: flow` and `music: none` to hear Flow's own voices and music (see `stories\test-flow-voices.txt`) |
 | `Ren (proud): "I'm a snow expert."` | In a clip: something said. It becomes a speech bubble (and, with `voices: kitsu`, Ren says it), and Flow gets only how Ren feels ("proud"). The feeling also changes the voice a little, as in Kitsu Studio (proud, teasing, pouting, whispering, shouting...) |
@@ -150,7 +151,7 @@ flow-video.bat make stories\world-tree\manga-chapter-01.txt --account 2
 ```
 
 - **`make`** makes the panels that aren't made yet (free), then the pages: `output\<project>\pages\page-01.png`... and the book `output\<project>\<project>.pdf`.
-- **A panel you don't like:** `make ... --redo panel 3` (free).
+- **A panel you don't like:** `make ... --redo panel 3` (free; several: `--redo panel 3,5,8-10`). A panel is drawn from its own words only. A panel that starts with "Same place" is the panel before a moment later.
 - **Changed a caption, the layout or a focus?** `make ... --redo pages`: only the pages are laid out again. Free, and nothing is made in Flow.
 - **Before selling on Amazon KDP:**
   - A paperback needs at least 24 pages, and a cover, which is made separately.

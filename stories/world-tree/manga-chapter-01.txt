@@ -36,7 +36,7 @@ quality: upscaled
 slant: on
 
 style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss, clear turquoise water, pink and blue wildflowers, glowing blue flowers and tiny light motes, soft volumetric light, drifting mist, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
-place: The world of the World Tree, an ancient fantasy world far beyond the lands known to ordinary travelers.
+place: An ancient fantasy world far beyond the lands known to ordinary travelers.
 
 # ---------- page 1: the ancient forest ----------
 page 1: 1 tall, 1, 1, 1, 2 tall
