@@ -302,6 +302,10 @@ test('frames: new places: a new place is drawn from its own words, not copied fr
   assert.strictEqual(r.code, 0, r.out);
   assert.deepStrictEqual(calls(1).slice(before).filter(c => c.type === 'image').map(c => c.prompt.match(/(cave|World Tree|sunset|market)/)[1]), ['World Tree', 'market']);
   assert.match(run('make', story, '--redo', 'frame', 'x').out, /--redo frame 6,7,9-12/);
+  // PowerShell passes 6,7,9-12 as three words: "6" "7" "9-12"
+  before = calls(1).length;
+  assert.strictEqual(run('make', story, '--account', '1', '--redo', 'frame', '1', '3-4').code, 0);
+  assert.deepStrictEqual(calls(1).slice(before).map(c => c.prompt.match(/(cave|World Tree|sunset|market)/)[1]), ['cave', 'sunset', 'market']);
 });
 
 test("Flow's own sound as the film's music: a quiet one is brought up to a proper level", () => {

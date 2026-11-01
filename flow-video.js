@@ -381,16 +381,18 @@ async function login(n) {
 // ---------- command line ----------
 async function main(argv) {
   const [cmd, ...rest] = argv, opt = k => { const i = rest.indexOf(`--${k}`); return i >= 0 ? rest[i + 1] : null; };
-  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && !(rest[i - 2] === '--redo' && /^[\d,\s-]+$/.test(x)));
+  // the numbers after "--redo frame": PowerShell turns 6,7,9-12 into three words ("6" "7" "9-12"), so they are all taken
+  const ri = rest.indexOf('--redo'), nums = [];
+  if (ri >= 0) for (let i = ri + 2; i < rest.length && /^[\d,\s-]+$/.test(rest[i]); i++) nums.push(i);
+  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && !nums.includes(i));
   if (cmd === 'login') return login(rest[0]);
   if (cmd === 'credits') return credits();
   if (cmd === 'check') return check(file);
   if (cmd === 'make') {
     let redo = null;
-    const ri = rest.indexOf('--redo');
     if (ri >= 0) {
       // one number, or several: 6,7,9-12
-      let kind = String(rest[ri + 1] || '').toLowerCase(); const list = String(rest[ri + 2] || '');
+      let kind = String(rest[ri + 1] || '').toLowerCase(); const list = nums.map(i => rest[i]).join(',').replace(/\s+/g, '').replace(/,+/g, ',').replace(/^,|,$/g, '');
       if (/^(frames|clips|panels)$/.test(kind)) kind = kind.slice(0, -1);
       const ns = /^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(list) ? list.split(',').flatMap(r => { const [a, b = a] = r.split('-').map(Number); return Array.from({ length: Math.max(0, b - a + 1) }, (_, i) => a + i); }) : null;
       if (!/^(frame|clip|film|panel|pages)$/.test(kind) || (!/^(film|pages)$/.test(kind) && !(ns && ns.length))) stop('Use --redo frame 3 (or several: --redo frame 6,7,9-12), --redo clip 2, or --redo film (manga: --redo panel 3, or --redo pages).');
