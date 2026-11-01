@@ -108,7 +108,56 @@ Yuki (soft, curious): "Ren... did you hear that?"
 
 **One Flow project for all your stories:** keep using the project that has Ren and Yuki in it, on each account. Every frame and clip is named after its story in Flow (like `the-snow-expert-frame-01-...`), so the stories never mix up. A clip on the same account picks its frames there directly. Only a clip made on the *other* account uploads them.
 
-## Good to know
+## Manga pages (for reading, and for selling on Amazon)
+
+A **manga story** makes manga pages instead of a video. The panels are pictures made in Google Flow, which are **free**, like the frames. A panel can also be a frame you already made for the video. Flow Studio lays out the pages itself:
+- slanted panel borders, like a manga page
+- the same parchment caption boxes as the films, with your **exact words** (AI pictures often misspell words)
+- speech bubbles
+- print size, plus **one PDF** ready for Amazon KDP
+
+Start from `stories\world-tree\manga-chapter-01.txt`:
+
+```
+title: Whispers of the World Tree - Chapter 1
+size: 6x9
+frames from: 01-world-intro.txt
+style: Breathtaking Japanese fantasy anime art...
+
+page 1: 1 tall, 1, 1, 1, 2 tall
+panel 1: frame 1
+Caption: "Beyond the lands known to ordinary travelers..."
+panel 2: Inside the ancient forest: enormous mossy trees...
+Caption (right): "...there lies a forest older than the memories of its people."
+```
+
+| Line | What it does |
+|---|---|
+| `size:` | The book's size in inches, one of Amazon's: `5x8`, `5.5x8.5`, `6x9` (the default), `7x10`, `8.5x11`. The pages are made at 300 dpi (6x9 is 1800 x 2700 pixels), with a 0.4 inch margin all round, so no "bleed" is needed |
+| `frames from:` | A video story next to this file. `panel 3: frame 2` then uses that story's frame 2, so nothing is made twice |
+| `quality:` | `upscaled` (the default: bigger pictures from Flow, sharper in print) or `original` |
+| `slant:` | `on` (the default): slanted panel borders, like a manga page. `off`: straight |
+| `page 1: 1 tall, 2, 1` | A page, and its rows from top to bottom: how many panels side by side (1 to 4), and `tall` or `short` for a taller or shorter row. `page 1:` alone: one panel per row |
+| `panel 3: ...` | A panel: what its picture shows (made in Flow), or `frame 2` (a frame of the `frames from` story). Panels are numbered through the whole chapter |
+| `Caption: "..."` | A parchment caption box. `(right)`, `(bottom)` or `(bottom right)` says where. The first one in a panel goes top left, the next bottom right. `Narrator:` works too |
+| `Jack (happy, left): "..."` | A speech bubble, its tail toward the left (or right) |
+| `focus: top` | Which part of the picture to keep when it is cut to the panel's shape: `top`, `middle` (the default) or `bottom` |
+
+```
+flow-video.bat check stories\world-tree\manga-chapter-01.txt
+flow-video.bat make stories\world-tree\manga-chapter-01.txt --account 2
+```
+
+- **`make`** makes the panels that aren't made yet (free), then the pages: `output\<project>\pages\page-01.png`... and the book `output\<project>\<project>.pdf`.
+- **A panel you don't like:** `make ... --redo panel 3` (free).
+- **Changed a caption, the layout or a focus?** `make ... --redo pages`: only the pages are laid out again. Free, and nothing is made in Flow.
+- **Before selling on Amazon KDP:**
+  - A paperback needs at least 24 pages, and a cover, which is made separately.
+  - These pages are in colour: choose colour printing, which costs more per book.
+  - Amazon asks whether the pictures are AI-made: answer yes.
+  - Check Google's terms for selling pictures made in Flow.
+
+
 
 - **Each account's Chrome window must stay open, with a Flow project open.** Don't use that window while a video is being made.
 - Flow Studio waits 25–70 seconds between generations, like a person would, so a 6-clip video takes a while. You can leave it running.

@@ -1,0 +1,75 @@
+# Whispers of the World Tree — MANGA, chapter 1: the journey (pages 1 and 2 so far)
+#
+# Manga pages to read and to sell (Amazon KDP print book, 6 x 9 inches). The panels are pictures made in Google Flow
+# (free, like the frames), or frames already made for the video (01-world-intro.txt), so nothing is made twice. Flow
+# Studio lays out the pages itself: slanted panel borders, the parchment caption boxes with the exact words, at print
+# size, and one PDF of all the pages.
+#
+#  Check it (free):                 .\flow-video.bat check stories\world-tree\manga-chapter-01.txt
+#  0. The video's frames first (free): .\flow-video.bat make stories\world-tree\01-world-intro.txt --account 2
+#  1. Panels and pages (free):      .\flow-video.bat make stories\world-tree\manga-chapter-01.txt --account 2
+#     Redo a panel (free):          .\flow-video.bat make stories\world-tree\manga-chapter-01.txt --account 2 --redo panel 3
+#     Fix a caption or the layout:  .\flow-video.bat make stories\world-tree\manga-chapter-01.txt --redo pages
+#  The pages: output\world-tree-manga-chapter-01\pages\page-01.png ...
+#  The book:  output\world-tree-manga-chapter-01\world-tree-manga-chapter-01.pdf
+#
+# How a page is written:
+#   page 1: 1 tall, 1, 1, 1, 2 tall    the rows from top to bottom: how many panels side by side (1 to 4),
+#                                      "tall" or "short" for a taller or shorter row
+#   panel 3: <what the picture shows>  a new picture, made in Flow; or  panel 1: frame 1  (a frame of the video)
+#   Caption (right): "..."             a caption box: left or right, top or bottom (the first one: top left)
+#   Jack (happy, left): "..."          a speech bubble, its tail toward the left
+#   focus: top                         which part of the picture to keep when it is cut to the panel (top, middle, bottom)
+#
+title: Whispers of the World Tree - Chapter 1
+project: world-tree-manga-chapter-01
+size: 6x9
+frames from: 01-world-intro.txt
+# bigger pictures from Flow, sharper in print
+quality: upscaled
+slant: on
+
+style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss, clear turquoise water, pink and blue wildflowers, glowing blue flowers and tiny light motes, soft volumetric light, drifting mist, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
+place: The world of the World Tree, an ancient fantasy world far beyond the lands known to ordinary travelers.
+
+# ---------- page 1: the ancient forest ----------
+page 1: 1 tall, 1, 1, 1, 2 tall
+
+panel 1: frame 1
+Caption: "Beyond the lands known to ordinary travelers..."
+
+panel 2: Inside the ancient forest: enormous mossy trees with huge twisting roots, sunbeams falling through the canopy, a clear stream flowing between mossy stones, glowing blue light motes, pink and blue wildflowers. No people. Wide shot.
+Caption: "...there lies a forest older than the memories of its people."
+
+panel 3: Small waterfalls cascading over mossy rocks into a clear turquoise pool, pink and blue wildflowers in the front, glowing blue light motes over the water, sunlight. No people. Wide shot.
+Caption (right): "Here, water remembers the mountains..."
+
+panel 4: A misty part of the ancient forest: gigantic dark trees fading into soft white mist, hanging vines, a hint of a huge tree far away in the mist, quiet and mysterious. No people. Wide shot.
+Caption: "...and the trees guard secrets hidden for generations."
+
+panel 5: A tall waterfall falling between mossy cliffs and trees into a clear turquoise pool, white mist, blue and purple wildflowers on the rocks in front, blue sky above. No people.
+Caption: "Few ever venture deep enough to find them."
+
+panel 6: frame 2
+Caption (right): "But every journey begins with a single step."
+
+# ---------- page 2: the waterfall ----------
+page 2: 1 short, 2 tall, 2 tall, 1 tall
+
+panel 7: A stone path running beside a clear stream with small cascades through the ancient forest, mossy rocks, wildflowers, and a waterfall shining far ahead between the trees. No people. Wide shot.
+Caption: "The deeper one travels into the forest..."
+
+panel 8: A huge, wide waterfall thundering down a cliff of mossy rock, clouds of white mist and spray, turquoise water and mossy stones below, pink and blue flowers in the front, blue sky with white clouds above. No people.
+Caption: "...the voice of the water grows louder."
+
+panel 9: A close view of the falling water of the great waterfall, white and sparkling, with a small rainbow in the mist and spray, flowers on the mossy rocks at the side. No people.
+Caption (right): "For centuries, it has fallen..."
+
+panel 10: The side of the great waterfall: a curtain of falling water, and a narrow mossy stone path leading along the rocks behind the water toward a dark opening, hanging vines and flowers. No people.
+Caption: "...hiding what lies beyond its veil."
+
+panel 11: The mouth of a hidden cave behind the falling water: dark stone with hanging rock points, glowing blue flowers and moss at the entrance, a stream flowing out of it, and a faint warm golden light deep inside. No people.
+Caption (right): "Hidden behind the falling water..."
+
+panel 12: frame 3
+Caption (right): "...a forgotten path waits in silence."

@@ -12,7 +12,11 @@
 //   flow-video make <story> --redo frame 3  make frame 3 again (also: --redo clip 2, --redo film)
 //   flow-video make <story> --account 2     use account 2 only (default: whichever has the most credits)
 //
-// Everything lands in output/<project>/: frames/frame-01.png..., clips/clip-01.mp4..., film.mp4.
+// A manga story (with "page 1:" and "panel 1:" lines) makes manga pages instead: the panels in Flow (free pictures),
+// then the pages and one PDF for Amazon KDP (lib/manga.js). --redo panel 3 makes a panel again; --redo pages is free.
+//
+// Everything lands in output/<project>/: frames/frame-01.png..., clips/clip-01.mp4..., film.mp4 (manga:
+// panels/panel-01.png..., pages/page-01.png..., <project>.pdf).
 // Already-made frames and clips are kept, so a run that stops (no credits left, Chrome closed) carries on where it was.
 const fs = require('fs'), path = require('path'), os = require('os');
 const { parseFlowStory, framePrompt, clipPrompt, castOf } = require('./lib/story');
@@ -20,6 +24,7 @@ const { joinClips, probe } = require('./lib/join');
 const { bubbleTimes, burnBubbles } = require('./lib/bubbles');
 const { makeVoices } = require('./lib/voices');
 const { kitsuSoundtrack } = require('./lib/soundtrack');
+const { parseManga, isManga, layoutPage, panelAspect, pagePixels, renderPages } = require('./lib/manga');
 
 const HERE = __dirname;
 const { SETTINGS_FILE, settings, saveSettings, looksLikeKitsu, kitsuDir } = require('./lib/kitsu');
@@ -61,7 +66,7 @@ function made(story) {
   // files made before this folder was moved (from Kitsu Studio's flow folder, or another drive) are found where they
   // are now: the same name in the same place inside this story's output folder
   const here = f => (!f || fs.existsSync(f) ? f : [path.join(outDir(story), path.basename(path.dirname(f)), path.basename(f)), path.join(outDir(story), path.basename(f))].find(x => fs.existsSync(x)) || f);
-  for (const k of ['frames', 'clips']) for (const n in m[k]) m[k][n] = here(m[k][n]);
+  for (const k of ['frames', 'clips', 'panels']) for (const n in m[k] || {}) m[k][n] = here(m[k][n]);
   if (m.film) m.film = here(m.film);
   return m;
 }
@@ -207,7 +212,104 @@ async function make(file, opts) {
   say(`\nDone: ${path.relative(process.cwd(), m.film || outDir(story))}${spent ? ` (clips cost ${spent} credits in all)` : ''}`);
 }
 
+// ---------- manga pages ----------
+function readManga(file) {
+  const book = parseManga(fs.readFileSync(file, 'utf8'));
+  book.stylePictures = (book.meta.stylePictures || []).map(p => path.resolve(path.dirname(file), p));
+  const lost = book.stylePictures.filter(p => !fs.existsSync(p));
+  if (lost.length) book.errors.push(`style pictures: I can't find ${lost.map(p => path.relative(process.cwd(), p)).join(', ')}.`);
+  // the video story whose frames some panels use, and what it has made so far
+  if (book.meta.framesFrom) {
+    const linked = path.resolve(path.dirname(file), book.meta.framesFrom);
+    if (!fs.existsSync(linked)) book.errors.push(`frames from: I can't find ${book.meta.framesFrom} (next to ${path.basename(file)}).`);
+    else {
+      const story = readStory(linked);
+      book.linked = { file: linked, story, m: made(story) };
+      book.panels.filter(p => p.frame !== null && !story.frames.some(f => f.n === p.frame)).forEach(p => book.errors.push(`Line ${p.line}: panel ${p.n} uses frame ${p.frame}, but ${path.basename(linked)} has no "frame ${p.frame}:".`));
+    }
+  }
+  if (book.errors.length) stop(`Please fix these lines in ${path.basename(file)}:\n  ${book.errors.join('\n  ')}`);
+  return book;
+}
+// a panel's picture: its own (made in Flow), or the frame of the video story it uses
+const panelFile = (book, m, p) => (p.frame !== null ? book.linked.m.frames[p.frame] : m.panels[p.n]);
+
+async function makeManga(file, opts) {
+  const book = readManga(file), m = made(book);
+  m.panels = m.panels || {};
+  if (opts.redo) {
+    const [kind, n] = opts.redo;
+    if (kind === 'panel') {
+      const p = book.panels.find(x => x.n === +n);
+      if (!p) stop(`There is no panel ${n}.`);
+      if (p.frame !== null) stop(`Panel ${n} is frame ${p.frame} of ${path.basename(book.linked.file)}: redo that frame there (make ${path.basename(book.linked.file)} --redo frame ${p.frame}).`);
+      delete m.panels[n]; delete m.inFlow[`panel-${n}`]; saveMade(book, m);
+    } else if (kind !== 'pages') stop('In a manga story: --redo panel 3, or --redo pages.');
+  }
+  const px = pagePixels(book.meta);
+  say(`${book.meta.title}: ${book.pages.length} page(s), ${book.panels.length} panels, ${book.meta.size} inches (${px.W} x ${px.H} pixels)`);
+  const missing = book.panels.filter(p => p.frame !== null && !have(panelFile(book, m, p)));
+  if (missing.length) stop(`Panel(s) ${missing.map(p => p.n).join(', ')} use frames of ${path.basename(book.linked.file)} that aren't made yet: make that story's frames first (free):\n  flow-video make ${path.relative(process.cwd(), book.linked.file)}`);
+
+  const todo = book.panels.filter(p => p.frame === null && !have(m.panels[p.n]));
+  if (todo.length) {
+    const pinned = opts.account ? account(opts.account) : null, accts = pinned ? [pinned] : accounts(), ready = [];
+    say('Accounts:');
+    for (const a of accts) { const s = await state(a); showState(a, s); if (s.ok) ready.push({ a, s }); }
+    if (!ready.length) stop(`No account is ready. Sign in with  flow-video login ${accts[0].n}  and open a Flow project in that Chrome window, then try again.`);
+    const a = ready.sort((p, q) => (q.s.credits ?? 0) - (p.s.credits ?? 0))[0].a;
+    say(`\nPanels (free pictures): ${todo.map(p => p.n).join(', ')} on ${a.name}`);
+    const shapes = {};
+    book.pages.forEach(pg => layoutPage(pg, px, book.meta.slant).forEach((q, k) => { shapes[pg.panels[k].n] = panelAspect(q); }));
+    for (const p of todo) {
+      // references: the panel before (the same drawing style), the style pictures, the characters in this panel (3 at most)
+      const prev = book.panels[book.panels.indexOf(p) - 1], prevFile = prev && panelFile(book, m, prev);
+      const prevRef = !have(prevFile) ? [] : prev.frame !== null ? [frameFor(book.linked.m, prev.frame, a)] : [m.inFlow[`panel-${prev.n}`] && m.inFlow[`panel-${prev.n}`].account === a.n ? `asset:${m.inFlow[`panel-${prev.n}`].title}` : path.resolve(prevFile)];
+      const refs = [...prevRef, ...book.stylePictures, ...castOf(book.meta, p.text).map(c => `asset:${c}`)].slice(0, 3);
+      const prompt = framePrompt(book.meta, p) + ' One manga panel picture, drawn to fill the whole frame: no text, no captions, no speech bubbles, no panel borders.'
+        + (prevRef.length ? ' Keep the same drawing style, colours and characters as the reference picture; this is the next panel of the same comic (it may show another place).' : '');
+      const scene = { type: 'image', prompt, aspect_ratio: shapes[p.n], max_credits: 0, ...(refs.length ? { reference_images: refs } : {}), ...(book.meta.frameModel ? { model: book.meta.frameModel } : {}), download_quality: book.meta.quality };
+      let r;
+      try { r = await a.generate(scene, path.join(outDir(book), 'panels', `panel-${num(p.n)}`), progress(`panel ${p.n}`), `${book.meta.project}-panel-${num(p.n)}`); }
+      catch (e) { stop(`Panel ${p.n} wasn't made: ${e.message}\nRun the same command again to try once more (the panels made so far are kept).`); }
+      m.panels[p.n] = r.files[0];
+      m.inFlow[`panel-${p.n}`] = { account: a.n, title: r.title };
+      saveMade(book, m);
+      say(`    panel ${p.n}: ${path.relative(process.cwd(), m.panels[p.n])}`);
+    }
+  } else say('Panels: all made.');
+
+  say('\nLaying out the pages...');
+  const files = Object.fromEntries(book.panels.map(p => [p.n, path.resolve(panelFile(book, m, p))]));
+  const fonts = { caption: path.join(HERE, 'fonts', 'lora-500-italic.woff2'), bubble: path.join(HERE, 'fonts', 'fredoka-700.woff2') };
+  const r = await renderPages(book, files, outDir(book), fonts);
+  m.pages = r.pages; m.pdf = r.pdf; saveMade(book, m);
+  say(`  ${r.pages.length} page(s) in ${path.relative(process.cwd(), path.join(outDir(book), 'pages'))}`);
+  say(`\nDone: ${path.relative(process.cwd(), r.pdf)} (for Amazon KDP: ${book.meta.size} inches, no bleed)`);
+  say(`  Redo a panel (free):  flow-video make ${file} --redo panel 3`);
+  say(`  Change a caption or the layout, then (free):  flow-video make ${file} --redo pages`);
+}
+
+function checkManga(file) {
+  const book = readManga(file), m = made(book), px = pagePixels(book.meta);
+  m.panels = m.panels || {};
+  say(`${book.meta.title}  (manga, project "${book.meta.project}", ${book.meta.size} inches: ${px.W} x ${px.H} pixels at 300 dpi, borders ${book.meta.slant ? 'slanted' : 'straight'})`);
+  if (book.linked) say(`Frames from: ${path.basename(book.linked.file)}`);
+  book.pages.forEach(pg => {
+    say(`\nPage ${pg.n}: ${pg.rows ? pg.rows.map(r => `${r.count}${r.weight > 1 ? ' tall' : r.weight < 1 ? ' short' : ''}`).join(', ') : `${pg.panels.length} row(s) of 1`}`);
+    pg.panels.forEach(p => {
+      const done = have(panelFile(book, m, p));
+      say(`  ${done ? 'made ' : '     '} panel ${p.n}: ${p.frame !== null ? `frame ${p.frame} of ${path.basename(book.linked.file)}` : `${p.text.slice(0, 70)}${p.text.length > 70 ? '...' : ''}`}${p.focus !== 'middle' ? ` (focus: ${p.focus})` : ''}`);
+      p.captions.forEach(c => say(`          caption${c.x || c.y ? ` (${[c.y, c.x].filter(Boolean).join(' ')})` : ''}: "${c.text}"`));
+      p.bubbles.forEach(b => say(`          bubble (${b.who}${b.x ? `, ${b.x}` : ''}): "${b.text}"`));
+    });
+  });
+  const left = book.panels.filter(p => p.frame === null && !have(m.panels[p.n])).length;
+  say(`\n${left} panel picture(s) still to make in Flow: free (pictures cost no credits). Nothing has been made by this check.`);
+}
+
 function check(file) {
+  if (file && fs.existsSync(file) && isManga(fs.readFileSync(file, 'utf8'))) return checkManga(file);
   const story = readStory(file), m = made(story);
   say(`${story.meta.title}  (project "${story.meta.project}", ${story.meta.aspect}${story.meta.model ? `, ${story.meta.model}` : ''}, at most ${story.meta.maxCredits} credits a clip)`);
   if (story.meta.characters.length) say(`Flow characters: ${story.meta.characters.join(', ')}`);
@@ -259,7 +361,7 @@ async function login(n) {
 // ---------- command line ----------
 async function main(argv) {
   const [cmd, ...rest] = argv, opt = k => { const i = rest.indexOf(`--${k}`); return i >= 0 ? rest[i + 1] : null; };
-  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && rest[i - 2] !== '--redo');
+  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && !(rest[i - 2] === '--redo' && /^\d+$/.test(x)));
   if (cmd === 'login') return login(rest[0]);
   if (cmd === 'credits') return credits();
   if (cmd === 'check') return check(file);
@@ -268,13 +370,15 @@ async function main(argv) {
     const ri = rest.indexOf('--redo');
     if (ri >= 0) {
       redo = [String(rest[ri + 1] || '').toLowerCase(), rest[ri + 2]];
-      if (!/^(frame|clip|film)$/.test(redo[0]) || (redo[0] !== 'film' && !/^\d+$/.test(redo[1] || ''))) stop('Use --redo frame 3, --redo clip 2, or --redo film.');
+      if (!/^(frame|clip|film|panel|pages)$/.test(redo[0]) || (!/^(film|pages)$/.test(redo[0]) && !/^\d+$/.test(redo[1] || ''))) stop('Use --redo frame 3, --redo clip 2, or --redo film (manga: --redo panel 3, or --redo pages).');
     }
+    if (file && fs.existsSync(file) && isManga(fs.readFileSync(file, 'utf8'))) return makeManga(file, { account: opt('account'), redo });
+    if (redo && /^(panel|pages)$/.test(redo[0])) stop(`--redo ${redo[0]} is for manga stories.`);
     return make(file, { all: rest.includes('--all'), account: opt('account'), redo });
   }
   if (cmd === 'kitsu') return kitsu(rest[0]);
   if (cmd === 'setup') return say('Run setup.bat once (it installs what Flow Studio needs), then:  flow-video kitsu <Kitsu Studio folder>');
-  say(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 16).map(l => l.replace(/^\/\/ ?/, '')).join('\n'));
+  say(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 20).map(l => l.replace(/^\/\/ ?/, '')).join('\n'));
 }
 
 if (require.main === module) {

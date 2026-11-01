@@ -31,7 +31,8 @@ class FlowAccount {
     const out = stem + (s.type === 'image' ? '.png' : '.mp4');
     if (s.type === 'video') require('child_process').execFileSync(require(${JSON.stringify(require.resolve(path.join(__dirname, '..', 'lib', 'join.js')))}).FFMPEG,
       ['-loglevel', 'error', '-y', '-f', 'lavfi', '-i', 'color=c=orange:s=180x320:d=1', ...(fs.existsSync(this.file('mute')) ? [] : ['-f', 'lavfi', '-i', 'sine=d=1']), ...(fs.existsSync(this.file('quiet')) ? ['-af', 'volume=0.1'] : []), '-shortest', out]);
-    else fs.writeFileSync(out, s.prompt);
+    // (a real picture, its prompt kept next to it, so the manga pages can be drawn)
+    else { require('child_process').execFileSync(require(${JSON.stringify(require.resolve(path.join(__dirname, '..', 'lib', 'join.js')))}).FFMPEG, ['-loglevel', 'error', '-y', '-f', 'lavfi', '-i', 'color=c=teal:s=' + (s.aspect_ratio === '9:16' ? '90x160' : '160x90'), '-frames:v', '1', out]); fs.writeFileSync(out + '.txt', s.prompt); }
     return { files: [out], credits: cost, title: name + '-t' + Date.now() };
   }
 }
@@ -293,6 +294,67 @@ test("Flow's own sound as the film's music: a quiet one is brought up to a prope
   assert.ok(before.i < -35, `the clip is quiet (${before.i} LUFS)`);
   assert.ok(Math.abs(after.i - -16) < 2.5, `the film is at a proper level (${after.i} LUFS)`);
   assert.ok(after.tp <= -1, `no clipping (${after.tp} dB)`);
+});
+
+test('manga: the story file, the pages\' layout, and their checks', () => {
+  const { parseManga, isManga, layoutPage, panelAspect, pagePixels } = require('../lib/manga');
+  const text = 'title: Book\nsize: 6 x 9\nframes from: story.txt\nstyle: Anime.\n\npage 1: 1 tall, 2\npanel 1: frame 1\nCaption: "Long ago..."\npanel 2: A waterfall.\nCaption (right, bottom): "...it fell."\nfocus: top\npanel 3: A cave.\nJack (happy, left): "Look!"\n\npage 2:\npanel 4: frame 3\n';
+  assert.ok(isManga(text) && !isManga(fs.readFileSync(STORY, 'utf8')));
+  const b = parseManga(text);
+  assert.deepStrictEqual(b.errors, []);
+  assert.strictEqual(b.meta.size, '6x9'); assert.strictEqual(b.meta.quality, 'upscaled');
+  assert.deepStrictEqual(b.panels.map(p => [p.n, p.page, p.frame]), [[1, 1, 1], [2, 1, null], [3, 1, null], [4, 2, 3]]);
+  assert.deepStrictEqual(b.panels[1].captions.map(c => [c.text, c.x, c.y]), [['...it fell.', 'right', 'bottom']]);
+  assert.strictEqual(b.panels[1].focus, 'top');
+  assert.deepStrictEqual(b.panels[2].bubbles.map(x => [x.who, x.text, x.x]), [['Jack', 'Look!', 'left']]);
+  // Amazon's 6 x 9 inches at 300 dpi; the panels stay inside the margins and don't overlap
+  const px = pagePixels(b.meta);
+  assert.deepStrictEqual([px.W, px.H], [1800, 2700]);
+  for (const slant of [true, false]) {
+    const q = layoutPage(b.pages[0], px, slant);
+    assert.strictEqual(q.length, 3);
+    q.flat().forEach(c => assert.ok(c.x >= px.margin - 0.5 && c.x <= px.W - px.margin + 0.5 && c.y >= px.margin - 0.5 && c.y <= px.H - px.margin + 0.5));
+    assert.ok(q[0][3].y < q[1][0].y && q[0][2].y < q[2][1].y, 'a gutter between the rows');
+    assert.ok(q[1][1].x < q[2][0].x && q[1][2].x < q[2][3].x, 'a gutter between the panels');
+    assert.strictEqual(panelAspect(q[0]), '16:9');
+  }
+  assert.strictEqual(panelAspect(layoutPage({ rows: [{ count: 3, weight: 1.5 }], panels: [1, 2, 3] }, px, false)[0]), '9:16');
+  const bad = parseManga('title: x\npage 1: 1, 2\npanel 1: frame 2\npanel 2: a\npage 2: 5\nCaption: "x"\n');
+  assert.ok(bad.errors.some(e => /rows hold 3 panels, but 2/.test(e)));
+  assert.ok(bad.errors.some(e => /frames from/.test(e)));
+  assert.ok(bad.errors.some(e => /page 1: 1 tall, 2, 1/.test(e)));
+  assert.match(parseManga('title: x\nsize: A4\npage 1:\npanel 1: a\n').errors.join(), /Amazon's book sizes/);
+});
+
+test('manga: panels made in Flow (free) or taken from the video\'s frames, then the pages and the PDF', () => {
+  const book = path.join(tmp, 'book.txt');
+  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: A tall tree.\n\npage 2:\npanel 4: frame 3\nCaption (right): "The end."\n');
+  const c = run('check', book);
+  assert.strictEqual(c.code, 0, c.out);
+  assert.match(c.out, /made +panel 1: frame 1 of story\.txt/);
+  assert.match(c.out, /2 panel picture\(s\) still to make in Flow: free/);
+  bank(1, 7); bank(2, 0);
+  const before = calls(1).length;
+  const r = run('make', book, '--account', '1');
+  assert.strictEqual(r.code, 0, r.out);
+  const made = calls(1).slice(before);
+  assert.deepStrictEqual(made.map(x => x.type), ['image', 'image'], 'only the two new panels are made; the frames are reused');
+  assert.match(made[0].prompt, /Ren in a garden\. One manga panel picture[^]*no speech bubbles[^]*next panel of the same comic/);
+  assert.ok(made[0].reference_images.some(x => /frame-01/.test(x)) && made[0].reference_images.includes('asset:Ren'));
+  assert.strictEqual(made[0].download_quality, 'upscaled');
+  assert.strictEqual(made[1].aspect_ratio, '9:16', 'half the page wide, half the page tall: a tall panel');
+  assert.strictEqual(bank(1), 7, 'no credits spent');
+  const out = path.join(tmp, 'output', 'the-fox-book');
+  assert.deepStrictEqual(fs.readdirSync(path.join(out, 'pages')), ['page-01.png', 'page-02.png']);
+  const pdf = fs.readFileSync(path.join(out, 'the-fox-book.pdf'), 'latin1');
+  assert.strictEqual((pdf.match(/\/Type\s*\/Page\b/g) || []).length, 2);
+  assert.match(pdf, /\/MediaBox\s*\[\s*0 0 432 648\s*\]/, '6 x 9 inches');
+  // nothing is made twice; --redo pages lays them out again for free, --redo panel 3 makes that one again
+  assert.match(run('make', book, '--account', '1', '--redo', 'pages').out, /Panels: all made/);
+  assert.strictEqual(calls(1).length, before + 2);
+  assert.strictEqual(run('make', book, '--account', '1', '--redo', 'panel', '3').code, 0);
+  assert.strictEqual(calls(1).length, before + 3);
+  assert.match(run('make', book, '--redo', 'panel', '1').out, /redo that frame there/);
 });
 
 test('moving Flow Studio: frames made in the old folder still count', () => {
