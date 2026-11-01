@@ -139,13 +139,13 @@ Caption (right): "...there lies a forest older than the memories of its people."
 | `frames from:` | A video story next to this file. `panel 3: frame 2` then uses that story's frame 2, so nothing is made twice |
 | `quality:` | `upscaled` (the default: bigger pictures from Flow, sharper in print) or `original` |
 | `slant:` | `on` (the default): slanted panel borders, like a manga page. `off`: straight |
-| `page 1: 1 tall, 2, 1` | A page, and its rows from top to bottom: how many panels side by side (1 to 6), and `tall` or `short` for a taller or shorter row. `page 1:` alone: one panel per row |
+| `page 1: 1 tall, 2, 1` | A page, and its rows from top to bottom: how many panels side by side (1 to 6), and `tall`, `very tall` or `short` for a taller or shorter row. `2+1`: two panels one above the other, then one beside them as tall as the row. `page 1:` alone: one panel per row |
 | `page 5: columns 5, 1` | A page in columns from left to right: how many panels one above the other, and `wide` or `narrow`. `columns 5, 1`: five panels down the left, one tall panel on the right |
 | `panel 3: ...` | A panel: what its picture shows (made in Flow), or `frame 2` (a frame of the `frames from` story). Panels are numbered through the whole chapter |
 | `Label: "Level 1 — The High World"` | A small name plate (bottom left, under any caption there) |
 | `Caption: "..."` | A parchment caption box. `(right)`, `(bottom)` or `(bottom right)` says where. The first one in a panel goes top left, the next bottom right. `Narrator:` works too |
 | `Jack (happy, left): "..."` | A speech bubble, its tail toward the left (or right) |
-| `Title: "..."` | Big title letters across the panel, for a title page: at the bottom, or `(top)` |
+| `Title: "..."` | Big title letters across the panel, for a title page: at the bottom, or `(top)`. A second `Title:` line is a smaller subtitle under it. Captions at the bottom go above the title |
 | `focus: top` | Which part of the picture to keep when it is cut to the panel's shape: `top`, `middle` (the default) or `bottom` |
 
 ```

@@ -1,10 +1,12 @@
-# Whispers of the World Tree — the world introduction (pages 1 to 8, and the title)
+# Whispers of the World Tree — the world introduction (manga pages 1 to 8, and the title)
 # Where Wings, Magic, and Destiny Meet.
 #
 # The journey before the heroes: an ancient forest, a waterfall, a hidden cave, the floating world, the World Tree and
 # its four worlds (one clip for each level, with its name plate), the wild Lower World, its towns, and the title.
 # 17 frames (free) and 16 clips of 10 s: about two and a half minutes, wide. The narrator's words appear in storybook caption boxes and are read by Kitsu Studio's narrator
-# voice; Google Flow makes the music and the sounds (water, wind, birds). Make 00-test-two-clips.txt first.
+# voice; Google Flow makes the music and the sounds (water, wind, birds). The words are the owner's, from the 8 test
+# manga pages (2026-11-01): about two lines a clip, so the video keeps the main ones; the manga
+# (manga-chapter-01.txt) has them all.
 #
 #  Check it (free):              .\flow-video.bat check stories\world-tree\01-world-intro.txt
 #  1. Make the frames (free):    .\flow-video.bat make stories\world-tree\01-world-intro.txt --account 2
@@ -80,25 +82,26 @@ Narrator: "...there lies a forest older than the memories of its people."
 
 clip 2: frame 2 to frame 3
 The camera moves along the stone path toward the roaring waterfall; the mist rises and a small rainbow appears in the spray.
-Narrator (at 0.5s): "The deeper one travels, the louder the water grows."
-Narrator: "Behind its veil, a forgotten path waits."
+Narrator (at 0.5s): "The deeper one travels into the forest..."
+Narrator: "...the voice of the water grows louder."
 
 clip 3: from frame 3
 The camera passes slowly behind the falling water into the hidden cave, following the underground stream between glowing flowers and crystals.
-Narrator (at 0.5s): "Beyond the waterfall, the forest gives way to stone."
-Narrator: "Yet even here, the ancient forest still breathes."
+Narrator (at 0.5s): "Hidden behind the falling water..."
+Narrator: "...a forgotten path waits in silence."
 
 clip 4: from frame 4
 The camera travels toward the golden light at the end of the tunnel and comes out onto the high cliff, revealing the vast view and the floating islands above the clouds.
-Narrator (at 0.5s): "After the darkness, the world opened beneath the sky."
-Narrator: "Another world floated among the clouds."
+Narrator (at 0.5s): "Somewhere beyond the darkness..."
+Narrator: "...a new horizon waits."
 
 clip 5: from frame 5
 The camera flies out over the clouds and between the floating islands toward the colossal World Tree, its towns and waterfalls coming into view.
-Narrator (at 0.5s): "At the heart of the floating world stood the World Tree."
-Narrator: "Four worlds. One ancient tree."
 
 # the four worlds, as on the owner's example page: each level with its name plate (shown, not read aloud)
+Narrator (at 0.5s): "After passing through the darkness... the world opened beneath the sky."
+Narrator: "Four worlds. One ancient tree."
+
 clip 6: from frame 14
 The camera glides slowly past the golden spires and balconies of the High World, high above the clouds, sunlight on the leaves, small birds flying by.
 Label: "Level 1 — The High World"
@@ -122,35 +125,35 @@ Narrator: "...there was a forest where the sunlight disappeared."
 
 clip 10: from frame 6
 From the whole World Tree, the camera descends slowly along the giant trunk, down into the sunlit forest of the Lower World, where the deer drink from the stream and birds flutter.
-Narrator (at 0.5s): "Below the great branches, the forest stretched beyond sight."
-Narrator: "Here, life moved beneath the ancient trees."
+Narrator (at 0.5s): "Below the great branches..."
+Narrator: "...the forest stretched farther than the eye could see."
 
 clip 11: from frame 7
 The camera drifts deeper into the misty forest, past the boar and the rabbits, to the glowing magical stag, then to the winged-elf hunters moving quietly along the path, their translucent wings folded.
 Narrator (at 0.5s): "Some creatures were born with magic in their blood."
-Narrator: "The forest was both home and provider."
+Narrator: "...the forest was both home and provider."
 
 clip 12: from frame 8
 The camera follows the winged-elf hunters along the path between the ancient trees until the first houses on the branches appear ahead, lanterns glowing.
-Narrator (at 0.5s): "Every path carried a story of survival."
-Narrator: "And beyond the wild paths, a home waited."
+Narrator (at 0.5s): "Every path through the forest carried a story of survival."
+Narrator: "...a home waited among the branches."
 
 clip 13: from frame 9
 The camera follows the hunters up onto the giant branches and into the town, then through the busy market: fruit and flower stalls with colourful awnings, hanging lanterns and herbs, winged elves shopping with baskets, a mother and a little child choosing flowers.
-Narrator (at 0.5s): "Here, life followed the rhythm of the forest."
-Narrator: "Families grew beneath ancient branches."
+Narrator (at 0.5s): "Following the paths beneath the ancient trees..."
+Narrator: "...the forest slowly became home."
 
 clip 14: from frame 10
 The camera rises from the market and travels along the wooden bridges from branch to branch, past glowing windows and waterfalls, as the light turns golden.
-Narrator (at 0.5s): "Every branch carried a road. Every tree sheltered a home."
-Narrator: "From branch to branch, their world continued."
+Narrator (at 0.5s): "Every branch carried a road."
+Narrator: "Every tree sheltered a home."
 
 clip 15: from frame 11
 The camera pulls far back from the bridges until the whole town glows across the branches of the World Tree at sunset, the dark Shrouded Wilds far below disappearing into mist.
-Narrator (at 0.5s): "Beneath the World Tree, an ancient town grew with the forest."
-Narrator: "Below, the sunlight disappeared."
+Narrator (at 0.5s): "Under the World Tree..."
+Narrator: "...an ancient town grew with the forests."
 
 clip 16: frame 12 to frame 13
 The camera keeps pulling back slowly into the sky until the whole World Tree stands alone above the golden sea of clouds at sunset. A long, quiet, majestic ending.
-Narrator (at 0.5s): "And beyond the darkness, no one knows."
-Narrator (at 4.5s): "Whispers of the World Tree."
+Narrator (at 1s): "Whispers of the World Tree."
+Narrator (at 4.5s): "Where wings, magic, and destiny meet."

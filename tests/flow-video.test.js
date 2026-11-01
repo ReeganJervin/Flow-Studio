@@ -370,6 +370,16 @@ test('manga: the story file, the pages\' layout, and their checks', () => {
   // (the border between the columns leans: compare at the top and at the bottom)
   assert.ok(cq[0][1].x < cq[2][0].x && cq[1][2].x < cq[2][3].x, 'panel 3 on the right, with a gutter');
   assert.ok(cq[2][3].y - cq[2][0].y > 2000 && panelAspect(cq[2]) === '9:16', 'the whole height');
+  // "2+1": two panels one above the other, then one beside them, as tall as the row; "very tall"
+  const mix = parseManga('title: x\npage 1: 1, 2+1 tall, 1 very tall\npanel 1: a\npanel 2: b\npanel 3: c\npanel 4: d\npanel 5: e\nTitle: "Big"\nTitle: "Small"\n');
+  assert.deepStrictEqual(mix.errors, []);
+  assert.deepStrictEqual(mix.pages[0].rows.map(r => [r.count, r.stacks, r.weight]), [[1, null, 1], [3, [2, 1], 1.5], [1, null, 2.2]]);
+  assert.deepStrictEqual(mix.panels[4].titles.map(t => t.text), ['Big', 'Small']);
+  const mq = layoutPage(mix.pages[0], px, true);
+  assert.strictEqual(mq.length, 5);
+  assert.ok(mq[1][3].y < mq[2][0].y && mq[1][1].x < mq[3][0].x && mq[2][2].x < mq[3][3].x, 'panels 2 and 3 one above the other, panel 4 beside them');
+  assert.ok(mq[3][0].y < mq[1][3].y && mq[3][3].y > mq[2][0].y, 'panel 4 as tall as the row');
+  assert.ok(mq[4][3].y - mq[4][0].y > mq[1][3].y - mq[0][0].y, 'the very tall row');
   cq.flat().forEach(c => assert.ok(c.x >= px.margin - 0.5 && c.x <= px.W - px.margin + 0.5 && c.y >= px.margin - 0.5 && c.y <= px.H - px.margin + 0.5));
 });
 

@@ -307,7 +307,7 @@ function checkManga(file) {
   say(`${book.meta.title}  (manga, project "${book.meta.project}", ${book.meta.size} inches: ${px.W} x ${px.H} pixels at 300 dpi, borders ${book.meta.slant ? 'slanted' : 'straight'})`);
   if (book.linked) say(`Frames from: ${path.basename(book.linked.file)}`);
   book.pages.forEach(pg => {
-    say(`\nPage ${pg.n}: ${pg.rows ? `${pg.columns ? 'columns ' : ''}${pg.rows.map(r => `${r.count}${r.weight > 1 ? (pg.columns ? ' wide' : ' tall') : r.weight < 1 ? (pg.columns ? ' narrow' : ' short') : ''}`).join(', ')}` : `${pg.panels.length} row(s) of 1`}`);
+    say(`\nPage ${pg.n}: ${pg.rows ? `${pg.columns ? 'columns ' : ''}${pg.rows.map(r => `${r.stacks ? r.stacks.join('+') : r.count}${r.weight > 2 ? ' very tall' : r.weight > 1 ? (pg.columns ? ' wide' : ' tall') : r.weight < 1 ? (pg.columns ? ' narrow' : ' short') : ''}`).join(', ')}` : `${pg.panels.length} row(s) of 1`}`);
     pg.panels.forEach(p => {
       const done = have(panelFile(book, m, p));
       say(`  ${done ? 'made ' : '     '} panel ${p.n}: ${p.frame !== null ? `frame ${p.frame} of ${path.basename(book.linked.file)}` : `${p.text.slice(0, 70)}${p.text.length > 70 ? '...' : ''}`}${p.focus !== 'middle' ? ` (focus: ${p.focus})` : ''}`);
