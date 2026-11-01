@@ -40,7 +40,7 @@ function accountNames() {
 const made_ = {};
 function account(n) {
   const names = accountNames();
-  if (!names[n]) stop(`There is no account ${n}. Accounts: ${Object.keys(names).join(', ')} (names are in flow\\settings.json).`);
+  if (!names[n]) stop(`There is no account ${n}. Accounts: ${Object.keys(names).join(', ')} (names are in settings.json).`);
   return made_[n] || (made_[n] = new FlowAccount({ n: String(n), name: names[n], home: path.join(ACCOUNTS_HOME, `account-${n}`), cdp: 9340 + +n }));
 }
 const accounts = () => Object.keys(accountNames()).map(account);
@@ -71,7 +71,7 @@ function saveMade(story, m) { fs.mkdirSync(outDir(story), { recursive: true }); 
 const have = f => f && fs.existsSync(f);
 const num = n => String(n).padStart(2, '0');
 function readStory(file) {
-  if (!file) stop('Which story? For example:  flow-video make flow\\stories\\my-story.txt');
+  if (!file) stop('Which story? For example:  flow-video make stories\\my-story.txt');
   if (!fs.existsSync(file)) stop(`I can't find ${file}.`);
   const story = parseFlowStory(fs.readFileSync(file, 'utf8'));
   // style pictures are found next to the story file
@@ -221,8 +221,10 @@ function check(file) {
   const kitsuMusic = story.meta.music !== 'none' || clipMusic.length;
   say(`Music: ${kitsuMusic ? `Kitsu Studio's "${story.meta.music}"${clipMusic.length ? ` (then ${clipMusic.join(', ')})` : ''}` : 'none from Kitsu Studio'}. Google Flow's own sound: ${story.meta.flowSound ? (kitsuMusic ? 'kept, under the music' : story.meta.voices === 'flow' ? 'kept (its music, sounds and voices)' : 'kept (its music and sounds)') : 'left out'}.`);
   if (story.meta.voices === 'kitsu') {
-    const { voiceFor } = require('./lib/voices'), missing = [...new Set(story.clips.flatMap(c => c.lines).filter(l => !voiceFor(l.who, l.notes)).map(l => l.who))];
-    if (missing.length) say(`Note: no Kitsu voice for ${missing.join(', ')} (see config\\voices.json): those lines would stop the film.`);
+    try {
+      const { voiceFor } = require('./lib/voices'), missing = [...new Set(story.clips.flatMap(c => c.lines).filter(l => !voiceFor(l.who, l.notes)).map(l => l.who))];
+      if (missing.length) say(`Note: no Kitsu voice for ${missing.join(', ')} (see Kitsu Studio's config\\voices.json): those lines would stop the film.`);
+    } catch (e) { say(`Note: ${e.message.split('\n')[0]} Run  flow-video kitsu <folder>  before making the film.`); }
   }
   const left = story.clips.filter(c => !have(m.clips[c.n])).length;
   say(`\n${left} clip(s) still to make: at most ${left * story.meta.maxCredits} credits. Nothing has been spent by this check.`);

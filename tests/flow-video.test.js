@@ -1,11 +1,14 @@
 // Tests Flow Studio against a pretend flow-mcp (same local API, no Chrome, no Google, no credits).
-//   node --test flow/tests/
+//   npm test   (or: node --test tests/flow-video.test.js)
 const test = require('node:test'), assert = require('node:assert'), fs = require('fs'), path = require('path'), os = require('os');
 const { spawnSync } = require('child_process');
 const { parseFlowStory, framePrompt, castOf } = require('../lib/story');
 const { probe } = require('../lib/join');
 
 const CLI = path.join(__dirname, '..', 'flow-video.js');
+// Kitsu Studio (its voices and music) next to this folder: the tests that make a film with them skip without it
+const KITSU = (() => { try { return require('../lib/kitsu').kitsuDir(); } catch (_) { return null; } })();
+const needsKitsu = { skip: KITSU ? false : 'needs Kitsu Studio next to this folder (its voices and music)' };
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'kitsu-flow-'));
 
 // a pretend Flow (no Chrome, no Google, no credits): an engine with the same methods as lib/flow-web.js
@@ -104,7 +107,7 @@ test('make: frames first (free), with the previous frame and the characters as r
   assert.ok(fs.existsSync(path.join(tmp, 'output', 'the-test-fox', 'frames', 'frame-03.png')));
 });
 
-test('make again: clips from frame to frame, switching account when one runs low, then the film', () => {
+test('make again: clips from frame to frame, switching account when one runs low, then the film', needsKitsu, () => {
   bank(1, 30); bank(2, 30); fs.writeFileSync(path.join(tmp, 'accounts', 'account-2', 'mute'), '');
   const r = run('make', STORY);
   assert.strictEqual(r.code, 0, r.out);
@@ -134,7 +137,7 @@ test('make again: clips from frame to frame, switching account when one runs low
   assert.match(r.out, /clips cost 40 credits/);
 });
 
-test('nothing is made twice; --redo frame 2 makes that frame and its two clips again', () => {
+test('nothing is made twice; --redo frame 2 makes that frame and its two clips again', needsKitsu, () => {
   bank(1, 100); bank(2, 0);
   const before = calls(1).length + calls(2).length;
   assert.match(run('make', STORY).out, /Frames: all made[\s\S]*Clips: all made/);
@@ -147,7 +150,7 @@ test('nothing is made twice; --redo frame 2 makes that frame and its two clips a
   assert.deepStrictEqual(after.map(c => c.type), ['image', 'video', 'video']);
 });
 
-test('no account with enough credits: stops, keeps what was made, says what to do', () => {
+test('no account with enough credits: stops, keeps what was made, says what to do', needsKitsu, () => {
   bank(1, 5); bank(2, 5);
   const r = run('make', STORY, '--redo', 'clip', '1');
   assert.strictEqual(r.code, 1);
@@ -155,7 +158,7 @@ test('no account with enough credits: stops, keeps what was made, says what to d
   assert.ok(fs.existsSync(path.join(tmp, 'output', 'the-test-fox', 'clips', 'clip-02.mp4')));
 });
 
-test('--account pins one account', () => {
+test('--account pins one account', needsKitsu, () => {
   bank(1, 100); bank(2, 100);
   const before = calls(2).length;
   const r = run('make', STORY, '--account', '1');
@@ -201,7 +204,7 @@ test('bubbles: timing from reading time, "at", and voice lengths; the bubble pic
   assert.ok(png.length > 2000);
 });
 
-test('voices: kitsu: Kitsu Studio voices for each line, mood and whisper, mixed into the film', () => {
+test('voices: kitsu: Kitsu Studio voices for each line, mood and whisper, mixed into the film', needsKitsu, () => {
   const { voiceFor } = require('../lib/voices');
   const table = { ren: { voice: 'am_puck', speed: 1, pitch: 1.12 }, _moods: { proud: { speed: 0.95, pitch: 1.02 } }, _styles: { whisper: { gain: -5, speed: 0.95 } } };
   assert.deepStrictEqual(voiceFor('Ren', 'proud, left', table), { voice: 'am_puck', speed: 0.95, pitch: 1.1424, gain: 0, echo: false });

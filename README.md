@@ -112,7 +112,7 @@ Yuki (soft, curious): "Ren... did you hear that?"
 - **Each account's Chrome window must stay open, with a Flow project open.** Don't use that window while a video is being made.
 - Flow Studio waits 25–70 seconds between generations, like a person would, so a 6-clip video takes a while. You can leave it running.
 - Your files go in `output\` and are never put in git.
-- Google changes Flow from time to time. If something stops working, send the message to Claude Code: the fix goes into `flow\lib\flow-web.js`, and a `git pull` brings it to you.
+- Google changes Flow from time to time. If something stops working, send the message to Claude Code: the fix goes into `lib\flow-web.js`, and a `git pull` brings it to you.
 - Automated use of Flow may be against Google's terms (flow-mcp's author warns about this too). Use it on your own accounts, at your own risk.
 - Characters (`characters:`) live in one Flow project. A frame that uses them must be made on the account whose open project has them: use `--account` for the frames if only one account has them. Clips don't need the characters (they start from your frames), so they can use either account.
-- Tests (no Google needed): `node --test flow/tests/flow-video.test.js`
+- Tests (no Google needed): `npm test`. The voice and music tests need Kitsu Studio next to this folder; without it they are skipped.

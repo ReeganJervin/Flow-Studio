@@ -14,7 +14,7 @@ Flow Studio makes videos in **Google Flow** from a story file of frames (free st
 | Driving Google Flow | `lib/flow-web.js` (sign-in, credits, one image or frames-to-video clip, download) |
 | Joining, bubbles, sound | `lib/join.js` (FFmpeg), `lib/bubbles.js` (speech bubbles; parchment caption boxes for `Narrator`), `lib/voices.js` and `lib/soundtrack.js` (Kitsu Studio's voices and music) |
 | Kitsu Studio's folder | `lib/kitsu.js` (`KITSU_STUDIO_DIR`, `"kitsu"` in settings.json, or a sibling folder) |
-| Tests | `tests/flow-video.test.js` (`npm test`; a pretend Flow, real FFmpeg; needs Kitsu Studio next to this folder) |
+| Tests | `tests/flow-video.test.js` (`npm test`; a pretend Flow, real FFmpeg). The 5 tests that make films with Kitsu Studio's voices and music skip when Kitsu Studio isn't next to this folder (as in a chat with only this repository); `KITSU_STUDIO_DIR=none` forces that |
 
 ## Rules
 
