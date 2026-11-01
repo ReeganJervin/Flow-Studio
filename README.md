@@ -47,6 +47,7 @@ flow-video.bat make stories\my-story.txt
   - To redo a frame you don't like: `make ... --redo frame 3`. Several at once: `--redo frame 6,7,9-12`. The clips that start or end on that frame are redone too.
 - **`make`**, again: makes the **clips**, which cost credits, and then **joins them** into `output\<project>\film.mp4`.
 - **`make ... --all`**: frames, clips and film in one go.
+- **`make ... --clips 1`**: makes only the **next** clip, then stops, so you can look at it before spending more credits (`--clips 3`: the next three). Run it again for the one after. The film is joined when the last clip is made.
 
 ## Two accounts
 

@@ -302,6 +302,18 @@ test('frames: new places: a new place is drawn from its own words, not copied fr
   const imgs = calls(1).slice(before);
   assert.deepStrictEqual(imgs.map(c => !!c.reference_images), [false, false, true, false]);
   assert.doesNotMatch(imgs[1].prompt, /previous image/); assert.match(imgs[2].prompt, /same scene a moment later/);
+  // --clips 1: only the next clip, then it stops and says what's next (the film waits for every clip)
+  const clipsStory = path.join(tmp, 'one-by-one.txt');
+  fs.writeFileSync(clipsStory, 'title: One By One\nframes: new places\nvoices: none\nmusic: none\nframe 1: a cave\nframe 2: a tree\nclip 1: from frame 1\nGo.\nclip 2: from frame 2\nGo on.\n');
+  assert.strictEqual(run('make', clipsStory, '--account', '1').code, 0);
+  let one = run('make', clipsStory, '--account', '1', '--clips', '1');
+  assert.strictEqual(one.code, 0, one.out);
+  assert.match(one.out, /1 of 2 clips made[^]*--clips 1/);
+  assert.ok(!fs.existsSync(path.join(tmp, 'output', 'one-by-one', 'film.mp4')));
+  one = run('make', clipsStory, '--account', '1', '--clips', '1');
+  assert.strictEqual(one.code, 0, one.out);
+  assert.ok(fs.existsSync(path.join(tmp, 'output', 'one-by-one', 'film.mp4')), 'the last clip, then the film');
+  assert.match(run('make', clipsStory, '--clips', 'x').out, /--clips 1/);
   // several frames again at once
   before = calls(1).length;
   const r = run('make', story, '--account', '1', '--redo', 'frames', '2,4');

@@ -11,6 +11,7 @@
 //   flow-video make <story> --all           frames, clips and the film in one go
 //   flow-video make <story> --redo frame 3  make frame 3 again (several: --redo frame 6,7,9-12; also --redo clip 2, --redo film)
 //   flow-video make <story> --account 2     use account 2 only (default: whichever has the most credits)
+//   flow-video make <story> --clips 1       make only the next clip (look at it before spending more credits)
 //
 // A manga story (with "page 1:" and "panel 1:" lines) makes manga pages instead: the panels in Flow (free pictures),
 // then the pages and one PDF for Amazon KDP (lib/manga.js). --redo panel 3 makes a panel again; --redo pages is free.
@@ -112,8 +113,9 @@ async function makeFrames(story, a, m, todo) {
 
 // Clips one at a time. Before each one the credits are read; when the account in use has fewer left than a clip may
 // cost (the story's "max credits"), it moves to another account that has enough, by itself.
-async function makeClips(story, accts, pinned, m) {
-  const todo = story.clips.filter(c => !have(m.clips[c.n])), need = story.meta.maxCredits;
+async function makeClips(story, accts, pinned, m, count = null) {
+  // (--clips 1: only the next clip, or the next few, so each can be looked at before more credits are spent)
+  const todo = story.clips.filter(c => !have(m.clips[c.n])).slice(0, count || undefined), need = story.meta.maxCredits;
   say(`\nClips: ${todo.map(c => c.n).join(', ')} (each at most ${need} credits)`);
   let a = null;
   for (const c of todo) {
@@ -213,7 +215,15 @@ async function make(file, opts) {
     }
   } else if (story.frames.length) say('\nFrames: all made.');
 
-  if (story.clips.some(c => !have(m.clips[c.n]))) await makeClips(story, accts, pinned, m); else say('Clips: all made.');
+  if (story.clips.some(c => !have(m.clips[c.n]))) await makeClips(story, accts, pinned, m, opts.clips); else say('Clips: all made.');
+  const left = story.clips.filter(c => !have(m.clips[c.n]));
+  if (left.length) {
+    say(`\n${story.clips.length - left.length} of ${story.clips.length} clips made. Look at them in ${path.relative(process.cwd(), path.join(outDir(story), 'clips'))}.`);
+    say(`  The next one:  flow-video make ${file}${opts.account ? ` --account ${opts.account}` : ''} --clips 1`);
+    say(`  All the rest:  flow-video make ${file}${opts.account ? ` --account ${opts.account}` : ''}`);
+    say('The film is joined when every clip is made.');
+    return;
+  }
   if (!have(m.film) && story.clips.length) await makeFilm(story, m);
   const spent = Object.values(m.credits).reduce((s, x) => s + (x.credits || 0), 0);
   say(`\nDone: ${path.relative(process.cwd(), m.film || outDir(story))}${spent ? ` (clips cost ${spent} credits in all)` : ''}`);
@@ -389,7 +399,7 @@ async function main(argv) {
   // the numbers after "--redo frame": PowerShell turns 6,7,9-12 into three words ("6" "7" "9-12"), so they are all taken
   const ri = rest.indexOf('--redo'), nums = [];
   if (ri >= 0) for (let i = ri + 2; i < rest.length && /^[\d,\s-]+$/.test(rest[i]); i++) nums.push(i);
-  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo'].includes(rest[i - 1]) && !nums.includes(i));
+  const file = rest.find((x, i) => !x.startsWith('--') && !['--account', '--redo', '--clips'].includes(rest[i - 1]) && !nums.includes(i));
   if (cmd === 'login') return login(rest[0]);
   if (cmd === 'credits') return credits();
   if (cmd === 'check') return check(file);
@@ -405,7 +415,9 @@ async function main(argv) {
     }
     if (file && fs.existsSync(file) && isManga(fs.readFileSync(file, 'utf8'))) return makeManga(file, { account: opt('account'), redo });
     if (redo && /^(panel|pages)$/.test(redo[0])) stop(`--redo ${redo[0]} is for manga stories.`);
-    return make(file, { all: rest.includes('--all'), account: opt('account'), redo });
+    const clips = opt('clips');
+    if (clips !== null && !/^[1-9]\d*$/.test(clips)) stop('Use --clips 1 (make only the next clip), or --clips 3 (the next three).');
+    return make(file, { all: rest.includes('--all'), account: opt('account'), redo, clips: clips && +clips });
   }
   if (cmd === 'kitsu') return kitsu(rest[0]);
   if (cmd === 'setup') return say('Run setup.bat once (it installs what Flow Studio needs), then:  flow-video kitsu <Kitsu Studio folder>');
