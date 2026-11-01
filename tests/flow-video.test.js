@@ -385,7 +385,7 @@ test('manga: the story file, the pages\' layout, and their checks', () => {
 
 test('manga: panels made in Flow (free) or taken from the video\'s frames, then the pages and the PDF', () => {
   const book = path.join(tmp, 'book.txt');
-  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: Same place, Ren climbs a tall tree.\nTitle: "The Fox Book"\n\npage 2: columns 1, 1\npanel 4: frame 3\nCaption (right): "The end."\nLabel: "Level 1 — The End"\npanel 5: A moon.\nCaption: "One."\nCaption (right): "Two."\nCaption (bottom): "Three."\n');
+  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1 short, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: Same place, Ren climbs a tall tree.\nTitle: "The Fox Book"\n\npage 2: columns 1, 1\npanel 4: frame 3\nCaption (right): "The end."\nLabel: "Level 1 — The End"\npanel 5: A moon.\nCaption: "One."\nCaption (right): "Two."\nCaption (bottom): "Three."\n');
   const c = run('check', book);
   assert.strictEqual(c.code, 0, c.out);
   assert.match(c.out, /made +panel 1: frame 1 of story\.txt/);
