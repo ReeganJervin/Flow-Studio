@@ -88,6 +88,25 @@ function readStory(file) {
   return story;
 }
 const progress = label => msg => say(`    ${label}: ${msg}`);
+// Making a picture or clip: frames already in Flow are picked there ("asset:<title>"). When Flow's picker can't find
+// one (its picker changes from time to time), the same frame is uploaded from this computer instead. Nothing is
+// spent before that: the frames are added before Flow's Start button is pressed.
+async function generate(a, scene, stem, onProgress, name, ...mades) {
+  try { return await a.generate(scene, stem, onProgress, name); } catch (e) {
+    if (!/isn't in this Flow project/.test(e.message)) throw e;
+    const local = {};
+    for (const m of mades) for (const k in m.inFlow || {}) {
+      const f = m.inFlow[k], file = /^panel-/.test(k) ? (m.panels || {})[k.slice(6)] : m.frames[k];
+      if (f && f.title && have(file)) local[`asset:${f.title}`] = path.resolve(file);
+    }
+    const swap = v => local[v] || v, again = { ...scene };
+    for (const k of ['first_frame', 'last_frame']) if (again[k]) again[k] = swap(again[k]);
+    if (again.reference_images) again.reference_images = again.reference_images.map(swap);
+    if (JSON.stringify(again) === JSON.stringify(scene)) throw e;
+    onProgress("Flow's picker couldn't find the frame: uploading it from this computer instead");
+    return a.generate(again, stem, onProgress, name);
+  }
+}
 
 // ---------- making ----------
 // frames one at a time, so each can use the frame before it as a reference and keep the look the same (only when it
@@ -102,7 +121,7 @@ async function makeFrames(story, a, m, todo) {
     const scene = { type: 'image', prompt: framePrompt(story.meta, f) + (have(prevFile) ? ' Match the previous image exactly for the characters, colours, light and drawing style; this is the same scene a moment later.' : ''),
       aspect_ratio: story.meta.aspect, max_credits: 0, ...(refs.length ? { reference_images: refs } : {}), ...(story.meta.frameModel ? { model: story.meta.frameModel } : {}), download_quality: story.meta.quality };
     let r;
-    try { r = await a.generate(scene, path.join(outDir(story), 'frames', `frame-${num(f.n)}`), progress(`frame ${f.n}`), `${story.meta.project}-frame-${num(f.n)}`); }
+    try { r = await generate(a, scene, path.join(outDir(story), 'frames', `frame-${num(f.n)}`), progress(`frame ${f.n}`), `${story.meta.project}-frame-${num(f.n)}`, m); }
     catch (e) { stop(`Frame ${f.n} wasn't made: ${e.message}\nRun the same command again to try once more.`); }
     m.frames[f.n] = r.files[0];
     m.inFlow[f.n] = { account: a.n, title: r.title };
@@ -135,7 +154,7 @@ async function makeClips(story, accts, pinned, m, count = null) {
       ...(story.meta.model ? { model: story.meta.model } : {}), ...(story.meta.duration ? { duration: story.meta.duration } : {}), ...(story.meta.resolution ? { resolution: story.meta.resolution } : {}) };
     say(`  clip ${c.n} (${c.from !== null ? (c.to !== null ? `frame ${c.from} to frame ${c.to}` : `from frame ${c.from} on`) : `from the characters ${castOf(story.meta, c.text).join(', ')}`}) on ${a.name}${best.s.credits !== null ? `, ${best.s.credits} credits left` : ''}`);
     let r;
-    try { r = await a.generate(scene, path.join(outDir(story), 'clips', `clip-${num(c.n)}`), progress(`clip ${c.n}`), `${story.meta.project}-clip-${num(c.n)}`); }
+    try { r = await generate(a, scene, path.join(outDir(story), 'clips', `clip-${num(c.n)}`), progress(`clip ${c.n}`), `${story.meta.project}-clip-${num(c.n)}`, m); }
     catch (e) { stop(`Clip ${c.n} wasn't made: ${e.message}\nThe clips made so far are kept: run the same command again to carry on.`); }
     m.clips[c.n] = r.files[0];
     m.credits[c.n] = { account: a.n, credits: r.credits ?? null };
@@ -291,7 +310,7 @@ async function makeManga(file, opts) {
         + (prevRef.length ? ' Match the reference picture exactly for the place, characters, colours and drawing style; this is the same scene a moment later.' : '');
       const scene = { type: 'image', prompt, aspect_ratio: shapes[p.n], max_credits: 0, ...(refs.length ? { reference_images: refs } : {}), ...(book.meta.frameModel ? { model: book.meta.frameModel } : {}), download_quality: book.meta.quality };
       let r;
-      try { r = await a.generate(scene, path.join(outDir(book), 'panels', `panel-${num(p.n)}`), progress(`panel ${p.n}`), `${book.meta.project}-panel-${num(p.n)}`); }
+      try { r = await generate(a, scene, path.join(outDir(book), 'panels', `panel-${num(p.n)}`), progress(`panel ${p.n}`), `${book.meta.project}-panel-${num(p.n)}`, m, ...(book.linked ? [book.linked.m] : [])); }
       catch (e) { stop(`Panel ${p.n} wasn't made: ${e.message}\nRun the same command again to try once more (the panels made so far are kept).`); }
       m.panels[p.n] = r.files[0];
       m.inFlow[`panel-${p.n}`] = { account: a.n, title: r.title };

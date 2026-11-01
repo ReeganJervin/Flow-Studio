@@ -21,6 +21,7 @@ class FlowAccount {
   credits() { return Number(fs.readFileSync(this.file('credits'), 'utf8')); }
   async state() { return { ok: true, credits: this.credits(), plan: 'PRO' }; }
   async generate(s, stem, progress, name) {
+    if (fs.existsSync(this.file('no-assets')) && [s.first_frame, s.last_frame, ...(s.reference_images || [])].some(x => /^asset:.*-t\\d+$/.test(x || ''))) throw new Error('"x" isn\\'t in this Flow project.');
     fs.appendFileSync(this.file('calls.log'), JSON.stringify(s) + '\\n');
     const cost = s.type === 'video' ? 20 : 0;
     if (cost > s.max_credits) throw new Error('too dear');
@@ -314,6 +315,18 @@ test('frames: new places: a new place is drawn from its own words, not copied fr
   assert.strictEqual(one.code, 0, one.out);
   assert.ok(fs.existsSync(path.join(tmp, 'output', 'one-by-one', 'film.mp4')), 'the last clip, then the film');
   assert.match(run('make', clipsStory, '--clips', 'x').out, /--clips 1/);
+  // Flow's picker can't find a frame made in Flow: the frame is uploaded from this computer instead
+  const noAssets = path.join(tmp, 'accounts', 'account-1', 'no-assets');
+  fs.writeFileSync(noAssets, '');
+  try {
+    before = calls(1).length;
+    const up = run('make', clipsStory, '--account', '1', '--redo', 'clip', '2');
+    assert.strictEqual(up.code, 0, up.out);
+    assert.match(up.out, /uploading it from this computer instead/);
+    const tried = calls(1).slice(before);
+    assert.strictEqual(tried.length, 1, 'the first try stops before anything is made');
+    assert.ok(path.isAbsolute(tried[0].first_frame) && fs.existsSync(tried[0].first_frame));
+  } finally { fs.rmSync(noAssets, { force: true }); }
   // several frames again at once
   before = calls(1).length;
   const r = run('make', story, '--account', '1', '--redo', 'frames', '2,4');
