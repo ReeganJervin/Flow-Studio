@@ -51,13 +51,13 @@ Caption: "Beyond the lands known to ordinary travelers..."
 panel 2: Inside the ancient forest: enormous mossy trees with huge twisting roots, hanging vines, sunbeams falling through the canopy, a clear stream flowing between mossy stones, glowing blue light motes, pink and blue wildflowers. No people. Wide shot.
 Caption: "...there lies a forest older than the memories of its people."
 
-panel 3: Small waterfalls cascading over mossy rocks into a clear turquoise pool, pink and blue wildflowers in the front, glowing blue light motes over the water, sunlight. No people. Wide shot.
+panel 3: frame 18
 Caption (right): "Here, water remembers the mountains..."
 
 panel 4: A misty part of the ancient forest: gigantic dark trees fading into soft white mist, hanging vines, the shape of a huge tree far away in the mist, quiet and mysterious. No people. Wide shot.
 Caption: "...and the trees guard secrets hidden for generations."
 
-panel 5: A tall waterfall falling between mossy cliffs and trees into a clear turquoise pool, white mist, blue and purple wildflowers on the rocks in front, blue sky above. No people.
+panel 5: frame 19
 Caption: "Few ever venture deep enough to find them."
 
 panel 6: frame 2
@@ -72,7 +72,7 @@ Caption: "The deeper one travels into the forest..."
 panel 8: A huge, wide waterfall thundering down a cliff of mossy rock, clouds of white mist and spray, turquoise water and mossy stones below, pink and blue flowers in the front, blue sky with white clouds above. No people.
 Caption: "...the voice of the water grows louder."
 
-panel 9: A close view of the falling water of the great waterfall, white and sparkling, with a small rainbow in the mist and spray, flowers on the mossy rocks at the side. No people.
+panel 9: frame 20
 Caption (right): "For centuries, it has fallen..."
 
 panel 10: The side of the great waterfall: a curtain of falling water, and a narrow mossy stone path leading along the rocks behind the water toward a dark opening, hanging vines and flowers. No people.
@@ -93,13 +93,13 @@ Caption: "Beyond the waterfall..."
 panel 14: frame 4
 Caption: "...the forest gives way to stone."
 
-panel 15: A glowing turquoise pool inside the cave: small cascades over dark rocks, glowing blue flowers and crystals all around, tiny light motes, an arch of stone. No people.
+panel 15: frame 21
 Caption: "...the ancient forest still breathes."
 
 panel 16: Inside the cave: giant ancient tree roots twisting down through the stone from above, moss and vines on them, glowing blue flowers, soft sunbeams falling through a crack high above. No people. Tall picture.
 Caption (right): "Yet even here..."
 
-panel 17: A long dark cave tunnel of wet stone, a shallow stream on the floor, glowing blue flowers along the walls, and a small warm glowing light far away at the end. No people. Wide shot.
+panel 17: frame 22
 Caption: "How far does this forgotten path lead?"
 
 panel 18: Inside the cave near its end: bright golden sunbeams streaming in through an opening ahead, lighting the wet stones and the stream, glowing blue and pink flowers. No people. Wide shot.
@@ -117,14 +117,14 @@ Caption: "After passing through the darkness..."
 panel 21: A mossy cliff edge with white, pink and purple wildflowers on the left, and a vast view over a sea of white clouds with floating islands of rock and trees, waterfalls pouring from their edges, under a bright blue sky. No people. Wide shot.
 Caption: "...the world opened beneath the sky."
 
-panel 22: A vast floating world: many floating islands of rock with forests and waterfalls among white clouds, wooden rope bridges between them, a clear turquoise lake on one island, and very far away a gigantic tree on the horizon. No people. Very wide shot.
+panel 22: frame 23
 Caption: "Beyond the forest..."
 Caption (right, bottom): "...another world floated among the clouds."
 
 panel 23: A gigantic ancient tree standing on a floating island among white clouds and other floating islands, sun rays shining through the clouds, waterfalls. No people.
 Caption: "But among the floating islands..."
 
-panel 24: Elegant wooden towers and pagodas built on the huge branches of a gigantic tree, wooden bridges between them, waterfalls, floating islands and white clouds around. No people.
+panel 24: frame 24
 Caption (right, bottom): "...something ancient watched over them all."
 
 panel 25: A mossy cliff with the dark mouth of a cave on the left and a path with wildflowers, and a vast view over the sea of clouds and floating islands with waterfalls, the colossal World Tree rising far away on the horizon. No people. Very wide shot.
@@ -164,7 +164,7 @@ Caption (right, bottom): "...no one knows."
 # ---------- page 6: the wild Lower World ----------
 page 6: 1, 1, 1, 1, 2, 1 tall
 
-panel 32: Looking up through the ancient forest of the Lower World at the giant lowest branches of the World Tree above: treehouses, wooden bridges and waterfalls pouring down among the leaves, floating islands beyond. No people. Wide shot.
+panel 32: frame 26
 Caption: "Below the great branches..."
 Caption (right): "...the forest stretched farther than the eye could see."
 
@@ -180,7 +180,7 @@ Caption (right): "...the forest was both home and provider."
 
 panel 36: A close view of a young hunter, a winged elf (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from the back, simple earthy forest clothes), a girl with a ponytail, calmly holding a bow with an arrow ready, looking ahead in the green forest.
 
-panel 37: A wild boar rooting among the ferns in the forest, seen close, and winged-elf hunters with bows standing far behind it on a path.
+panel 37: frame 27
 Caption: "Boar, deer, rabbits..."
 Caption (right, bottom): "Every path through the forest carried a story of survival."
 
@@ -191,7 +191,7 @@ Caption (right, bottom): "...a home waited among the branches."
 # ---------- page 7: the paths become home ----------
 page 7: 1, 1, 1 tall, 2, 1, 1 tall
 
-panel 39: Three winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) hunters with bows and backpacks walking up a forest path toward a town of wooden treehouses, bridges and lanterns built on the giant branches, waterfalls behind. Wide shot.
+panel 39: frame 28
 Caption: "Following the paths beneath the ancient trees..."
 
 panel 40: Cozy wooden treehouses with balconies, flower boxes and glowing lanterns on the giant branches, a winged elf (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from the back, simple earthy forest clothes) woman resting on a porch among flowers, others crossing a wooden bridge, waterfalls behind. Wide shot.
@@ -208,19 +208,19 @@ panel 44: frame 11
 Caption: "Every tree sheltered a home."
 
 panel 45: frame 12
-Caption: "Beneath the World Tree..."
-Caption (right, bottom): "...an ancient town grew with the forest."
+Caption: "As the sun went down..."
+Caption (right, bottom): "...lanterns woke across the branches."
 
 # ---------- page 8: life in the town, and the title ----------
 page 8: 1, 1, 1, 2, 1 very tall
 
-panel 46: a winged elf (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from the back, simple earthy forest clothes) girl watering flowers in front of a cozy wooden shop on the branches, lanterns and hanging plants, others walking along a wooden walkway behind, a waterfall and bridges in the distance. Wide shot.
+panel 46: frame 29
 Caption: "Here, life followed the rhythm of the forest."
 
 panel 47: A busy market corner on the giant branches: winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) with backpacks and baskets at a fruit stall under colourful awnings and lanterns, a long wooden bridge and waterfalls behind. Wide shot.
 Caption: "Families grew beneath ancient branches..."
 
-panel 48: a winged elf (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from the back, simple earthy forest clothes) girl kneeling by a little stream between the treehouses, gently greeting rabbits, a spotted deer drinking nearby, small birds, flowers, other winged elves carrying baskets. Wide shot.
+panel 48: frame 30
 Caption: "...and the forest became part of every home."
 
 panel 49: a winged elf (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from the back, simple earthy forest clothes) with a backpack walking along a wooden walkway between treehouses with lanterns, other winged elves on the bridges.
@@ -229,7 +229,7 @@ Caption: "From branch to branch..."
 panel 50: A wide view of the treehouse town built along the giant branches: wooden houses, many bridges and walkways, waterfalls pouring down between the branches, lanterns. No people.
 Caption (right): "...their world continued."
 
-panel 51: The whole Lower World town spread across the colossal branches of the World Tree, seen from far away at sunset: treehouses, bridges, lanterns and waterfalls on many branches, floating islands and misty mountains all around, a sea of clouds below and the sun setting on the right, an open area at the bottom of the picture. Very wide, epic shot.
+panel 51: frame 31
 Caption: "Under the World Tree..."
 Caption (right, bottom): "...an ancient town grew with the forests."
 Title: "Whispers of the World Tree"

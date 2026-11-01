@@ -317,14 +317,14 @@ function checkManga(file) {
       p.bubbles.forEach(b => say(`          bubble (${b.who}${b.x ? `, ${b.x}` : ''}): "${b.text}"`));
     });
   });
-  // a video frame keeps its own shape (16:9 or 9:16): say when its panel is so different that much of it is cut off
+  // a video frame keeps its own shape (16:9 or 9:16): say when its panel is so different that most of it is cut off
   if (book.linked) {
     const [fw, fh] = book.linked.story.meta.aspect.split(':').map(Number), cut = [];
     book.pages.forEach(pg => layoutPage(pg, px, book.meta.slant).forEach((q, k) => {
       const p = pg.panels[k]; if (p.frame === null) return;
       const xs = q.map(c => c.x), ys = q.map(c => c.y), shape = (Math.max(...xs) - Math.min(...xs)) / (Math.max(...ys) - Math.min(...ys)), r = shape / (fw / fh);
-      if (r > 1.6) cut.push(`panel ${p.n} (frame ${p.frame}): only ${Math.round(100 / r)}% of the frame's height shows. Make that row "tall", or use "focus: top" or "focus: bottom" to choose what stays`);
-      if (r < 0.6) cut.push(`panel ${p.n} (frame ${p.frame}): only ${Math.round(100 * r)}% of the frame's width shows. Give it a wider panel (fewer panels in that row), or a "short" row`);
+      if (r > 2.5) cut.push(`panel ${p.n} (frame ${p.frame}): only ${Math.round(100 / r)}% of the frame's height shows. Make that row "tall", or use "focus: top" or "focus: bottom" to choose what stays`);
+      if (r < 0.4) cut.push(`panel ${p.n} (frame ${p.frame}): only ${Math.round(100 * r)}% of the frame's width shows. Give it a wider panel (fewer panels in that row), or a "short" row`);
     }));
     if (cut.length) say(`\nNote:\n  ${cut.join('\n  ')}`);
   }
