@@ -266,9 +266,15 @@ test('a clip from a start frame only: no end frame, so a very different place do
   assert.deepStrictEqual(st.errors, []);
   assert.deepStrictEqual(st.clips.map(c => [c.from, c.to]), [[1, null], [2, null]]);
   assert.match(clipPrompt(st.meta, st.clips[0]), /The hunters walk on into the town\. One continuous camera shot[^]*no fades, no dissolves/);
+  // a name plate: shown, never read aloud or sent to Flow
+  const lab = parseFlowStory('title: L\nframe 1: a\nclip 1: from frame 1\nThe camera glides.\nLabel: "Level 1 — The High World"\nNarrator: "Above the clouds."\n');
+  assert.deepStrictEqual(lab.errors, []);
+  assert.deepStrictEqual(lab.clips[0].labels.map(l => l.text), ['Level 1 — The High World']);
+  assert.deepStrictEqual(lab.clips[0].lines.map(l => l.who), ['Narrator']);
+  assert.doesNotMatch(clipPrompt(lab.meta, lab.clips[0]) + lab.clips[0].text, /Level 1/);
   assert.match(parseFlowStory('title: x\nframe 1: a\nclip 1: from frame 4\nGo.\n').errors.join(), /no "frame 4:"/);
   const story = path.join(tmp, 'town.txt');
-  fs.writeFileSync(story, 'title: Town Walk\nvoices: none\nmusic: none\nbubbles: off\nframe 1: a forest path\nframe 2: a town market\nclip 1: from frame 1\nThe hunters walk on into the town.\nclip 2: frame 1 to frame 2\nThe market.\n');
+  fs.writeFileSync(story, 'title: Town Walk\nvoices: none\nmusic: none\nframe 1: a forest path\nframe 2: a town market\nclip 1: from frame 1\nThe hunters walk on into the town.\nclip 2: frame 1 to frame 2\nThe market.\nLabel: "Level 3 — The Lower World"\n');
   assert.match(run('check', story).out, /clip 1: from frame 1 on/);
   bank(1, 100); bank(2, 0);
   const before = calls(1).length;
@@ -349,20 +355,31 @@ test('manga: the story file, the pages\' layout, and their checks', () => {
     assert.strictEqual(panelAspect(q[0]), '16:9');
   }
   assert.strictEqual(panelAspect(layoutPage({ rows: [{ count: 3, weight: 1.5 }], panels: [1, 2, 3] }, px, false)[0]), '9:16');
-  const bad = parseManga('title: x\npage 1: 1, 2\npanel 1: frame 2\npanel 2: a\npage 2: 5\nCaption: "x"\n');
+  const bad = parseManga('title: x\npage 1: 1, 2\npanel 1: frame 2\npanel 2: a\npage 2: 7\nCaption: "x"\n');
   assert.ok(bad.errors.some(e => /rows hold 3 panels, but 2/.test(e)));
   assert.ok(bad.errors.some(e => /frames from/.test(e)));
   assert.ok(bad.errors.some(e => /page 1: 1 tall, 2, 1/.test(e)));
   assert.match(parseManga('title: x\nsize: A4\npage 1:\npanel 1: a\n').errors.join(), /Amazon's book sizes/);
+  // columns: "columns 2, 1": two panels one above the other on the left, one tall panel on the right; name plates
+  const col = parseManga('title: x\npage 1: columns 2, 1\npanel 1: a\nLabel: "Level 1 — The High World"\npanel 2: b\npanel 3: c\n');
+  assert.deepStrictEqual(col.errors, []);
+  assert.ok(col.pages[0].columns);
+  assert.deepStrictEqual(col.panels[0].labels.map(l => l.text), ['Level 1 — The High World']);
+  const cq = layoutPage(col.pages[0], px, true);
+  assert.ok(cq[0][3].y < cq[1][0].y, 'panel 1 above panel 2');
+  // (the border between the columns leans: compare at the top and at the bottom)
+  assert.ok(cq[0][1].x < cq[2][0].x && cq[1][2].x < cq[2][3].x, 'panel 3 on the right, with a gutter');
+  assert.ok(cq[2][3].y - cq[2][0].y > 2000 && panelAspect(cq[2]) === '9:16', 'the whole height');
+  cq.flat().forEach(c => assert.ok(c.x >= px.margin - 0.5 && c.x <= px.W - px.margin + 0.5 && c.y >= px.margin - 0.5 && c.y <= px.H - px.margin + 0.5));
 });
 
 test('manga: panels made in Flow (free) or taken from the video\'s frames, then the pages and the PDF', () => {
   const book = path.join(tmp, 'book.txt');
-  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: Same place, Ren climbs a tall tree.\nTitle: "The Fox Book"\n\npage 2:\npanel 4: frame 3\nCaption (right): "The end."\n');
+  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: Same place, Ren climbs a tall tree.\nTitle: "The Fox Book"\n\npage 2: columns 1, 1\npanel 4: frame 3\nCaption (right): "The end."\nLabel: "Level 1 — The End"\npanel 5: A moon.\nCaption: "One."\nCaption (right): "Two."\nCaption (bottom): "Three."\n');
   const c = run('check', book);
   assert.strictEqual(c.code, 0, c.out);
   assert.match(c.out, /made +panel 1: frame 1 of story\.txt/);
-  assert.match(c.out, /2 panel picture\(s\) still to make in Flow: free/);
+  assert.match(c.out, /3 panel picture\(s\) still to make in Flow: free/);
   // story.txt is 9:16, and panel 1 is a wide panel: check says how much of that frame shows
   assert.match(c.out, /panel 1 \(frame 1\): only \d+% of the frame's height shows/);
   bank(1, 7); bank(2, 0);
@@ -370,7 +387,7 @@ test('manga: panels made in Flow (free) or taken from the video\'s frames, then 
   const r = run('make', book, '--account', '1');
   assert.strictEqual(r.code, 0, r.out);
   const made = calls(1).slice(before);
-  assert.deepStrictEqual(made.map(x => x.type), ['image', 'image'], 'only the two new panels are made; the frames are reused');
+  assert.deepStrictEqual(made.map(x => x.type), ['image', 'image', 'image'], 'only the new panels are made; the frames are reused');
   // a new place: only the character as a reference, not the panel before (Flow would copy it in)
   assert.match(made[0].prompt, /Ren in a garden\. One manga panel picture[^]*no speech bubbles/);
   assert.deepStrictEqual(made[0].reference_images, ['asset:Ren']);
@@ -388,9 +405,9 @@ test('manga: panels made in Flow (free) or taken from the video\'s frames, then 
   assert.match(pdf, /\/MediaBox\s*\[\s*0 0 432 648\s*\]/, '6 x 9 inches');
   // nothing is made twice; --redo pages lays them out again for free, --redo panel 3 makes that one again
   assert.match(run('make', book, '--account', '1', '--redo', 'pages').out, /Panels: all made/);
-  assert.strictEqual(calls(1).length, before + 2);
-  assert.strictEqual(run('make', book, '--account', '1', '--redo', 'panel', '3').code, 0);
   assert.strictEqual(calls(1).length, before + 3);
+  assert.strictEqual(run('make', book, '--account', '1', '--redo', 'panel', '3').code, 0);
+  assert.strictEqual(calls(1).length, before + 4);
   assert.match(run('make', book, '--redo', 'panel', '1').out, /redo that frame there/);
 });
 

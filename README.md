@@ -96,6 +96,7 @@ Yuki (soft, curious): "Ren... did you hear that?"
 | `clip N: from frame A` | A video that starts on frame A, with no end frame: the camera travels on by itself. Use it when the next place looks very different (into a cave, into a town): with an end frame, Flow melts one picture into the other, so the new place seems to "fade in". The next clip then starts on its own frame |
 | `Narrator: "..."` | The storyteller: never shown or acted by Flow, read by Kitsu Studio's narrator voice, and shown in a **storybook caption box** (parchment, top left; `(right)` for top right) instead of a speech bubble. With `music: none` and `flow sound: on`, Google Flow's music and sounds play under the narrator: brought up to a good level (Flow's own sound is often very quiet), and dipping a little while the narrator speaks |
 | `frames:` | `follow on` (the default): each frame is the same scene a moment later than the one before, which is given to Flow as a reference (Ren & Yuki's Shorts). `new places`: each frame is a new place, drawn from its own words only, as Flow copies a reference picture into the new frame; a frame that starts with "Same place" still follows on (the World Tree) |
+| `Label: "Level 1 — The High World"` | In a clip: a small name plate at the bottom left, shown during the whole clip ("LEVEL 1 —" big, "THE HIGH WORLD" small below). Never read aloud, never sent to Flow |
 | `style pictures:` | Up to 2 of your own pictures (paths next to the story file), used as references for every frame so Flow draws in the same style |
 | `clip 1:` (no frames) | The clip is made from the Flow characters named in it, with **their own looks and the voices you gave them in Flow**, and no frames. Flow can't use frames and characters in the same clip, so this trades the frames' exact picture for the characters' voices. Use it with `voices: flow` and `music: none` to hear Flow's own voices and music (see `stories\test-flow-voices.txt`) |
 | `Ren (proud): "I'm a snow expert."` | In a clip: something said. It becomes a speech bubble (and, with `voices: kitsu`, Ren says it), and Flow gets only how Ren feels ("proud"). The feeling also changes the voice a little, as in Kitsu Studio (proud, teasing, pouting, whispering, shouting...) |
@@ -138,8 +139,10 @@ Caption (right): "...there lies a forest older than the memories of its people."
 | `frames from:` | A video story next to this file. `panel 3: frame 2` then uses that story's frame 2, so nothing is made twice |
 | `quality:` | `upscaled` (the default: bigger pictures from Flow, sharper in print) or `original` |
 | `slant:` | `on` (the default): slanted panel borders, like a manga page. `off`: straight |
-| `page 1: 1 tall, 2, 1` | A page, and its rows from top to bottom: how many panels side by side (1 to 4), and `tall` or `short` for a taller or shorter row. `page 1:` alone: one panel per row |
+| `page 1: 1 tall, 2, 1` | A page, and its rows from top to bottom: how many panels side by side (1 to 6), and `tall` or `short` for a taller or shorter row. `page 1:` alone: one panel per row |
+| `page 5: columns 5, 1` | A page in columns from left to right: how many panels one above the other, and `wide` or `narrow`. `columns 5, 1`: five panels down the left, one tall panel on the right |
 | `panel 3: ...` | A panel: what its picture shows (made in Flow), or `frame 2` (a frame of the `frames from` story). Panels are numbered through the whole chapter |
+| `Label: "Level 1 — The High World"` | A small name plate (bottom left, under any caption there) |
 | `Caption: "..."` | A parchment caption box. `(right)`, `(bottom)` or `(bottom right)` says where. The first one in a panel goes top left, the next bottom right. `Narrator:` works too |
 | `Jack (happy, left): "..."` | A speech bubble, its tail toward the left (or right) |
 | `Title: "..."` | Big title letters across the panel, for a title page: at the bottom, or `(top)` |

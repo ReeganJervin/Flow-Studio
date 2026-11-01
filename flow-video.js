@@ -157,6 +157,9 @@ async function makeFilm(story, m) {
   const { items, warnings } = bubbleTimes(story.clips.map((c, i) => ({ duration: info[i].duration, lines: lines[i] })));
   warnings.forEach(w => say(`  note: ${w}`));
   const voiced = items.filter(b => b.wav).length;
+  // name plates ("Label:"): shown during their whole clip, not spoken
+  const clipStart = info.reduce((a, c, i) => [...a, i ? a[i - 1] + info[i - 1].duration : 0], []);
+  story.clips.forEach((c, i) => (c.labels || []).forEach(l => items.push({ text: l.text, who: 'Label', t0: clipStart[i] + 0.4, t1: clipStart[i] + info[i].duration - 0.3 })));
   // the sound: Kitsu Studio's music (the story's mood, changed by a clip's own "music:" line) and the voice lines,
   // mixed by Kitsu Studio's mixer; Google Flow's own sound is left out unless the story says "flow sound: on"
   const starts = info.reduce((a, c, i) => [...a, i ? a[i - 1] + info[i - 1].duration : 0], []);
@@ -304,12 +307,13 @@ function checkManga(file) {
   say(`${book.meta.title}  (manga, project "${book.meta.project}", ${book.meta.size} inches: ${px.W} x ${px.H} pixels at 300 dpi, borders ${book.meta.slant ? 'slanted' : 'straight'})`);
   if (book.linked) say(`Frames from: ${path.basename(book.linked.file)}`);
   book.pages.forEach(pg => {
-    say(`\nPage ${pg.n}: ${pg.rows ? pg.rows.map(r => `${r.count}${r.weight > 1 ? ' tall' : r.weight < 1 ? ' short' : ''}`).join(', ') : `${pg.panels.length} row(s) of 1`}`);
+    say(`\nPage ${pg.n}: ${pg.rows ? `${pg.columns ? 'columns ' : ''}${pg.rows.map(r => `${r.count}${r.weight > 1 ? (pg.columns ? ' wide' : ' tall') : r.weight < 1 ? (pg.columns ? ' narrow' : ' short') : ''}`).join(', ')}` : `${pg.panels.length} row(s) of 1`}`);
     pg.panels.forEach(p => {
       const done = have(panelFile(book, m, p));
       say(`  ${done ? 'made ' : '     '} panel ${p.n}: ${p.frame !== null ? `frame ${p.frame} of ${path.basename(book.linked.file)}` : `${p.text.slice(0, 70)}${p.text.length > 70 ? '...' : ''}`}${p.focus !== 'middle' ? ` (focus: ${p.focus})` : ''}`);
       p.captions.forEach(c => say(`          caption${c.x || c.y ? ` (${[c.y, c.x].filter(Boolean).join(' ')})` : ''}: "${c.text}"`));
       p.titles.forEach(t => say(`          title: "${t.text}"`));
+      p.labels.forEach(l => say(`          label: "${l.text}"`));
       p.bubbles.forEach(b => say(`          bubble (${b.who}${b.x ? `, ${b.x}` : ''}): "${b.text}"`));
     });
   });
@@ -338,6 +342,7 @@ function check(file) {
   say('\nClips:');
   story.clips.forEach(c => {
     say(`  ${have(m.clips[c.n]) ? 'made ' : '     '} clip ${c.n}: ${c.from !== null ? (c.to !== null ? `frame ${c.from} to frame ${c.to}` : `from frame ${c.from} on`) : `from the characters (${castOf(story.meta, c.text).join(', ')})`}: ${c.action.slice(0, 70)}${c.action.length > 70 ? '...' : ''}`);
+    (c.labels || []).forEach(l => say(`          label: "${l.text}"`));
     c.lines.forEach(l => say(`          ${story.meta.bubbles ? 'bubble' : 'says  '} (${l.who}${l.side ? `, ${l.side}` : ''}${l.at !== null ? `, at ${l.at}s` : ''}): "${l.text}"`));
   });
   say(`\nVoices: ${{ none: 'none (the words go in speech bubbles)', kitsu: "Kitsu Studio's own voices, added to the film (none from Flow)", flow: 'made by Flow' }[story.meta.voices]}. Bubbles: ${story.meta.bubbles ? 'on' : 'off'}.`);
