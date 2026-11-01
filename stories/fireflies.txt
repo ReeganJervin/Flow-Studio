@@ -1,0 +1,49 @@
+# The Firefly Night  (hook: Yuki is scared of the dark. Ren has an idea.)
+#
+#  Check it (free):              .\flow-video.bat check stories\fireflies.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\fireflies.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\fireflies.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\fireflies.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\fireflies.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\fireflies.txt --account 2 --redo film
+#  The film: output\the-firefly-night\film.mp4
+#
+title: The Firefly Night
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+music: bedtime
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Cozy and magical, never scary.
+place: A quiet meadow at night: a deep blue starry sky, a big round moon, soft dark grass, little flowers and gentle rolling hills.
+
+frame 1: Yuki on the right hugging her knees, looking around nervously in the dark meadow. Ren on the left beside her, looking at her kindly. Medium shot.
+frame 2: Same place and framing. Ren on the left with his paws cupped around something, a soft glow leaking out between his fingers. Yuki on the right leaning in, curious.
+frame 3: Same place and framing. Ren opening his paws and one tiny glowing firefly floating up. Yuki on the right smiling for the first time.
+frame 4: Same place, slightly wider. Many glowing fireflies rising from the grass all around them, lighting up the meadow softly. Ren and Yuki looking around in wonder.
+frame 5: Ren on the left and Yuki on the right lying on the grass side by side, looking up as the fireflies gather into a glowing heart shape above them. Medium shot.
+
+clip 1: frame 1 to frame 2
+Yuki hugs her knees and looks around nervously. Ren sees she is scared, then quietly cups his paws around something glowing.
+Yuki (scared, at 0.5s): "Ren... it's so dark."
+Ren (gentle, at 5s): "Wait. I have something for you."
+
+clip 2: frame 2 to frame 3
+Ren slowly opens his paws, and one tiny glowing firefly floats up between them. Yuki smiles.
+music: magical
+Ren (happy): "A little light. Just for you."
+
+clip 3: frame 3 to frame 4
+More and more fireflies rise from the grass all around them, until the whole meadow glows softly.
+Yuki (surprised): "Ren, look! There are so many!"
+Ren (proud): "I may have told all my friends."
+
+clip 4: frame 4 to frame 5
+Ren and Yuki lie down on the grass side by side. The fireflies float above them and gather into a glowing heart.
+Yuki (happy): "I'm not scared anymore."
+Ren (shy): "Good. Because they're very bad at spelling."

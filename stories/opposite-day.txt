@@ -1,0 +1,56 @@
+# Opposite Day  (hook: Today everything means the opposite. Ren is not ready.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\opposite-day.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\opposite-day.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\opposite-day.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\opposite-day.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\opposite-day.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\opposite-day.txt --account 2 --redo film
+#  The film: output\opposite-day-flow\film.mp4
+#
+title: Opposite Day
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: opposite-day-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Sweet and funny, never scary.
+place: A cozy picnic on a sunny hill: a checkered blanket, a little basket, a plate of cookies, soft grass, flowers and fluffy clouds.
+
+frame 1: Yuki on the right sitting on the picnic blanket with one paw raised like she is announcing something important, a playful grin. Ren on the left sitting across from her, listening. A plate of cookies between them. Medium shot.
+frame 2: Same place and framing. Ren on the left reaching for a cookie with a big smile. Yuki on the right pulling the plate away playfully.
+frame 3: Same place and framing. Ren on the left holding his head with both paws, very confused, little question marks around him. Yuki on the right giggling.
+frame 4: Same place. Ren on the left grinning cleverly, one finger raised, having an idea. Yuki on the right curious. Medium shot.
+frame 5: Same place. Ren on the left and Yuki on the right sitting close together on the blanket, both smiling warmly and sharing the cookies. Medium shot.
+
+clip 1: frame 1 to frame 2
+Yuki raises her paw and makes an announcement. Ren happily reaches for a cookie, and Yuki pulls the plate away.
+Yuki (playful, at 0.5s): "Today is Opposite Day!"
+Ren (happy, at 4s): "Okay! I love cookies!"
+
+clip 2: frame 2 to frame 3
+Yuki keeps the plate away, smiling. Ren holds his head with both paws, very confused.
+Yuki (teasing): "Opposite Day. So no cookies for you."
+Ren (surprised): "Wait. I hate cookies!"
+
+clip 3: frame 3 to frame 4
+Ren thinks very hard, then grins and raises one finger. He has an idea.
+Yuki (laughing): "Too late, Ren."
+Ren (proud): "Okay. Yuki, you are NOT my best friend."
+
+clip 4: frame 4 to frame 5
+Yuki stops, smiles warmly and slides the plate of cookies back. They sit close and share them.
+Yuki (shy): "I know."
+Ren (happy): "Opposite Day is the best day."

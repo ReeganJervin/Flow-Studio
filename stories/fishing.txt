@@ -1,0 +1,47 @@
+# The Fishing Expert  (hook: Ren has never caught a fish. Today is different. Probably.)
+#
+#  Check it (free):              .\flow-video.bat check stories\fishing.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\fishing.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\fishing.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\fishing.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\fishing.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\fishing.txt --account 2 --redo film
+#  The film: output\the-fishing-expert\film.mp4
+#
+title: The Fishing Expert
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A sunny riverbank: a gentle sparkling river, smooth stones, reeds, a small wooden footbridge and soft green grass.
+
+frame 1: Ren on the left sitting on a stone by the river holding a little wooden fishing rod, looking proud and focused. Yuki on the right sitting on the grass with a small basket. Medium shot.
+frame 2: Same place and framing. Ren on the left pulling his rod up excitedly, and on the end of the line is an old boot dripping water. Yuki on the right trying not to laugh.
+frame 3: Same place and framing. A cute round fish leaping out of the water right in front of Ren and splashing water on his face, Ren's eyes squeezed shut, fur dripping. Yuki on the right covering her mouth.
+frame 4: Same place. Yuki on the right gently holding a leaf out over the water, and a cute fish nibbling the leaf happily. Ren on the left dripping wet, staring with his mouth open. Medium shot.
+frame 5: Ren on the left wearing the old boot on his head like a hat, water dripping, arms crossed. Yuki on the right waving goodbye to the fish in the river, smiling. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren fishes with great focus. He feels a tug and pulls the rod up proudly, but an old boot comes out of the water.
+Ren (proud, at 0.5s): "Watch closely. The fishing expert is at work."
+Ren (excited, at 6s): "Got one! A big one!"
+
+clip 2: frame 2 to frame 3
+Ren stares at the boot. Then a fish jumps out of the water right in front of him and splashes his face.
+Yuki (teasing): "That's a boot, expert."
+Ren (proud): "Boots are the hardest to catch."
+
+clip 3: frame 3 to frame 4
+Ren wipes his wet face. Yuki holds a leaf over the water, and a friendly fish swims up and nibbles it.
+Yuki (happy): "Look, Ren. He just wanted a snack."
+
+clip 4: frame 4 to frame 5
+Ren puts the boot on his head like a hat and crosses his arms. Yuki waves goodbye to the fish.
+Ren (pouting): "The boot and I are a team now."
+Yuki (playful): "The perfect team."

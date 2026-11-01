@@ -1,0 +1,56 @@
+# The Pumpkin Portrait  (hook: Ren carved his own face. It did NOT go well. Halloween special.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\halloween-pumpkin.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\halloween-pumpkin.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\halloween-pumpkin.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\halloween-pumpkin.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\halloween-pumpkin.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\halloween-pumpkin.txt --account 2 --redo film
+#  The film: output\the-pumpkin-portrait-flow\film.mp4
+#
+title: The Pumpkin Portrait
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-pumpkin-portrait-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Cozy Halloween, cute and funny, never scary.
+place: A cozy autumn garden at golden hour: a little wooden table with two big orange pumpkins, autumn leaves, warm orange light, a few small candles and a string of soft lights.
+
+frame 1: Ren on the left and Yuki on the right sitting at the little wooden table, each with a big orange pumpkin in front of them, both looking determined. Medium shot.
+frame 2: Same place and framing. Both pumpkins turned away from the camera so we can't see them. Ren on the left looking very proud, chest puffed out. Yuki on the right smiling.
+frame 3: Same place and framing. Ren's pumpkin turned toward the camera: a very silly lopsided face with crooked eyes and a wobbly zigzag mouth. Ren on the left presenting it proudly with both paws.
+frame 4: Same place and framing. Yuki's pumpkin turned toward the camera: a beautiful, perfect carving of Ren's cute fox face. Yuki on the right presenting it. Ren on the left with his mouth open in surprise.
+frame 5: Same place, evening. Both pumpkins glowing with candles inside, side by side on the table, the silly one and the perfect one. Ren on the left and Yuki on the right sitting together, smiling at them. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren and Yuki carve their pumpkins carefully, hiding them from each other. Ren finishes and puffs out his chest.
+Ren (proud, at 0.5s): "I carved my own face. It's perfect."
+Yuki (happy, at 5s): "Show me!"
+
+clip 2: frame 2 to frame 3
+Ren turns his pumpkin around: a very silly, lopsided face with crooked eyes. He presents it proudly.
+Ren (proud): "Ta-da! Handsome, right?"
+Yuki (amused): "Ren... why is your face so wobbly?"
+
+clip 3: frame 3 to frame 4
+Yuki turns her pumpkin around: a beautiful, perfect carving of Ren's face. Ren's mouth drops open.
+Yuki (shy): "I carved you too."
+Ren (surprised): "Wait. Why is yours better at being me?"
+
+clip 4: frame 4 to frame 5
+It gets dark and both pumpkins glow side by side. Ren and Yuki sit together, smiling at them.
+Ren (proud): "Mine is modern art."
+Yuki (teasing): "Very modern."

@@ -1,0 +1,43 @@
+# Whispers of the World Tree — TEST: 2 clips of the Lower World (about 30 credits)
+#
+# The hardest part of the introduction, to test first: the wildlife, the winged-elf hunters and their town. Check the
+# winged elves, the narrator's caption boxes and voice, Google Flow's music, and how the two clips join.
+#
+#  Check it (free):              .\flow-video.bat check stories\world-tree\00-test-two-clips.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\world-tree\00-test-two-clips.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\world-tree\00-test-two-clips.txt --account 2 --redo frame 2
+#  2. Make the 2 clips and film: .\flow-video.bat make stories\world-tree\00-test-two-clips.txt --account 2
+#     Redo the film only (free): .\flow-video.bat make stories\world-tree\00-test-two-clips.txt --account 2 --redo film
+#  The film: output\world-tree-test-two-clips\film.mp4
+#
+title: Whispers of the World Tree (test)
+project: world-tree-test-two-clips
+aspect: 16:9
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+# the narrator: Kitsu Studio's narrator voice, the same in every clip; Flow makes the music and sounds under it
+voices: kitsu
+music: none
+flow sound: on
+bubbles: on
+# optional: up to 2 of your own pictures, so Flow draws in the same style (put them next to this file), e.g.
+# style pictures: refs/page-1.png, refs/page-7.png
+
+style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss and ancient trees, soft volumetric sunlight, clear blue sky with big white clouds, drifting mist, glowing blue flowers and tiny light motes, warm golden lanterns, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
+place: The world of the World Tree: an ancient forest beyond the lands known to ordinary travelers, waterfalls, hidden caves, a world of floating islands among the clouds, and towns of wooden houses built on the giant branches.
+
+frame 1: The Lower World forest below the giant branches of the World Tree: a sunlit clearing with a clear stream over mossy stones, a spotted deer stag drinking, a fawn beside it, rabbits in the grass, small blue birds on a branch, a wild boar rooting among the ferns, glowing blue flowers, waterfalls and wooden bridges far above in the branches. Wide shot.
+frame 2: The same forest, a little further along the stream: three winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) hunters with bows and quivers moving quietly along a mossy forest path between the giant trees, a young hunter with a green cloak in front crouching to look at animal tracks. Wide shot.
+frame 3: A Lower World town on the giant branches: cozy wooden houses with lanterns and flower boxes, a lively market with fruit stalls and colourful awnings, wooden bridges and walkways between the trees, waterfalls, and winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) shopping, carrying baskets and talking, the hunters arriving along the path. Warm late-afternoon light. Wide shot.
+
+clip 1: frame 1 to frame 2
+The camera stays still, with a slow gentle push in. The deer and fawn lift their heads, then calmly wander off into the trees with the boar and the rabbits; the birds flutter away. Three winged-elf hunters step quietly out of the forest onto the mossy path, their translucent wings shimmering, and the one in the green cloak crouches to read the tracks.
+Narrator (at 0.5s): "Below the great branches, life moved beneath the ancient trees."
+Narrator: "The forest was both home and provider."
+
+clip 2: frame 2 to frame 3
+The camera stays still, with a slow gentle push in. The hunter in the green cloak stands up and the three winged elves walk on along the path toward the town. The market comes alive: stalls with colourful awnings, small winged elves shopping and flying between the treehouses, lanterns glowing, people crossing the rope bridges.
+Narrator (at 0.5s): "Following the paths beneath the ancient trees..."
+Narrator: "...the forest slowly became home."

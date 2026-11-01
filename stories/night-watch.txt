@@ -1,0 +1,57 @@
+# The Night Guard  (hook: Ren will stay awake ALL night.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\night-watch.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\night-watch.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\night-watch.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\night-watch.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\night-watch.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\night-watch.txt --account 2 --redo film
+#  The film: output\the-night-guard-flow\film.mp4
+#
+title: The Night Guard
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-night-guard-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Cozy and funny, never scary.
+place: A cozy forest clearing at night: soft blue moonlight, tall rounded trees, a small glowing campfire, a few fireflies floating, and a blanket on the grass.
+
+frame 1: Ren on the left standing tall next to the small campfire, holding a stick like a guard, chest puffed out. Yuki on the right wrapped in a blanket, sleepy. Medium shot.
+frame 2: Same place and framing. Ren on the left still standing but his eyes half closed and his head drooping. Yuki on the right peeking out of her blanket.
+frame 3: Same place and framing. Ren on the left fast asleep standing up, leaning on his stick, a little bubble of sleep at his nose. Yuki on the right sitting up, smiling.
+frame 4: Same place. A small round firefly landing on Ren's nose, Ren's eyes popping wide open in surprise, stick held up. Yuki on the right covering a giggle. Medium shot.
+frame 5: Ren and Yuki sitting together under the blanket by the campfire, Ren's head resting on Yuki's shoulder, eyes closed, Yuki smiling at the fireflies. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren stands guard by the campfire. Slowly his eyes get heavy and his head starts to droop.
+Ren (determined, at 0.5s): "Sleep, Yuki. I'll guard us all night."
+Yuki (sleepy, at 5s): "All night?"
+Ren (proud): "Every single minute."
+
+clip 2: frame 2 to frame 3
+Ren falls asleep standing up, leaning on his stick, snoring softly. Yuki peeks out of her blanket.
+Yuki (whispering): "Ren? Are you guarding?"
+Ren (sleepy): "Mm-hm. With my eyes closed."
+
+clip 3: frame 3 to frame 4
+A tiny glowing firefly drifts down and lands on Ren's nose. He wakes with a jump and holds his stick up.
+Ren (surprised): "Who goes there?!"
+Yuki (laughing): "A firefly. A very scary firefly."
+
+clip 4: frame 4 to frame 5
+Ren sits down next to Yuki under the blanket. He leans on her shoulder and his eyes close again.
+Ren (sleepy): "I'll just guard from here."
+Yuki (happy): "Goodnight, guard."

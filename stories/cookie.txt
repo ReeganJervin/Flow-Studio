@@ -1,0 +1,47 @@
+# Who Ate the Cookie?  (hook: Ren definitely did not eat the cookie.)
+#
+#  Check it (free):              .\flow-video.bat check stories\cookie.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\cookie.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\cookie.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\cookie.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\cookie.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\cookie.txt --account 2 --redo film
+#  The film: output\who-ate-the-cookie\film.mp4
+#
+title: Who Ate the Cookie
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A cozy cottage garden on a sunny afternoon: a white picket fence, a little wooden table with an empty plate, flower beds and an apple tree.
+
+frame 1: Yuki on the right pointing at an empty plate on the little wooden table, eyebrows raised. Ren on the left standing very straight with his paws behind his back, cookie crumbs all around his mouth. Medium shot.
+frame 2: Same place and framing. Ren on the left pointing dramatically up at the sky, crumbs still on his face. Yuki on the right looking at him, unimpressed, arms crossed.
+frame 3: Same place and framing. Ren on the left pointing at a small bird sitting on the fence, crumbs on his cheeks. Yuki on the right looking at the tiny bird, then back at Ren.
+frame 4: Close shot. Yuki on the right holding up a small round mirror toward Ren. Ren on the left staring at his own crumb-covered face in the mirror, eyes wide.
+frame 5: Ren on the left with his ears drooping and a shy guilty smile, holding out the last half cookie toward Yuki. Yuki on the right smiling and taking it. Medium shot.
+
+clip 1: frame 1 to frame 2
+Yuki points at the empty plate. Ren keeps his paws behind his back, then points up at the sky.
+Yuki (suspicious, at 0.5s): "Ren. Where is my cookie?"
+Ren (proud, at 4s): "A cloud took it."
+
+clip 2: frame 2 to frame 3
+Yuki crosses her arms. Ren quickly points at a tiny bird on the fence instead.
+Yuki (teasing): "A cloud?"
+Ren (nervous): "I mean that bird. A very hungry bird."
+
+clip 3: frame 3 to frame 4
+Yuki takes a little mirror from her pocket and holds it up. Ren sees his crumb-covered face and freezes.
+Yuki (amused): "Then why is the bird on your face?"
+
+clip 4: frame 4 to frame 5
+Ren's ears droop. He brings out half a cookie from behind his back and offers it to Yuki, who smiles and takes it.
+Ren (shy): "I saved you half."
+Yuki (happy): "You saved me the small half."

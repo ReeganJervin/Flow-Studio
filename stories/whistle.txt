@@ -1,0 +1,56 @@
+# Learning to Whistle  (hook: Ren can't whistle. Ren will NOT give up.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\whistle.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\whistle.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\whistle.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\whistle.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\whistle.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\whistle.txt --account 2 --redo film
+#  The film: output\learning-to-whistle-flow\film.mp4
+#
+title: Learning to Whistle
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: learning-to-whistle-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A sunny forest edge: tall rounded trees with birds on the branches, soft grass, small flowers and dappled sunlight.
+
+frame 1: Yuki on the right whistling happily with puckered lips, little music notes floating up, a small bluebird on a branch above listening. Ren on the left watching, impressed. Medium shot.
+frame 2: Same place and framing. Ren on the left trying to whistle with his lips puckered very hard, cheeks puffed, but nothing coming out except a little puff of air. Yuki on the right watching, trying not to laugh.
+frame 3: Same place and framing. Ren on the left red-faced, blowing so hard his ears stick straight up and his tail puffs out. Yuki on the right covering her ears playfully.
+frame 4: Same place. A tiny round mouse popping its head out of a hole near Ren's feet, squeaking back at him. Ren on the left looking down at it, surprised. Yuki on the right giggling. Medium shot.
+frame 5: Same place. The tiny mouse sitting on Ren's shoulder. Ren on the left grinning proudly. Yuki on the right laughing, the bluebird on her head. Medium shot.
+
+clip 1: frame 1 to frame 2
+Yuki whistles a little tune and a bluebird sings back. Ren tries to whistle too, but only a tiny puff of air comes out.
+Yuki (happy, at 0.5s): "See? Easy."
+Ren (determined, at 5s): "Easy. Watch this."
+
+clip 2: frame 2 to frame 3
+Ren blows harder and harder until his ears stick up and his tail puffs out. Still no whistle.
+Yuki (amused): "Ren, you're just blowing."
+Ren (determined): "I'm warming up."
+
+clip 3: frame 3 to frame 4
+Ren finally makes a tiny squeaky sound. A little mouse pops out of a hole and squeaks back at him.
+Ren (excited): "I did it! Someone answered!"
+Yuki (laughing): "A mouse answered."
+
+clip 4: frame 4 to frame 5
+The tiny mouse climbs onto Ren's shoulder. Ren grins proudly while the bluebird sits on Yuki's head.
+Ren (proud): "Birds are for beginners."
+Yuki (teasing): "Squeak to you too."

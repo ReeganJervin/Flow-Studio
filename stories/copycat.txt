@@ -1,0 +1,55 @@
+# The Copycat  (hook: A tiny frog copies EVERYTHING Ren does.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\copycat.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\copycat.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\copycat.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\copycat.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\copycat.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\copycat.txt --account 2 --redo film
+#  The film: output\the-copycat-flow\film.mp4
+#
+title: The Copycat
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-copycat-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A sunny pond edge: lily pads, a few smooth stones, soft reeds, pink water flowers and green grass.
+
+frame 1: Ren on the left standing on the grass with one paw raised, looking at a tiny round green frog on a stone in front of him, which is raising one little arm exactly the same way. Yuki on the right watching. Medium shot.
+frame 2: Same place and framing. Ren on the left with his hands on his hips, frowning. The tiny frog on its stone with its hands on its hips, frowning the same way. Yuki on the right covering a giggle.
+frame 3: Same place and framing. Ren on the left doing a silly dance on one leg with his arms waving. The tiny frog doing the same dance on one leg, but much better, with a little spin.
+frame 4: Same place. Ren on the left sitting down with his arms crossed, pouting. The tiny frog sitting the same way, arms crossed, pouting. Yuki on the right laughing. Medium shot.
+frame 5: Same place. Ren on the left giving a little bow. The tiny frog bowing too, and then hopping onto Ren's head. Yuki on the right clapping. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren raises a paw and the tiny frog raises its arm too. Ren puts his hands on his hips; so does the frog.
+Ren (surprised, at 0.5s): "Hey. Stop copying me."
+Yuki (amused, at 5s): "I think he likes you."
+
+clip 2: frame 2 to frame 3
+Ren tries to trick the frog with a silly dance on one leg. The frog copies it, then adds a perfect little spin.
+Ren (proud): "Copy THIS!"
+Yuki (laughing): "Ren, he's better than you."
+
+clip 3: frame 3 to frame 4
+Ren sits down and crosses his arms, pouting. The frog sits down and pouts exactly the same way.
+Ren (pouting): "I'm not playing anymore."
+
+clip 4: frame 4 to frame 5
+Ren can't help smiling. He gives a little bow, the frog bows too, then hops up onto Ren's head.
+Ren (happy): "Fine. You can be my sidekick."
+Yuki (teasing): "Or you're his."

@@ -1,0 +1,56 @@
+# The Mystery Egg  (hook: They found an egg. It is NOT a chicken egg.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\mystery-egg.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\mystery-egg.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\mystery-egg.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\mystery-egg.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\mystery-egg.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\mystery-egg.txt --account 2 --redo film
+#  The film: output\the-mystery-egg-flow\film.mp4
+#
+title: The Mystery Egg
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-mystery-egg-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Wonder and funny, never scary.
+place: A soft mossy forest clearing: tall rounded trees, glowing mushrooms, ferns, sunbeams and a cozy nest of leaves on the ground.
+
+frame 1: Ren on the left and Yuki on the right kneeling beside a big round egg with pastel purple spots, sitting in a nest of leaves, both staring at it curiously. Medium shot.
+frame 2: Same place and framing. The egg cracking, a little crack across the top and a soft glow coming out. Ren on the left leaning back in surprise. Yuki on the right leaning forward, excited.
+frame 3: Same place and framing. A tiny round baby dragon with soft lilac scales, big sparkly eyes and little wings popping out of the egg, half the shell on its head like a hat. Ren and Yuki gasping happily.
+frame 4: Same place. The tiny baby dragon hugging Ren's leg tightly and nuzzling him. Ren on the left looking down at it, surprised and flustered. Yuki on the right with paws on her cheeks, delighted. Medium shot.
+frame 5: Same place. The baby dragon sneezing a little puff of pink flower petals all over Ren's face, Ren covered in petals and smiling, the dragon curled up in his arms. Yuki on the right laughing. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren and Yuki stare at the spotted egg. It wobbles, cracks, and a soft glow shines out.
+Yuki (curious, at 0.5s): "What kind of egg is that?"
+Ren (proud, at 4s): "A chicken egg. Definitely a chicken."
+
+clip 2: frame 2 to frame 3
+The egg breaks open and a tiny baby dragon pops out with a piece of shell on its head like a hat.
+Yuki (excited): "Ren, that's not a chicken!"
+Ren (surprised): "Very fancy chicken."
+
+clip 3: frame 3 to frame 4
+The baby dragon toddles straight to Ren and hugs his leg tightly, nuzzling him.
+Yuki (laughing): "It thinks you're its mom!"
+Ren (nervous): "I'm not your mom. I'm a fox."
+
+clip 4: frame 4 to frame 5
+The baby dragon sneezes a puff of pink flower petals all over Ren's face. Ren smiles and picks it up.
+Ren (shy): "Okay. Maybe a little bit your mom."
+Yuki (teasing): "Congratulations, Mama Ren."

@@ -1,0 +1,55 @@
+# The Biggest Snowman  (hook: Ren will build the biggest snowman EVER.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\snowman.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\snowman.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\snowman.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\snowman.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\snowman.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\snowman.txt --account 2 --redo film
+#  The film: output\the-biggest-snowman-flow\film.mp4
+#
+title: The Biggest Snowman
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-biggest-snowman-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A gentle snowy hill on a soft winter morning: round snow-covered pine trees, soft white snow, a pale blue sky and a few gentle snowflakes falling.
+
+frame 1: Ren on the left proudly patting a tiny snowball, chest puffed out. Yuki on the right holding two little twigs for arms. Medium shot.
+frame 2: Same place and framing. Ren on the left rolling a huge snowball much taller than him up the gentle slope, straining, paws pushing. Yuki on the right watching with wide eyes.
+frame 3: Same place, slightly wider. The huge snowball rolling back down the gentle slope with Ren riding on top of it, arms waving, scarf flying. Yuki on the right hopping out of the way, surprised.
+frame 4: The bottom of the slope. The huge snowball stopped, with Ren stuck in the side of it, only his head, paws and fluffy tail sticking out, like a snowman with a fox face. Yuki on the right laughing. Medium shot.
+frame 5: Yuki on the right sticking the two twig arms into the snowball beside Ren's face and putting a little carrot nose on it. Ren in the snowball smiling proudly. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren pats a tiny snowball proudly, then starts rolling it up the slope. It grows bigger and bigger until it's taller than him.
+Ren (proud, at 0.5s): "I'll build the biggest snowman ever!"
+Yuki (surprised, at 6s): "Ren, it's bigger than you!"
+
+clip 2: frame 2 to frame 3
+At the top, the giant snowball starts rolling back down the gentle slope, with Ren on top of it. Funny and soft.
+Ren (scared): "Yuki! The snowman is escaping!"
+
+clip 3: frame 3 to frame 4
+The snowball rolls gently to a stop at the bottom. Ren is stuck in it, only his head, paws and tail sticking out.
+Yuki (laughing): "Are you okay?"
+Ren (proud): "I'm part of the snowman now."
+
+clip 4: frame 4 to frame 5
+Yuki sticks two twig arms in the snowball next to Ren's face and adds a little carrot nose. Ren smiles proudly.
+Yuki (teasing): "The biggest snowman ever."
+Ren (proud): "And the most handsome."

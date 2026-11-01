@@ -1,0 +1,35 @@
+# TEST: Ren and Yuki with the voices you gave them in Google Flow (2 clips, about 30 credits)
+#
+# The clips have no frames: Flow makes them from your Ren and Yuki characters, so it uses the voices you set on
+# them, and Flow makes the music and sounds too (no Kitsu music, no bubbles). Flow can't use frames and characters
+# in the same clip, so the look is held by the characters alone here.
+#
+#  Check it (free):     .\flow-video.bat check stories\test-flow-voices.txt
+#  Make the 2 clips:    .\flow-video.bat make stories\test-flow-voices.txt --account 2
+#  Redo a clip:         .\flow-video.bat make stories\test-flow-voices.txt --account 2 --redo clip 1
+#  The film: output\test-flow-voices\film.mp4   (clips in output\test-flow-voices\clips\)
+#
+title: Test Flow Voices
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+# Flow speaks the lines with the characters' own voices, and makes the music and sounds
+voices: flow
+music: none
+bubbles: off
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Cozy Halloween, cute and funny, never scary. Gentle spooky-fun music.
+place: A cozy cottage garden on Halloween evening: glowing smiling jack-o'-lanterns on the fence, an orange sunset sky, fallen autumn leaves, little paper bats hanging from the apple tree.
+
+clip 1:
+Ren on the left wears a white bedsheet ghost costume with two crooked eye holes, his fluffy orange tail and feet sticking out underneath. Yuki on the right is dressed as a little round pumpkin. Ren waves his arms and sways toward Yuki like a spooky ghost; the sheet slips and one ear pokes out.
+Ren (proud, playful): "Boooo! I am the scariest ghost!"
+Yuki (teasing, giggling): "Oh no. A ghost with a fluffy tail."
+
+clip 2:
+Ren in his ghost sheet on the left turns around proudly and comes face to face with a smiling jack-o'-lantern on the fence. He jumps back in fright and the sheet flies up. Yuki in her pumpkin costume on the right laughs.
+Ren (scared, high voice): "Aaah! A pumpkin monster!"
+Yuki (laughing): "Ren, it's smiling at you!"

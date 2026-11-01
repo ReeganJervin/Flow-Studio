@@ -1,0 +1,56 @@
+# The Rainy Day  (hook: It's raining, and they only have ONE leaf.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\rainy-day.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\rainy-day.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\rainy-day.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\rainy-day.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\rainy-day.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\rainy-day.txt --account 2 --redo film
+#  The film: output\the-rainy-day-flow\film.mp4
+#
+title: The Rainy Day
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-rainy-day-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Cozy and cheerful, never scary.
+place: A soft green meadow on a gentle rainy day: light rain falling, little puddles on a dirt path, soft grey clouds, wildflowers, and one very big round leaf plant.
+
+frame 1: Ren on the left and Yuki on the right standing in the meadow as the first gentle raindrops fall, both looking up at the grey sky in surprise. Medium shot.
+frame 2: Same place and framing. Ren on the left holding one big round leaf over Yuki's head like an umbrella, while the rain falls on him and his fur gets wet. Yuki on the right dry and smiling.
+frame 3: Same place and framing. Yuki on the right pulling Ren under the big leaf too, the two of them squeezed together under one leaf, both laughing.
+frame 4: Same place. Ren and Yuki jumping into a puddle together, a big happy splash, the leaf flying behind them. Medium shot.
+frame 5: Same place. The rain stopped, a soft rainbow in the sky. Ren on the left and Yuki on the right, both wet and muddy, sitting in the puddle and smiling up at the rainbow. Medium shot.
+
+clip 1: frame 1 to frame 2
+The first raindrops fall. Ren quickly picks a big round leaf and holds it over Yuki's head, while he gets wet himself.
+Yuki (surprised, at 0.5s): "Rain!"
+Ren (proud, at 4s): "Don't worry. I've got you covered."
+
+clip 2: frame 2 to frame 3
+Yuki notices Ren getting soaked. She pulls him under the leaf, and they squeeze together, laughing.
+Yuki (teasing): "Ren, you're all wet."
+Ren (shy): "I'm a very waterproof fox."
+
+clip 3: frame 3 to frame 4
+Yuki sees a big puddle and grins. They both run and jump into it together, splashing happily. The leaf blows away.
+Yuki (playful): "If we're wet anyway..."
+Ren (excited): "Puddle jump!"
+
+clip 4: frame 4 to frame 5
+The rain stops and a soft rainbow appears. Ren and Yuki sit in the puddle, muddy and happy, looking up.
+Ren (surprised): "Look, Yuki. A rainbow."
+Yuki (happy): "Best rainy day ever."

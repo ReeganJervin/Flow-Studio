@@ -1,0 +1,56 @@
+# The Hiccups  (hook: Ren can't stop hiccuping. Yuki has a plan. Several plans.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\hiccups.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\hiccups.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\hiccups.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\hiccups.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\hiccups.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\hiccups.txt --account 2 --redo film
+#  The film: output\the-hiccups-flow\film.mp4
+#
+title: The Hiccups
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-hiccups-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A cozy cottage garden on a sunny morning: a white picket fence, flower beds, a small wooden bench and an apple tree.
+
+frame 1: Ren on the left hopping a little off the ground with a big hiccup, cheeks puffed, eyes squeezed. Yuki on the right looking at him with concern. Medium shot.
+frame 2: Same place and framing. Yuki on the right jumping out from behind the bench with her arms raised to scare him. Ren on the left looking at her, completely calm and unimpressed, mid-hiccup.
+frame 3: Same place and framing. Ren on the left bent over upside down, trying to drink water from a little cup, water splashing on his face. Yuki on the right giving instructions with one paw raised.
+frame 4: Same place. Yuki on the right giving Ren a big warm hug. Ren on the left with his eyes wide in surprise, his cheeks blushing. Medium shot.
+frame 5: Same place. Ren on the left smiling happily, no more hiccups. Yuki on the right hopping a little off the ground with a big hiccup, paws over her mouth, surprised. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren hiccups so hard he hops off the ground each time. Yuki jumps out from behind the bench to scare him.
+Ren (sad, at 0.5s): "I have the hic-hiccups."
+Yuki (playful, at 5s): "Boo!"
+
+clip 2: frame 2 to frame 3
+Ren isn't scared at all and hiccups again. Yuki tells him to drink water upside down, and he tries, splashing his face.
+Ren (pouting): "Not scary. Hic."
+Yuki (determined): "Okay, plan two. Drink upside down!"
+
+clip 3: frame 3 to frame 4
+Ren is soaked and still hiccuping. Yuki gives up on plans and gives him a big warm hug. Ren blushes.
+Ren (sad): "Plan two is wet. Hic."
+Yuki (happy): "Plan three. A hug."
+
+clip 4: frame 4 to frame 5
+Ren's hiccups are gone and he smiles. Then Yuki hops off the ground with a big hiccup, surprised.
+Ren (happy): "It worked! They're gone!"
+Yuki (surprised): "Hic!"

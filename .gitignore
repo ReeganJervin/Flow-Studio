@@ -1,0 +1,4 @@
+node_modules/
+# the videos Flow Studio makes, and each computer's own settings
+output/
+settings.json

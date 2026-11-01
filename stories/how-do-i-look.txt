@@ -1,0 +1,55 @@
+# How Do I Look?  (hook: Yuki has a new look. Ren has to answer. Carefully.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\how-do-i-look.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\how-do-i-look.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\how-do-i-look.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\how-do-i-look.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\how-do-i-look.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\how-do-i-look.txt --account 2 --redo film
+#  The film: output\how-do-i-look-flow\film.mp4
+#
+title: How Do I Look
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: how-do-i-look-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Sweet and funny, never scary.
+place: A sunny meadow full of flowers in spring: soft green hills, daisies, tulips, butterflies and fluffy clouds.
+
+frame 1: Yuki on the right posing proudly with a huge, over-the-top crown of flowers, leaves and berries piled high on her head, so big it wobbles. Ren on the left staring at it with wide eyes. Medium shot.
+frame 2: Same place and framing. Ren on the left sweating nervously, a tiny drop on his forehead, paws together, trying to think. Yuki on the right waiting with her eyes sparkling, the huge crown wobbling.
+frame 3: Same place and framing. Yuki on the right with her ears drooping and a little pout, the huge crown tilting to one side. Ren on the left waving his paws in panic.
+frame 4: Same place. A butterfly landing on Yuki's huge flower crown, then another, then a little bird, all happily sitting on it. Ren on the left pointing at them excitedly. Yuki on the right looking up, surprised. Medium shot.
+frame 5: Same place. Ren on the left wearing a tiny flower on his own ear, smiling shyly. Yuki on the right laughing happily with butterflies all around her crown. Medium shot.
+
+clip 1: frame 1 to frame 2
+Yuki strikes a pose with her huge, wobbly flower crown. Ren stares, then starts to sweat, thinking hard.
+Yuki (excited, at 0.5s): "Ren! How do I look?"
+Ren (nervous, at 5s): "You look... very... tall."
+
+clip 2: frame 2 to frame 3
+Yuki's ears droop and she pouts. Ren panics and waves his paws, trying to fix it.
+Ren (nervous): "I mean beautiful! Like a beautiful... salad."
+Yuki (pouty): "A salad?"
+
+clip 3: frame 3 to frame 4
+A butterfly lands on the crown, then another, then a little bird. Ren points at them, excited.
+Ren (excited): "Look! Even the butterflies love it!"
+
+clip 4: frame 4 to frame 5
+Yuki laughs with butterflies all around her. Ren tucks a tiny flower behind his own ear and smiles shyly.
+Yuki (happy): "So I'm a pretty salad?"
+Ren (shy): "The prettiest salad in the forest."

@@ -1,0 +1,55 @@
+# The Spooky Ghost  (hook: Ren is the SCARIEST ghost ever. Halloween special.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\halloween-ghost.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\halloween-ghost.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\halloween-ghost.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\halloween-ghost.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\halloween-ghost.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\halloween-ghost.txt --account 2 --redo film
+#  The film: output\the-spooky-ghost-flow\film.mp4
+#
+title: The Spooky Ghost
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-spooky-ghost-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Cozy Halloween, cute and funny, never scary.
+place: A cozy cottage garden on Halloween evening: glowing smiling jack-o'-lanterns on the fence, an orange sunset sky, fallen autumn leaves, a few little paper bats hanging from the apple tree.
+
+frame 1: Ren on the left wearing a white bedsheet ghost costume with two crooked eye holes, his fluffy orange tail and his feet sticking out underneath, arms raised to look scary. Yuki on the right dressed as a little round pumpkin, smiling. Medium shot.
+frame 2: Same place and framing. Ren in the ghost sheet leaning toward Yuki with his arms up, the sheet slipping so one ear pokes out. Yuki on the right pretending to be scared, paws on her cheeks, clearly trying not to laugh.
+frame 3: Same place and framing. Ren in the ghost sheet jumping back in fright from a smiling jack-o'-lantern on the fence, the sheet flying up. Yuki on the right giggling.
+frame 4: Same place. Ren on the left tangled in the sheet on the grass, only his face and tail showing. Yuki on the right leaning over him with a sweet smile. Medium shot.
+frame 5: Same place. Yuki on the right in her pumpkin costume with a big playful grin, arms raised. Ren on the left jumping straight up in fright, ears and tail puffed. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren in his ghost sheet waves his arms and sways toward Yuki like a spooky ghost. The sheet slips and one ear pokes out.
+Ren (proud, at 0.5s): "Boooo! I am the scariest ghost!"
+Yuki (teasing, at 5s): "Oh no. A ghost with a fluffy tail."
+
+clip 2: frame 2 to frame 3
+Ren turns around proudly and comes face to face with a smiling jack-o'-lantern on the fence. He jumps back in fright, sheet flying.
+Ren (scared): "Aaah! A pumpkin monster!"
+
+clip 3: frame 3 to frame 4
+Ren trips over his own sheet and tumbles softly onto the grass, all tangled up. Yuki leans over him, smiling.
+Yuki (amused): "The scariest ghost is scared of pumpkins?"
+Ren (shy): "That one looked at me."
+
+clip 4: frame 4 to frame 5
+Ren sits up. Yuki raises her arms and says boo, and Ren jumps straight up in fright, ears and tail puffed.
+Yuki (playful): "Boo."
+Ren (scared): "Aaah!"

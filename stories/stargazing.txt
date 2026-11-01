@@ -1,0 +1,55 @@
+# The Shooting Star  (hook: One shooting star. Two wishes.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\stargazing.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\stargazing.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\stargazing.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\stargazing.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\stargazing.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\stargazing.txt --account 2 --redo film
+#  The film: output\the-shooting-star-flow\film.mp4
+#
+title: The Shooting Star
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-shooting-star-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Dreamy and sweet, never scary.
+place: A soft grassy hilltop at night: a deep blue sky full of twinkling stars, a few soft clouds, a crescent moon and the lights of a tiny village far away.
+
+frame 1: Ren on the left and Yuki on the right lying on their backs on the grassy hilltop, looking up at the starry sky. Ren pointing up at the stars. Medium shot.
+frame 2: Same place and framing. Ren on the left pointing proudly at a group of stars. Yuki on the right squinting at the sky, head tilted, unconvinced.
+frame 3: Same place and framing. A bright shooting star streaking across the sky. Ren and Yuki sitting up quickly, eyes wide and sparkling.
+frame 4: Same place. Ren on the left and Yuki on the right both with their eyes closed and paws together, making a wish, soft starlight around them. Medium shot.
+frame 5: Same place. Ren and Yuki lying side by side again, looking at each other and smiling, their paws touching on the grass between them. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren and Yuki lie on the hilltop looking at the stars. Ren points proudly at a group of stars.
+Ren (proud, at 0.5s): "See those stars? That's a cookie."
+Yuki (teasing, at 5s): "Ren, every star looks like a cookie to you."
+
+clip 2: frame 2 to frame 3
+Suddenly a bright shooting star streaks across the sky. They both sit up with sparkling eyes.
+Yuki (excited): "A shooting star! Make a wish!"
+
+clip 3: frame 3 to frame 4
+Ren and Yuki close their eyes and hold their paws together, wishing hard.
+Ren (whispering): "Don't tell me yours. Or it won't come true."
+Yuki (whispering): "I won't."
+
+clip 4: frame 4 to frame 5
+They lie back down side by side, look at each other and smile, their paws touching on the grass.
+Ren (shy): "Did yours come true?"
+Yuki (happy): "It's lying right next to me."

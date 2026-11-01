@@ -1,0 +1,50 @@
+# The Secret Present  (hook: Ren is hiding something behind his back.)
+#
+#  Check it (free):              .\flow-video.bat check stories\flower-crown.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\flower-crown.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\flower-crown.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\flower-crown.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\flower-crown.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\flower-crown.txt --account 2 --redo film
+#  The film: output\the-secret-present\film.mp4
+#
+title: The Secret Present
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+music: happy
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Sweet and funny, never scary.
+place: A flower meadow on a warm afternoon: lots of pink, yellow and white flowers, soft green grass, butterflies and a few small round trees.
+
+frame 1: Ren on the left sitting in the flowers with his back half turned, secretly weaving a flower crown, tongue sticking out in concentration. Yuki on the right far behind him, hopping toward him. Medium shot.
+frame 2: Same place and framing. Ren on the left jumping up and hiding the flower crown behind his back, eyes wide, very guilty smile. Yuki on the right now close, looking curious.
+frame 3: Same place and framing. Yuki on the right trying to peek behind Ren's back. Ren on the left spinning around to keep it hidden, the flower crown flashing behind him.
+frame 4: Same place. Ren on the left shyly holding the colourful flower crown out to Yuki with both paws, blushing. Yuki on the right with her paws over her mouth in surprise. Medium shot.
+frame 5: Same place. Yuki on the right wearing the flower crown between her ears, hugging Ren, who is blushing on the left, both very happy. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren secretly weaves a flower crown. Yuki hops up behind him and he jumps, quickly hiding it behind his back.
+Yuki (curious, at 1s): "Ren? What are you doing?"
+Ren (nervous, at 5s): "Nothing! Just... sitting. Very normally."
+
+clip 2: frame 2 to frame 3
+Yuki tries to peek behind Ren's back. Ren spins around and around to keep the present hidden.
+Yuki (playful): "What's behind your back?"
+Ren (nervous): "My tail. Just my tail."
+
+clip 3: frame 3 to frame 4
+Ren gives up, blushes, and shyly holds out the flower crown with both paws. Yuki gasps happily.
+music: heartfelt
+Ren (shy): "I made it for you. Happy friend day."
+Yuki (surprised): "Friend day?"
+
+clip 4: frame 4 to frame 5
+Yuki puts the flower crown on between her ears and hugs Ren tightly. Ren blushes.
+Ren (shy): "I invented it. It's today."
+Yuki (happy): "Then it's my favourite day."

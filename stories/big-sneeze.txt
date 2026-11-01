@@ -1,0 +1,55 @@
+# The Big Sneeze  (hook: Ren is trying very hard NOT to sneeze.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\big-sneeze.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\big-sneeze.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\big-sneeze.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\big-sneeze.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\big-sneeze.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\big-sneeze.txt --account 2 --redo film
+#  The film: output\the-big-sneeze-flow\film.mp4
+#
+title: The Big Sneeze
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-big-sneeze-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A sunny hillside covered in fluffy white dandelions, soft green grass, a pale blue sky and a few fluffy clouds.
+
+frame 1: Ren on the left in a field of fluffy white dandelions, his nose twitching, eyes watering, about to sneeze. Yuki on the right holding a little dandelion and looking at him. Medium shot.
+frame 2: Same place and framing. Ren on the left pinching his nose with both paws, cheeks puffed, eyes squeezed shut, trying very hard not to sneeze. Yuki on the right leaning away, worried.
+frame 3: Same place, wider. Ren on the left sneezing an enormous sneeze, a huge cloud of dandelion fluff exploding into the air all around them. Yuki on the right with her ears blown back.
+frame 4: Same place. Thousands of dandelion seeds floating slowly down like snow, sparkling in the sun. Ren and Yuki looking up in wonder. Medium shot.
+frame 5: Same place. Yuki on the right completely covered in white dandelion fluff, looking like a fluffy snowball with ears. Ren on the left laughing, a little fluff on his nose. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren's nose twitches in the dandelion field. He pinches it with both paws and squeezes his eyes shut.
+Ren (nervous, at 0.5s): "Ah... ahh..."
+Yuki (worried, at 4s): "Ren, don't. Not here."
+
+clip 2: frame 2 to frame 3
+Ren holds it, holds it, and then sneezes an enormous sneeze. A huge cloud of dandelion fluff bursts into the air.
+Ren (surprised): "Ahh-CHOO!"
+
+clip 3: frame 3 to frame 4
+The dandelion seeds float slowly down all around them like sparkling snow. They both look up in wonder.
+Yuki (surprised): "Ren... it's snowing."
+Ren (proud): "I meant to do that."
+
+clip 4: frame 4 to frame 5
+The fluff settles all over Yuki until she looks like a fluffy snowball with ears. Ren bursts out laughing.
+Yuki (pouty): "Ren."
+Ren (laughing): "Bless you, snow bunny."

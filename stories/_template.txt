@@ -1,0 +1,42 @@
+# ============================================================
+#  FLOW STORY TEMPLATE (for Google Flow, not for make-video)
+#  1. Copy this file, e.g. stories\my-flow-story.txt
+#  2. Check it (free):      flow-video.bat check stories\my-flow-story.txt
+#  3. Make the frames:      flow-video.bat make stories\my-flow-story.txt
+#  4. Look at the frames, then run the same make command again
+#     for the clips (these cost credits) and the finished film.
+#  Lines starting with # are notes.
+# ============================================================
+
+title: My Flow Story
+# 9:16 for Shorts, 16:9 for wide videos
+aspect: 9:16
+# the names of your characters in Flow: a frame that mentions them uses them as references
+characters: Ren, Yuki
+# a clip is skipped (nothing spent) if Flow asks more than this
+max credits: 25
+# optional: model: Veo 3.1 - Fast   (without it, Flow's current choice is used)
+# the lines are always spoken by the same Ren and Yuki voices as Kitsu Studio's episodes (Flow makes no voices).
+# Only if you want otherwise: voices: none (bubbles only) or voices: flow (Flow's voices)
+# the film's music: Kitsu Studio's own (happy, calm, magical, mystery, adventure, tense, sad, bedtime, epic, heartfelt, none).
+# A clip can change it with a line "music: mystery". Google Flow's own sound is left out.
+music: happy
+# where each one usually stands, for the bubble's tail
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle, never scary.
+place: A sunny meadow with soft green hills, little flowers and a few fluffy clouds.
+
+# ---------- frames (free stills): a clip goes from one frame to the next ----------
+frame 1: Ren and Yuki stand side by side in the meadow, smiling at the camera. Medium shot.
+frame 2: Same place and framing. Ren points up at the sky in surprise, Yuki looks up too.
+frame 3: Same place and framing. Ren and Yuki laugh together as a butterfly lands on Ren's nose.
+
+# ---------- clips (cost credits): "clip N: frame A to frame B", then what happens and who says what ----------
+clip 1: frame 1 to frame 2
+Ren notices something in the sky and points up. Yuki follows his paw with her eyes.
+Ren (excited, at 1s): "Yuki, look!"
+
+clip 2: frame 2 to frame 3
+A little butterfly flutters down and lands on Ren's nose. Ren goes cross-eyed and Yuki giggles.
+Yuki (laughing): "It likes you!"

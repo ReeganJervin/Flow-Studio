@@ -1,0 +1,55 @@
+# The Kite Master  (hook: Ren says the wind obeys him.)
+#
+# Frames first (free), then clips from frame to frame. The film keeps Google Flow's own sound (its voices and music):
+# Kitsu's voices and music are not added; only the speech bubbles are.
+#
+#  Check it (free):              .\flow-video.bat check stories\kite.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\kite.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\kite.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\kite.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\kite.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\kite.txt --account 2 --redo film
+#  The film: output\the-kite-master-flow\film.mp4
+#
+title: The Kite Master
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+project: the-kite-master-flow
+# Google Flow speaks the lines and makes the music; the film only gets the speech bubbles
+voices: flow
+music: none
+bubbles: on
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and funny, never scary.
+place: A breezy green hilltop on a bright day: soft rolling hills, wildflowers bending in the wind, fluffy clouds and one round tree.
+
+frame 1: Ren on the left holding the string of a small red and yellow kite, chest puffed out proudly, the kite flying a little above him. Yuki on the right watching. Medium shot.
+frame 2: Same place and framing. A strong gust: the kite pulls hard and Ren is up on his tiptoes, leaning forward, holding the string with both paws, eyes wide. Yuki on the right with her ears blowing in the wind.
+frame 3: Same place, slightly wider. Ren floating a little above the grass, holding on to the kite string, legs dangling, scarf flapping. Yuki on the right reaching up toward his tail.
+frame 4: Same place. Yuki on the right holding Ren's fluffy tail with both paws, and Ren softly landing back on the grass. The kite above them. Medium shot.
+frame 5: Ren on the left sitting on the grass with leaves in his fur, the kite string tied around his tummy. Yuki on the right holding the kite proudly, flying it easily. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren flies the kite proudly. A gust of wind tugs it hard and pulls him up onto his tiptoes.
+Ren (proud, at 0.5s): "I'm the kite master. The wind obeys me."
+Yuki (teasing, at 5s): "The wind doesn't look very obedient."
+
+clip 2: frame 2 to frame 3
+The kite pulls harder and lifts Ren gently off the ground, legs dangling. Funny and soft, nobody gets hurt.
+Ren (scared): "Yuki! The wind is not obeying!"
+
+clip 3: frame 3 to frame 4
+Yuki hops up, grabs Ren's fluffy tail and pulls him gently back down onto the grass.
+Ren (proud): "I was just testing it."
+Yuki (amused): "Testing if you can fly?"
+
+clip 4: frame 4 to frame 5
+Ren sits on the grass, tangled in the string. Yuki takes the kite and flies it easily, smiling.
+Ren (pouting): "Fine. You can be the kite assistant."
+Yuki (playful): "Kite master assistant."

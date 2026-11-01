@@ -1,0 +1,49 @@
+# The Little Lost Bird  (hook: A tiny bird fell out of its nest. Ren and Yuki have a plan.)
+#
+#  Check it (free):              .\flow-video.bat check stories\baby-bird.txt
+#  1. Make the frames (free):    .\flow-video.bat make stories\baby-bird.txt --account 2
+#     Redo a frame (free):       .\flow-video.bat make stories\baby-bird.txt --account 2 --redo frame 3
+#  2. Make the clips and film:   .\flow-video.bat make stories\baby-bird.txt --account 2
+#     (same command again: about 60 credits for the 4 clips)
+#     Redo a clip (credits):     .\flow-video.bat make stories\baby-bird.txt --account 2 --redo clip 2
+#     Redo the film only (free): .\flow-video.bat make stories\baby-bird.txt --account 2 --redo film
+#  The film: output\the-little-lost-bird\film.mp4
+#
+title: The Little Lost Bird
+aspect: 9:16
+characters: Ren, Yuki
+model: Omni 1.1 Flash
+resolution: 720p
+duration: 10
+max credits: 15
+music: heartfelt
+sides: Ren left, Yuki right
+
+style: Cute 2D chibi storybook cartoon, soft round shapes, warm dark-brown outlines, flat warm pastel colours, pink blush. Gentle and heartwarming, never scary.
+place: A sunny forest edge in spring: a big friendly tree with a little round nest on a low branch, soft grass, small flowers and dappled sunlight.
+
+frame 1: Ren on the left and Yuki on the right kneeling in the grass, looking down at a tiny fluffy blue baby bird sitting between them, chirping softly. The big tree with the little nest behind them. Medium shot.
+frame 2: Same place and framing. Yuki on the right gently holding the tiny baby bird in her paws. Ren on the left pointing up at the little nest on the low branch.
+frame 3: Same place. Ren on the left standing on his tiptoes on a small rock, holding Yuki up on his shoulders, wobbling a little. Yuki on his shoulders reaching up toward the nest with the baby bird in her paws. Medium shot.
+frame 4: Same place. The baby bird safe in the little nest, a mother bird landing next to it. Ren and Yuki below, smiling up, Yuki back on the grass on the right. Medium shot.
+frame 5: Ren on the left and Yuki on the right sitting together under the tree, a small blue feather floating down between them, both looking up happily at the mother bird and her baby in the nest. Medium shot.
+
+clip 1: frame 1 to frame 2
+Ren and Yuki find a tiny baby bird alone in the grass. Yuki gently picks it up. Ren spots the nest on the branch above.
+Yuki (worried, at 0.5s): "Oh no. It fell out of its nest."
+Ren (determined, at 5s): "Don't worry, little one. We'll take you home."
+
+clip 2: frame 2 to frame 3
+Ren climbs onto a small rock and lifts Yuki onto his shoulders. They wobble together, reaching up toward the nest. Gentle and funny, nobody falls.
+Ren (wobbly): "Can you reach?"
+Yuki (determined): "Almost. Stay still, Ren!"
+
+clip 3: frame 3 to frame 4
+Yuki places the baby bird softly into the nest. A mother bird flies down and lands beside it. Yuki climbs down.
+music: happy
+Yuki (happy): "There you go. Home sweet home."
+
+clip 4: frame 4 to frame 5
+Ren and Yuki sit under the tree. The mother bird drops a small blue feather, which floats down between them.
+Ren (surprised): "A thank-you feather!"
+Yuki (happy): "You were a very good ladder."
