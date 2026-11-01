@@ -18,6 +18,8 @@ Flow Studio makes videos in **Google Flow** from a story file of frames (free st
 
 ## Rules
 
+- **Never merge the `Improvment` branch into `main` (owner's rule, 2026-11-01).** Don't open or merge a pull request from it into `main` either; work goes on the session's own branch.
+- **Both series go on (owner, 2026-11-01):** Ren & Yuki Shorts (`stories/`) and Whispers of the World Tree (`stories/world-tree/`). A change for one must not break the other.
 - **Voices (owner's rule, 2026-10-31):** Ren and Yuki always have the same voices everywhere: the ones in Kitsu Studio's `config/voices.json`. Flow Studio reads them from there (`voices: kitsu`). Stories may instead keep Google Flow's own voices and music (`voices: flow`, `music: none`), which the owner chose for many Shorts.
 - **Kitsu Studio is only used, never changed:** its voice tool and settings, its story compiler, page and audio (for the music), run and read from its folder.
 - **Family show** for Ren & Yuki: cute, never scary, no fighting (Kitsu Studio's rules R11/R15).
@@ -31,4 +33,6 @@ Flow Studio makes videos in **Google Flow** from a story file of frames (free st
 - **Whispers of the World Tree** (the owner's own series: winged elves Jack and Lunelle, a World Tree with four levels, a Japanese fantasy anime look): `stories/world-tree/`. The 2-clip test worked well (winged elves, caption boxes, narrator). Its two open points, decided by the owner on 2026-11-01:
   - The town "fading in" between two frames that differ too much: fixed with start-frame-only clips (`clip 3: from frame 3`). Flow travels on by itself instead of melting into a different end frame. In `01-world-intro.txt`, clips 3 to 11 use it; clips 1, 2 and 12 keep both frames. Clip 2 of the test was changed too (to compare: `--redo clip 2`, about 15 credits).
   - Music: **Flow's own sound for now** (`music: none`, `flow sound: on`), no Kitsu music. It was very quiet, so with no Kitsu music it is now brought to a proper level (-21 LUFS under a narrator, -16 alone) and dips about 5 dB while the narrator speaks (`lib/bubbles.js`).
+  - `01-world-intro.txt` corrected (2026-11-01, from the owner's manga pages 1 and 2): `style:` and `place:` now only hold the drawing style and the world (they go into every frame, and used to ask for a blue sky, lanterns, floating islands and towns in the cave and at sunset); the sky and light are in each frame; page 1's own words ("...there lies a forest..."). Pages 1 and 2 have 6 captions each; the clips keep 2 shorter lines each, to fit 10 s.
   - Next: the owner makes the 13 frames of `01-world-intro.txt` (free), then the 12 clips (at most 180 credits).
+- **Idea: manga pages** (owner, 2026-11-01), to read and maybe sell, like the owner's World Tree pages 1 and 2: suggested (not built yet) as panels made in Flow as free images, then laid out by Flow Studio (panel borders, the same parchment caption boxes, exact text) into print-ready pages. Waiting for the owner's go-ahead.

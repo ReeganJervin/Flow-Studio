@@ -30,23 +30,25 @@ bubbles: on
 # optional: up to 2 of your own pictures, so Flow draws in the same style (put them next to this file), e.g.
 # style pictures: refs/page-1.png, refs/page-7.png
 
-style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss and ancient trees, soft volumetric sunlight, clear blue sky with big white clouds, drifting mist, glowing blue flowers and tiny light motes, warm golden lanterns, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
-place: The world of the World Tree: an ancient forest beyond the lands known to ordinary travelers, waterfalls, hidden caves, a world of floating islands among the clouds, and towns of wooden houses built on the giant branches.
+# (style and place go into EVERY frame and clip: only the drawing style and the look of this world here; the sky,
+#  the lanterns, the light of day or sunset are written in each frame, so the cave or the sunset don't get a blue sky)
+style: Breathtaking Japanese fantasy anime art in the style of a high-budget anime film: highly detailed, painterly, lush green moss, clear turquoise water, pink and blue wildflowers, glowing blue flowers and tiny light motes, soft volumetric light, drifting mist, vivid but natural colours, cinematic composition, no text, no captions, no speech bubbles. Sweeping, gentle orchestral fantasy music with flutes and strings, and natural sounds.
+place: The world of the World Tree, an ancient fantasy world far beyond the lands known to ordinary travelers.
 
 # ---------- frames (free stills): each clip goes from one frame to the next ----------
 # page 1: the ancient forest
-frame 1: An ancient forest seen from a mossy rise: enormous old trees with huge roots, a clear stream flowing between mossy stones, pink and blue wildflowers, glowing blue light motes, sunbeams through the canopy, distant misty mountains and waterfalls on the horizon. No people. Wide shot.
+frame 1: An ancient forest seen from a mossy rise: enormous old trees with huge roots, a clear stream flowing between mossy stones, pink and blue wildflowers, glowing blue light motes, sunbeams through the canopy, distant misty mountains and waterfalls on the horizon under a clear blue sky with big white clouds. Morning light. No people. Wide shot.
 # page 2: the waterfall
-frame 2: Deeper in the ancient forest: a narrow stone path between gigantic mossy trunks, sunbeams, ferns and glowing blue flowers, and at the end of the path a magnificent tall waterfall falling between the trees. No people. Wide shot.
-frame 3: Close to the magnificent waterfall: a curtain of white falling water with a small rainbow in the mist, and behind it the dark mouth of a hidden cave, with a mossy stone path leading into it. No people. Wide shot.
+frame 2: Deeper in the ancient forest: a narrow stone path between gigantic mossy trunks, sunbeams, ferns and glowing blue flowers, and at the end of the path a magnificent tall waterfall falling between the trees, blue sky above. No people. Wide shot.
+frame 3: Close to the magnificent waterfall: a curtain of white falling water with a small rainbow in the mist, and behind it the dark mouth of a hidden cave, with a mossy stone path leading into it, sunlight and blue sky above the cliff. No people. Wide shot.
 # page 3: the cave
 frame 4: Inside the hidden cave behind the waterfall: an underground stream flowing between rocks, hanging roots and moss, glowing blue flowers and crystals on the stone walls, and a warm golden light far ahead at the end of the tunnel. No people. Wide shot.
 # page 4: the first horizon
 frame 5: The cave opening onto a high cliff: a breathtaking view of an endless forest below, misty mountains, waterfalls, and huge floating islands with trees and waterfalls rising above the white clouds under a bright blue sky. No people. Wide shot.
 # page 5: the four worlds
-frame 6: The heart of the floating world: the colossal World Tree, its trunk as big as a mountain, its branches carrying forests, rivers, waterfalls and elegant wooden towns on different levels, the bright High World at the top, floating islands and wooden bridges all around it among the clouds. Very wide shot.
+frame 6: The heart of the floating world: the colossal World Tree, its trunk as big as a mountain, its branches carrying forests, rivers, waterfalls and elegant wooden towns on different levels, the bright High World at the top, floating islands and wooden bridges all around it among the white clouds, clear blue sky, warm golden lanterns in the towns. Very wide shot.
 # page 6: the wild Lower World
-frame 7: The Lower World forest below the giant branches: a sunlit clearing with a clear stream over mossy stones, a spotted deer stag drinking, a fawn beside it, rabbits in the grass, small blue birds on a branch, a wild boar rooting among the ferns, glowing blue flowers, waterfalls and wooden bridges far above. Wide shot.
+frame 7: The Lower World forest below the giant branches: a sunlit clearing with a clear stream over mossy stones, a spotted deer stag drinking, a fawn beside it, rabbits in the grass, small blue birds on a branch, a wild boar rooting among the ferns, glowing blue flowers, waterfalls and wooden bridges far above. Bright daylight. Wide shot.
 frame 8: Deeper in the misty forest: a majestic magical stag with softly glowing blue markings and antlers standing among the dark trees, glowing blue light motes around it; and on a mossy path nearby, three winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) hunters with bows and quivers moving quietly, a young hunter with a green cloak in front. Wide shot.
 # page 7: the paths become home, the market
 frame 9: The winged-elf hunters walking along a forest path beneath the ancient trees, and ahead of them, through the trees, the first wooden houses on the giant branches with lanterns, flower boxes and waterfalls. Wide shot.
@@ -65,7 +67,7 @@ frame 13: The colossal World Tree at sunset seen from far away, rising above a s
 clip 1: frame 1 to frame 2
 The camera glides slowly through the ancient forest along the stream, between the giant mossy trees, light motes drifting in the sunbeams.
 Narrator (at 0.5s): "Beyond the lands known to ordinary travelers..."
-Narrator: "...lies a forest older than the memories of its people."
+Narrator: "...there lies a forest older than the memories of its people."
 
 clip 2: frame 2 to frame 3
 The camera moves along the stone path toward the roaring waterfall; the mist rises and a small rainbow appears in the spray.
