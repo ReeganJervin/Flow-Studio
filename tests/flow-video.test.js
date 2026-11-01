@@ -298,7 +298,7 @@ test("Flow's own sound as the film's music: a quiet one is brought up to a prope
 
 test('manga: the story file, the pages\' layout, and their checks', () => {
   const { parseManga, isManga, layoutPage, panelAspect, pagePixels } = require('../lib/manga');
-  const text = 'title: Book\nsize: 6 x 9\nframes from: story.txt\nstyle: Anime.\n\npage 1: 1 tall, 2\npanel 1: frame 1\nCaption: "Long ago..."\npanel 2: A waterfall.\nCaption (right, bottom): "...it fell."\nfocus: top\npanel 3: A cave.\nJack (happy, left): "Look!"\n\npage 2:\npanel 4: frame 3\n';
+  const text = 'title: Book\nsize: 6 x 9\nframes from: story.txt\nstyle: Anime.\n\npage 1: 1 tall, 2\npanel 1: frame 1\nCaption: "Long ago..."\npanel 2: A waterfall.\nCaption (right, bottom): "...it fell."\nfocus: top\npanel 3: A cave.\nJack (happy, left): "Look!"\nTitle (top): "The Cave"\n\npage 2:\npanel 4: frame 3\n';
   assert.ok(isManga(text) && !isManga(fs.readFileSync(STORY, 'utf8')));
   const b = parseManga(text);
   assert.deepStrictEqual(b.errors, []);
@@ -307,6 +307,7 @@ test('manga: the story file, the pages\' layout, and their checks', () => {
   assert.deepStrictEqual(b.panels[1].captions.map(c => [c.text, c.x, c.y]), [['...it fell.', 'right', 'bottom']]);
   assert.strictEqual(b.panels[1].focus, 'top');
   assert.deepStrictEqual(b.panels[2].bubbles.map(x => [x.who, x.text, x.x]), [['Jack', 'Look!', 'left']]);
+  assert.deepStrictEqual(b.panels[2].titles.map(x => [x.text, x.y]), [['The Cave', 'top']]);
   // Amazon's 6 x 9 inches at 300 dpi; the panels stay inside the margins and don't overlap
   const px = pagePixels(b.meta);
   assert.deepStrictEqual([px.W, px.H], [1800, 2700]);
@@ -328,11 +329,13 @@ test('manga: the story file, the pages\' layout, and their checks', () => {
 
 test('manga: panels made in Flow (free) or taken from the video\'s frames, then the pages and the PDF', () => {
   const book = path.join(tmp, 'book.txt');
-  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: A tall tree.\n\npage 2:\npanel 4: frame 3\nCaption (right): "The end."\n');
+  fs.writeFileSync(book, 'title: The Fox Book\nframes from: story.txt\ncharacters: Ren, Yuki\nstyle: Cute.\n\npage 1: 1, 2\npanel 1: frame 1\nCaption: "Once upon a time..."\npanel 2: Ren in a garden.\nRen (happy, left): "Hi!"\npanel 3: A tall tree.\nTitle: "The Fox Book"\n\npage 2:\npanel 4: frame 3\nCaption (right): "The end."\n');
   const c = run('check', book);
   assert.strictEqual(c.code, 0, c.out);
   assert.match(c.out, /made +panel 1: frame 1 of story\.txt/);
   assert.match(c.out, /2 panel picture\(s\) still to make in Flow: free/);
+  // story.txt is 9:16, and panel 1 is a wide panel: check says how much of that frame shows
+  assert.match(c.out, /panel 1 \(frame 1\): only \d+% of the frame's height shows/);
   bank(1, 7); bank(2, 0);
   const before = calls(1).length;
   const r = run('make', book, '--account', '1');

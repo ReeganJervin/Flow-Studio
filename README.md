@@ -141,6 +141,7 @@ Caption (right): "...there lies a forest older than the memories of its people."
 | `panel 3: ...` | A panel: what its picture shows (made in Flow), or `frame 2` (a frame of the `frames from` story). Panels are numbered through the whole chapter |
 | `Caption: "..."` | A parchment caption box. `(right)`, `(bottom)` or `(bottom right)` says where. The first one in a panel goes top left, the next bottom right. `Narrator:` works too |
 | `Jack (happy, left): "..."` | A speech bubble, its tail toward the left (or right) |
+| `Title: "..."` | Big title letters across the panel, for a title page: at the bottom, or `(top)` |
 | `focus: top` | Which part of the picture to keep when it is cut to the panel's shape: `top`, `middle` (the default) or `bottom` |
 
 ```

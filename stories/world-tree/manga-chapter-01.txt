@@ -1,4 +1,9 @@
-# Whispers of the World Tree — MANGA, chapter 1: the journey (pages 1 and 2 so far)
+# Whispers of the World Tree — MANGA, chapter 1: the journey to the World Tree (9 pages)
+#
+# Made from page 1 in Google Flow. The two pages the owner showed (2026-11-01) were examples of the look, not made in
+# Flow: this chapter follows the same look, the words of those examples on pages 1 and 2, and from page 3 on the
+# narrator's words of the video (01-world-intro.txt): the cave, the floating world, the World Tree and its four
+# worlds, the Lower World and its town, and the title. Change any words below and run --redo pages (free).
 #
 # Manga pages to read and to sell (Amazon KDP print book, 6 x 9 inches). The panels are pictures made in Google Flow
 # (free, like the frames), or frames already made for the video (01-world-intro.txt), so nothing is made twice. Flow
@@ -19,6 +24,7 @@
 #   panel 3: <what the picture shows>  a new picture, made in Flow; or  panel 1: frame 1  (a frame of the video)
 #   Caption (right): "..."             a caption box: left or right, top or bottom (the first one: top left)
 #   Jack (happy, left): "..."          a speech bubble, its tail toward the left
+#   Title: "..."                       big title letters across the panel (at the bottom; "(top)" for the top)
 #   focus: top                         which part of the picture to keep when it is cut to the panel (top, middle, bottom)
 #
 title: Whispers of the World Tree - Chapter 1
@@ -73,3 +79,97 @@ Caption (right): "Hidden behind the falling water..."
 
 panel 12: frame 3
 Caption (right): "...a forgotten path waits in silence."
+
+# ---------- page 3: the hidden cave ----------
+page 3: 1 tall, 2, 1
+
+panel 13: Behind the great waterfall, looking out through the curtain of falling water from the dark side: bright daylight shining through the white water, wet mossy stones and a stone path leading into darkness. No people. Wide shot.
+Caption: "Beyond the waterfall, the forest gives way to stone."
+
+panel 14: A close view of a cave wall covered in glowing blue crystals and moss, hanging roots, drops of water shining. No people.
+
+panel 15: Glowing blue flowers growing beside a clear underground stream in a dark cave, tiny glowing light motes floating above the water. No people.
+Caption (right, bottom): "Yet even here, the ancient forest still breathes."
+
+panel 16: frame 4
+
+# ---------- page 4: the first horizon ----------
+page 4: 1, 1 tall, 1
+
+panel 17: The end of a long dark cave tunnel: a bright warm golden opening of daylight ahead, a stream flowing toward it, hanging roots dark against the light. No people. Wide shot.
+Caption: "After the darkness, the world opened beneath the sky."
+
+panel 18: frame 5
+
+panel 19: A close view of a huge floating island of rock among white clouds under a bright blue sky, trees on top, waterfalls pouring off its edges into the clouds, birds flying around it. No people. Wide shot.
+Caption (right): "Another world floated among the clouds."
+
+# ---------- page 5: the World Tree and its four worlds ----------
+page 5: 1 tall, 2, 2
+
+panel 20: frame 6
+Caption: "At the heart of the floating world stood the World Tree."
+
+panel 21: The High World at the very top of the colossal World Tree: elegant white and golden wooden towers and gardens on the highest branches in bright sunlight, above the clouds, clear blue sky. No people.
+Caption: "Four worlds."
+
+panel 22: The Middle World on the colossal middle branches of the World Tree: busy wooden towns, many bridges and walkways between the branches, waterfalls, warm golden lanterns, white clouds around. No people.
+
+panel 23: The Lower World on the lowest giant branches of the World Tree: cozy wooden treehouse towns among green leaves and moss, waterfalls pouring down, a wild green forest far below. No people.
+
+panel 24: The Shrouded Wilds far below the World Tree: a dim, quiet, mysterious forest hidden in thick soft mist, giant dark roots, a few glowing blue flowers. Calm and mysterious, not scary. No people.
+Caption (right, bottom): "One ancient tree."
+
+# ---------- page 6: the wild Lower World ----------
+page 6: 1, 2, 1 tall
+
+panel 25: Looking down from the giant lower branches of the World Tree onto an endless green forest stretching to the horizon, rivers and waterfalls, mist, soft sunlight. No people. Wide shot.
+Caption: "Below the great branches, the forest stretched beyond sight."
+
+panel 26: frame 7
+Caption: "Here, life moved beneath the ancient trees."
+
+panel 27: A majestic magical stag with softly glowing blue markings and glowing antlers standing among dark misty trees, glowing blue light motes around it, calm and gentle. Close view.
+Caption (right, bottom): "Some creatures were born with magic in their blood."
+
+panel 28: frame 8
+Caption: "The forest was both home and provider."
+
+# ---------- page 7: the paths become home ----------
+page 7: 2, 1 tall, 2
+
+panel 29: A young hunter, one of the winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes), in a green cloak with a bow, crouching on a mossy forest path to look closely at animal tracks. Close view.
+Caption: "Every path carried a story of survival."
+
+panel 30: frame 9
+Caption (right, bottom): "And beyond the wild paths, a home waited."
+
+panel 31: frame 10
+Caption: "Here, life followed the rhythm of the forest."
+
+panel 32: A mother and a little child, winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes), smiling as they choose flowers together at a flower stall with a colourful awning and hanging lanterns. Close view.
+Caption (bottom): "Families grew beneath ancient branches."
+
+panel 33: A market stall full of fruit, baskets, hanging herbs and glowing lanterns under a colourful awning on a wooden walkway of a treehouse town. No people. Close view.
+
+# ---------- page 8: from branch to branch ----------
+page 8: 1, 2, 1 tall
+
+panel 34: frame 11
+Caption: "Every branch carried a road. Every tree sheltered a home."
+
+panel 35: Two winged elves (human-sized, pointed ears, delicate translucent iridescent wings like a dragonfly's or butterfly's growing from their backs, simple earthy forest clothes) crossing a long rope bridge high between the giant branches of the World Tree, waterfalls falling into the clouds far below, warm golden-hour light.
+Caption (right, bottom): "From branch to branch, their world continued."
+
+panel 36: A cozy wooden house on a giant branch at golden hour: glowing windows, flower boxes, a round door, lanterns, leaves all around. No people.
+
+panel 37: frame 12
+Caption: "Beneath the World Tree, an ancient town grew with the forest."
+Caption (right, bottom): "Below, the sunlight disappeared."
+
+# ---------- page 9: the title ----------
+page 9: 1
+
+panel 38: The colossal World Tree at sunset seen from far away, rising above a sea of golden clouds, floating islands with waterfalls around it, warm light on its leaves, the sky deep orange and violet, a wide open area of empty sky in the lower part of the picture. Very tall shot.
+Caption: "And beyond the darkness, no one knows."
+Title: "Whispers of the World Tree"

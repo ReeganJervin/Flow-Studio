@@ -301,9 +301,21 @@ function checkManga(file) {
       const done = have(panelFile(book, m, p));
       say(`  ${done ? 'made ' : '     '} panel ${p.n}: ${p.frame !== null ? `frame ${p.frame} of ${path.basename(book.linked.file)}` : `${p.text.slice(0, 70)}${p.text.length > 70 ? '...' : ''}`}${p.focus !== 'middle' ? ` (focus: ${p.focus})` : ''}`);
       p.captions.forEach(c => say(`          caption${c.x || c.y ? ` (${[c.y, c.x].filter(Boolean).join(' ')})` : ''}: "${c.text}"`));
+      p.titles.forEach(t => say(`          title: "${t.text}"`));
       p.bubbles.forEach(b => say(`          bubble (${b.who}${b.x ? `, ${b.x}` : ''}): "${b.text}"`));
     });
   });
+  // a video frame keeps its own shape (16:9 or 9:16): say when its panel is so different that much of it is cut off
+  if (book.linked) {
+    const [fw, fh] = book.linked.story.meta.aspect.split(':').map(Number), cut = [];
+    book.pages.forEach(pg => layoutPage(pg, px, book.meta.slant).forEach((q, k) => {
+      const p = pg.panels[k]; if (p.frame === null) return;
+      const xs = q.map(c => c.x), ys = q.map(c => c.y), shape = (Math.max(...xs) - Math.min(...xs)) / (Math.max(...ys) - Math.min(...ys)), r = shape / (fw / fh);
+      if (r > 1.6) cut.push(`panel ${p.n} (frame ${p.frame}): only ${Math.round(100 / r)}% of the frame's height shows. Make that row "tall", or use "focus: top" or "focus: bottom" to choose what stays`);
+      if (r < 0.6) cut.push(`panel ${p.n} (frame ${p.frame}): only ${Math.round(100 * r)}% of the frame's width shows. Give it a wider panel (fewer panels in that row), or a "short" row`);
+    }));
+    if (cut.length) say(`\nNote:\n  ${cut.join('\n  ')}`);
+  }
   const left = book.panels.filter(p => p.frame === null && !have(m.panels[p.n])).length;
   say(`\n${left} panel picture(s) still to make in Flow: free (pictures cost no credits). Nothing has been made by this check.`);
 }
