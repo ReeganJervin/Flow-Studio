@@ -37,7 +37,11 @@ The camera stays still, with a slow gentle push in. The deer and fawn lift their
 Narrator (at 0.5s): "Below the great branches, life moved beneath the ancient trees."
 Narrator: "The forest was both home and provider."
 
-clip 2: frame 2 to frame 3
-The camera stays still, with a slow gentle push in. The hunter in the green cloak stands up and the three winged elves walk on along the path toward the town. The market comes alive: stalls with colourful awnings, small winged elves shopping and flying between the treehouses, lanterns glowing, people crossing the rope bridges.
+# (made first as "frame 2 to frame 3": the town faded in, as the two frames differ too much. Now from a start frame
+#  only, so the camera really walks into the town. To see the difference, redo this clip (about 15 credits):
+#  .\flow-video.bat make stories\world-tree\00-test-two-clips.txt --account 2 --redo clip 2
+#  Frame 3 isn't used by a clip any more; it stays as the picture of the town.)
+clip 2: from frame 2
+The camera slowly follows behind them. The hunter in the green cloak stands up and the three winged elves walk on along the path toward the town. They come out of the trees into the Lower World town on the giant branches, with cozy wooden houses, lanterns and flower boxes. The market comes alive: stalls with colourful awnings, small winged elves shopping and flying between the treehouses, lanterns glowing, people crossing the rope bridges.
 Narrator (at 0.5s): "Following the paths beneath the ancient trees..."
 Narrator: "...the forest slowly became home."

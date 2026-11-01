@@ -28,4 +28,7 @@ Flow Studio makes videos in **Google Flow** from a story file of frames (free st
 ## Status (2026-11-01)
 
 - Ren & Yuki Shorts: many stories in `stories/` (most with Flow's own sound and speech bubbles).
-- **Whispers of the World Tree** (the owner's own series: winged elves Jack and Lunelle, a World Tree with four levels, a Japanese fantasy anime look): `stories/world-tree/`. The 2-clip test worked well (winged elves, caption boxes, narrator); open points: the town "fading in" between two frames that differ too much, and whether to add Kitsu music (magical or epic) under the narrator, since Flow's own sound was very quiet. The 12-clip world introduction (`01-world-intro.txt`) is waiting for those decisions.
+- **Whispers of the World Tree** (the owner's own series: winged elves Jack and Lunelle, a World Tree with four levels, a Japanese fantasy anime look): `stories/world-tree/`. The 2-clip test worked well (winged elves, caption boxes, narrator). Its two open points, decided by the owner on 2026-11-01:
+  - The town "fading in" between two frames that differ too much: fixed with start-frame-only clips (`clip 3: from frame 3`). Flow travels on by itself instead of melting into a different end frame. In `01-world-intro.txt`, clips 3 to 11 use it; clips 1, 2 and 12 keep both frames. Clip 2 of the test was changed too (to compare: `--redo clip 2`, about 15 credits).
+  - Music: **Flow's own sound for now** (`music: none`, `flow sound: on`), no Kitsu music. It was very quiet, so with no Kitsu music it is now brought to a proper level (-21 LUFS under a narrator, -16 alone) and dips about 5 dB while the narrator speaks (`lib/bubbles.js`).
+  - Next: the owner makes the 13 frames of `01-world-intro.txt` (free), then the 12 clips (at most 180 credits).

@@ -33,6 +33,8 @@ frame 2: Same place and framing. Ren points up at the sky in surprise, Yuki look
 frame 3: Same place and framing. Ren and Yuki laugh together as a butterfly lands on Ren's nose.
 
 # ---------- clips (cost credits): "clip N: frame A to frame B", then what happens and who says what ----------
+# (to go somewhere that looks very different, write "clip N: from frame A": a start frame only, so the new place
+#  doesn't "fade in"; the next clip then starts on its own frame)
 clip 1: frame 1 to frame 2
 Ren notices something in the sky and points up. Yuki follows his paw with her eyes.
 Ren (excited, at 1s): "Yuki, look!"

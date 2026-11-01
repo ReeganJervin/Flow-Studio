@@ -58,6 +58,10 @@ frame 12: The camera far back at sunset: the whole Lower World town spread acros
 frame 13: The colossal World Tree at sunset seen from far away, rising above a sea of golden clouds, floating islands with waterfalls around it, warm light on its leaves, the sky deep orange and violet, an open empty area of sky in the lower part of the picture. Very wide, epic shot.
 
 # ---------- clips (cost credits) ----------
+# "clip 3: from frame 3": a start frame only, for a clip that travels to a very different place (into the cave, up to
+# the World Tree, into the town...). With an end frame Flow melted one picture into the other (the town "fading in" in
+# the 2-clip test); from a start frame only, the camera really travels there, and the next clip starts on its own
+# frame. Clips 1, 2 and 12 stay in one place, so they keep both frames (12 ends exactly on the title picture).
 clip 1: frame 1 to frame 2
 The camera glides slowly through the ancient forest along the stream, between the giant mossy trees, light motes drifting in the sunbeams.
 Narrator (at 0.5s): "Beyond the lands known to ordinary travelers..."
@@ -68,47 +72,47 @@ The camera moves along the stone path toward the roaring waterfall; the mist ris
 Narrator (at 0.5s): "The deeper one travels, the louder the water grows."
 Narrator: "Behind its veil, a forgotten path waits."
 
-clip 3: frame 3 to frame 4
+clip 3: from frame 3
 The camera passes slowly behind the falling water into the hidden cave, following the underground stream between glowing flowers and crystals.
 Narrator (at 0.5s): "Beyond the waterfall, the forest gives way to stone."
 Narrator: "Yet even here, the ancient forest still breathes."
 
-clip 4: frame 4 to frame 5
+clip 4: from frame 4
 The camera travels toward the golden light at the end of the tunnel and comes out onto the high cliff, revealing the vast view and the floating islands above the clouds.
 Narrator (at 0.5s): "After the darkness, the world opened beneath the sky."
 Narrator: "Another world floated among the clouds."
 
-clip 5: frame 5 to frame 6
+clip 5: from frame 5
 The camera flies out over the clouds and between the floating islands toward the colossal World Tree, its towns and waterfalls coming into view.
 Narrator (at 0.5s): "At the heart of the floating world stood the World Tree."
 Narrator: "Four worlds. One ancient tree."
 
-clip 6: frame 6 to frame 7
+clip 6: from frame 6
 The camera descends along the giant trunk, past the bright High World and the busy Middle World, down into the sunlit forest of the Lower World, where the deer drink from the stream and birds flutter.
 Narrator (at 0.5s): "Below the great branches, the forest stretched beyond sight."
 Narrator: "Here, life moved beneath the ancient trees."
 
-clip 7: frame 7 to frame 8
+clip 7: from frame 7
 The camera drifts deeper into the misty forest, past the boar and the rabbits, to the glowing magical stag, then to the winged-elf hunters moving quietly along the path, their translucent wings folded.
 Narrator (at 0.5s): "Some creatures were born with magic in their blood."
 Narrator: "The forest was both home and provider."
 
-clip 8: frame 8 to frame 9
+clip 8: from frame 8
 The camera follows the winged-elf hunters along the path between the ancient trees until the first houses on the branches appear ahead, lanterns glowing.
 Narrator (at 0.5s): "Every path carried a story of survival."
 Narrator: "And beyond the wild paths, a home waited."
 
-clip 9: frame 9 to frame 10
-The camera follows the hunters into the town and through the busy market, past fruit stalls, lanterns and families choosing flowers.
+clip 9: from frame 9
+The camera follows the hunters up onto the giant branches and into the town, then through the busy market: fruit and flower stalls with colourful awnings, hanging lanterns and herbs, winged elves shopping with baskets, a mother and a little child choosing flowers.
 Narrator (at 0.5s): "Here, life followed the rhythm of the forest."
 Narrator: "Families grew beneath ancient branches."
 
-clip 10: frame 10 to frame 11
+clip 10: from frame 10
 The camera rises from the market and travels along the wooden bridges from branch to branch, past glowing windows and waterfalls, as the light turns golden.
 Narrator (at 0.5s): "Every branch carried a road. Every tree sheltered a home."
 Narrator: "From branch to branch, their world continued."
 
-clip 11: frame 11 to frame 12
+clip 11: from frame 11
 The camera pulls far back from the bridges until the whole town glows across the branches of the World Tree at sunset, the dark Shrouded Wilds far below disappearing into mist.
 Narrator (at 0.5s): "Beneath the World Tree, an ancient town grew with the forest."
 Narrator: "Below, the sunlight disappeared."

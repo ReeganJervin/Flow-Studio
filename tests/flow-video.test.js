@@ -30,7 +30,7 @@ class FlowAccount {
     fs.mkdirSync(path.dirname(stem), { recursive: true });
     const out = stem + (s.type === 'image' ? '.png' : '.mp4');
     if (s.type === 'video') require('child_process').execFileSync(require(${JSON.stringify(require.resolve(path.join(__dirname, '..', 'lib', 'join.js')))}).FFMPEG,
-      ['-loglevel', 'error', '-y', '-f', 'lavfi', '-i', 'color=c=orange:s=180x320:d=1', ...(fs.existsSync(this.file('mute')) ? [] : ['-f', 'lavfi', '-i', 'sine=d=1']), '-shortest', out]);
+      ['-loglevel', 'error', '-y', '-f', 'lavfi', '-i', 'color=c=orange:s=180x320:d=1', ...(fs.existsSync(this.file('mute')) ? [] : ['-f', 'lavfi', '-i', 'sine=d=1']), ...(fs.existsSync(this.file('quiet')) ? ['-af', 'volume=0.1'] : []), '-shortest', out]);
     else fs.writeFileSync(out, s.prompt);
     return { files: [out], credits: cost, title: name + '-t' + Date.now() };
   }
@@ -257,6 +257,42 @@ test('a narrator: never acted by Flow, read by the Kitsu narrator voice, shown i
   const { drawBubbles } = require('../lib/bubbles');
   const [cap] = await drawBubbles([{ text: 'Four worlds. One ancient tree.', who: 'Narrator' }], 1280, 720);
   assert.ok(cap.length > 2000);
+});
+
+test('a clip from a start frame only: no end frame, so a very different place doesn\'t fade in', () => {
+  const { parseFlowStory, clipPrompt } = require('../lib/story');
+  const st = parseFlowStory('title: Town\naspect: 16:9\nframe 1: a forest path\nframe 2: a town market\nclip 1: from frame 1\nThe hunters walk on into the town.\nclip 2: frame 2\nThe market comes alive.\n');
+  assert.deepStrictEqual(st.errors, []);
+  assert.deepStrictEqual(st.clips.map(c => [c.from, c.to]), [[1, null], [2, null]]);
+  assert.match(clipPrompt(st.meta, st.clips[0]), /The hunters walk on into the town\. One continuous camera shot[^]*no fades, no dissolves/);
+  assert.match(parseFlowStory('title: x\nframe 1: a\nclip 1: from frame 4\nGo.\n').errors.join(), /no "frame 4:"/);
+  const story = path.join(tmp, 'town.txt');
+  fs.writeFileSync(story, 'title: Town Walk\nvoices: none\nmusic: none\nbubbles: off\nframe 1: a forest path\nframe 2: a town market\nclip 1: from frame 1\nThe hunters walk on into the town.\nclip 2: frame 1 to frame 2\nThe market.\n');
+  assert.match(run('check', story).out, /clip 1: from frame 1 on/);
+  bank(1, 100); bank(2, 0);
+  const before = calls(1).length;
+  const r = run('make', story, '--all', '--account', '1');
+  assert.strictEqual(r.code, 0, r.out);
+  const vids = calls(1).slice(before).filter(c => c.type === 'video');
+  assert.ok(vids[0].first_frame && !('last_frame' in vids[0]), 'clip 1: a start frame only');
+  assert.ok(vids[1].first_frame && vids[1].last_frame, 'clip 2: both frames');
+});
+
+test("Flow's own sound as the film's music: a quiet one is brought up to a proper level", () => {
+  const { loudness } = require('../lib/join');
+  const story = path.join(tmp, 'quiet.txt');
+  fs.writeFileSync(story, 'title: Quiet Flow\nvoices: none\nmusic: none\nflow sound: on\nframe 1: a\nframe 2: b\nclip 1: frame 1 to frame 2\nWind in the trees.\nNarrator: "Long ago."\n');
+  bank(1, 100); bank(2, 0);
+  const quiet = path.join(tmp, 'accounts', 'account-1', 'quiet');
+  fs.writeFileSync(quiet, '');
+  try {
+    const r = run('make', story, '--all', '--account', '1');
+    assert.strictEqual(r.code, 0, r.out);
+  } finally { fs.rmSync(quiet, { force: true }); }
+  const dir = path.join(tmp, 'output', 'quiet-flow'), before = loudness(path.join(dir, 'film-clean.mp4')), after = loudness(path.join(dir, 'film.mp4'));
+  assert.ok(before.i < -35, `the clip is quiet (${before.i} LUFS)`);
+  assert.ok(Math.abs(after.i - -16) < 2.5, `the film is at a proper level (${after.i} LUFS)`);
+  assert.ok(after.tp <= -1, `no clipping (${after.tp} dB)`);
 });
 
 test('moving Flow Studio: frames made in the old folder still count', () => {

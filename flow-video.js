@@ -121,10 +121,10 @@ async function makeClips(story, accts, pinned, m) {
     if (a && best.a !== a) say(`  ${a.name} is low on credits: switching to ${best.a.name} (${best.s.credits} credits).`);
     a = best.a;
     // from its two frames, or (a clip with no frames) from the Flow characters named in it, with their own voices
-    const look = c.from !== null ? { first_frame: frameFor(m, c.from, a), last_frame: frameFor(m, c.to, a) } : { reference_images: castOf(story.meta, c.text).slice(0, 3).map(n => `asset:${n}`) };
+    const look = c.from !== null ? { first_frame: frameFor(m, c.from, a), ...(c.to !== null ? { last_frame: frameFor(m, c.to, a) } : {}) } : { reference_images: castOf(story.meta, c.text).slice(0, 3).map(n => `asset:${n}`) };
     const scene = { type: 'video', prompt: clipPrompt(story.meta, c), aspect_ratio: story.meta.aspect, max_credits: need, ...look, download_quality: story.meta.quality,
       ...(story.meta.model ? { model: story.meta.model } : {}), ...(story.meta.duration ? { duration: story.meta.duration } : {}), ...(story.meta.resolution ? { resolution: story.meta.resolution } : {}) };
-    say(`  clip ${c.n} (${c.from !== null ? `frame ${c.from} to frame ${c.to}` : `from the characters ${castOf(story.meta, c.text).join(', ')}`}) on ${a.name}${best.s.credits !== null ? `, ${best.s.credits} credits left` : ''}`);
+    say(`  clip ${c.n} (${c.from !== null ? (c.to !== null ? `frame ${c.from} to frame ${c.to}` : `from frame ${c.from} on`) : `from the characters ${castOf(story.meta, c.text).join(', ')}`}) on ${a.name}${best.s.credits !== null ? `, ${best.s.credits} credits left` : ''}`);
     let r;
     try { r = await a.generate(scene, path.join(outDir(story), 'clips', `clip-${num(c.n)}`), progress(`clip ${c.n}`), `${story.meta.project}-clip-${num(c.n)}`); }
     catch (e) { stop(`Clip ${c.n} wasn't made: ${e.message}\nThe clips made so far are kept: run the same command again to carry on.`); }
@@ -162,8 +162,10 @@ async function makeFilm(story, m) {
   }
   if (items.length && story.meta.voices !== 'kitsu') say(`  no Ren and Yuki voices: this story says "voices: ${story.meta.voices}". Delete that line (or write voices: kitsu) to hear them.`);
   if (items.length && story.meta.bubbles) say(`  adding ${items.length} speech bubble(s)...`);
-  // (Flow's own sound under Kitsu's music is kept quiet; with no Kitsu music it is the film's music, so it stays up)
-  await burnBubbles(clean, film, items, info[0].w, info[0].h, { bubbles: story.meta.bubbles, soundtrack, flowSound: story.meta.flowSound, flowVolume: playing ? 0.35 : 0.85 });
+  // Flow's own sound under Kitsu's music is kept quiet. With no Kitsu music it is the film's music: it is brought up
+  // (Flow's sound is often very quiet), a little under the voices' level when someone speaks, and dips under them
+  const flowLoudness = playing ? null : voiced ? -21 : -16;
+  await burnBubbles(clean, film, items, info[0].w, info[0].h, { bubbles: story.meta.bubbles, soundtrack, flowSound: story.meta.flowSound, flowVolume: 0.35, flowLoudness, duck: !playing && voiced > 0 });
   m.film = film;
   saveMade(story, m);
   say(`  ${path.relative(process.cwd(), m.film)} (${Math.round(r.duration)} s)${items.length ? `; without bubbles or voices: ${path.basename(clean)}` : ''}`);
@@ -213,7 +215,7 @@ function check(file) {
   story.frames.forEach(f => say(`  ${have(m.frames[f.n]) ? 'made ' : '     '} frame ${f.n}${castOf(story.meta, f.text).length ? ` [${castOf(story.meta, f.text).join(', ')}]` : ''}: ${f.text.slice(0, 80)}${f.text.length > 80 ? '...' : ''}`));
   say('\nClips:');
   story.clips.forEach(c => {
-    say(`  ${have(m.clips[c.n]) ? 'made ' : '     '} clip ${c.n}: ${c.from !== null ? `frame ${c.from} to frame ${c.to}` : `from the characters (${castOf(story.meta, c.text).join(', ')})`}: ${c.action.slice(0, 70)}${c.action.length > 70 ? '...' : ''}`);
+    say(`  ${have(m.clips[c.n]) ? 'made ' : '     '} clip ${c.n}: ${c.from !== null ? (c.to !== null ? `frame ${c.from} to frame ${c.to}` : `from frame ${c.from} on`) : `from the characters (${castOf(story.meta, c.text).join(', ')})`}: ${c.action.slice(0, 70)}${c.action.length > 70 ? '...' : ''}`);
     c.lines.forEach(l => say(`          ${story.meta.bubbles ? 'bubble' : 'says  '} (${l.who}${l.side ? `, ${l.side}` : ''}${l.at !== null ? `, at ${l.at}s` : ''}): "${l.text}"`));
   });
   say(`\nVoices: ${{ none: 'none (the words go in speech bubbles)', kitsu: "Kitsu Studio's own voices, added to the film (none from Flow)", flow: 'made by Flow' }[story.meta.voices]}. Bubbles: ${story.meta.bubbles ? 'on' : 'off'}.`);
